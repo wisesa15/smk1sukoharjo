@@ -7,6 +7,7 @@ class Auth extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
+        $this->load->model('User_model', 'user');
     }
 
     public function index()
@@ -33,7 +34,7 @@ class Auth extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $user = $this->db->get_where('user', ['username' => $username])->row_array();
+        $user = $this->user->getUser($username);
 
         //usernya ada
         if ($user) {
@@ -67,5 +68,14 @@ class Auth extends CI_Controller
 
     public function registration()
     {
+        // $data = [
+        //     'username' => 'admin',
+        //     'image' => 'default.jpg',
+        //     'password' => password_hash('admin', PASSWORD_DEFAULT),
+        //     'role_id' => 1,
+        //     'date_created' => time()
+        // ];
+        // $this->db->insert('user', $data);
+        redirect('auth');
     }
 }
