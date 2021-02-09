@@ -77,67 +77,42 @@
                             <li class="nav-divider">
                                 Menu
                             </li>
-                            <?php foreach ($menu as $m) : ?>
-                                <li class="nav-item ">
-                                    <?php if ($title == $m['menu']) : ?>
-                                        <a class="nav-link active" href="<?= base_url($m['url']); ?>">
+                            <?php if ($user['role_id'] == 1) : ?>
+                                <?php foreach ($menu as $m) : ?>
+                                    <li class="nav-item ">
+                                        <?php if ($title == $m['menu']) : ?>
+                                            <a class="nav-link active" href="<?= base_url($m['url']); ?>">
+                                            <?php else : ?>
+                                                <a class="nav-link" href="<?= base_url($m['url']); ?>">
+                                                <?php endif; ?>
+                                                <i class="<?= $m['icon']; ?>"></i><?= $m['menu']; ?></a>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <?php foreach ($menu as $m) : ?>
+                                    <li class="nav-item ">
+                                        <?php if ($title == $m['menu'] && $m['menu'] != 'Kelas') : ?>
+                                            <a class="nav-link active" href="<?= base_url($m['url']); ?>">
+                                                <i class="<?= $m['icon']; ?>"></i><?= $m['menu']; ?></a>
+                                        <?php elseif ($m['menu'] == 'Kelas') : ?>
+                                            <a class="nav-link" href="" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2">
+                                                <i class="<?= $m['icon']; ?>"></i><?= $m['menu']; ?></a>
+                                            <div id="submenu-2" class="collapse submenu" style="">
+                                                <ul class="nav flex-column">
+                                                    <?php foreach ($kelas as $k) : ?>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" href=""><?= $k['nama']; ?></a>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            </div>
                                         <?php else : ?>
                                             <a class="nav-link" href="<?= base_url($m['url']); ?>">
-                                            <?php endif; ?>
-
-                                            <i class="<?= $m['icon']; ?>"></i><?= $m['menu']; ?>
-
-                                            </a>
-                                        <?php endforeach; ?>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Mata Pelajaran</a>
-                                    <div id="submenu-2" class="collapse submenu" style="">
-                                        <ul class="nav flex-column">
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="pages/cards.html">Mata Pelajaran 1 <span class="badge badge-secondary">New</span></a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="pages/general.html">Mata Pelajaran 2</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="pages/carousel.html">Mata Pelajaran 3</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="pages/listgroup.html">Mata Pelajaran 4</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="pages/typography.html">Mata Pelajaran 5</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="pages/accordions.html">Mata Pelajaran 6</a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="pages/tabs.html">Mata Pelajaran 7</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </li>
-                                <!-- </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-fw fa-user-graduate"></i>Siswa
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-fw fa-chalkboard-teacher" aria-hidden="true"></i>Guru
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-fw fa-book-open"></i>Kelas
-                                </a>
-                            </li>
-                            <li class="nav-item ">
-                                <a class="nav-link" href="#">
-                                    <i class="fas fa-fw fa-user-circle"></i>Profile
-                                </a>
-                            </li> -->
+                                                <i class="<?= $m['icon']; ?>"></i><?= $m['menu']; ?></a>
+                                        <?php endif; ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </nav>
