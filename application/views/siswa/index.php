@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Dashboard</h2>
+                    <h2 class="pageheader-title">Data Siswa</h2>
                     <!-- <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus
                                 vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p> -->
                     <!-- <div class="page-breadcrumb">
@@ -34,78 +34,34 @@
             <!-- ============================================================== -->
             <!-- content  -->
             <!-- ============================================================== -->
-            <div class="row">
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="text-muted">Jumlah Siswa</h5>
-                            <div>
-                                <h1 class="mb-1">300</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="text-muted">Jumlah Guru</h5>
-                            <div>
-                                <h1 class="mb-1">300</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="text-muted">Jumlah Kelas</h5>
-                            <div>
-                                <h1 class="mb-1">300</h1>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="row">
                 <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/800x600" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 1</h5>
-                        </div>
+                    <div class="d-flex justify-content-end">
+
+                        <button type="button" class="btn btn-primary mb-3">+ Tambah Siswa</button>
                     </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/801x601" alt="Card image cap" width="100%">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 2</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/802x602" alt="Card image cap" height="100%">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 1</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/803x603" alt="Card image cap" width="100%">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 2</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/804x604" alt="Card image cap" width="100%">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 2</h5>
-                        </div>
-                    </div>
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">NIS</th>
+                                <th scope="col">Nama</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>123</td>
+                                <td>Mark</td>
+                                <td>
+                                    <a href="#" class="badge badge-success">Edit</a>
+                                    <a href="#" class="badge badge-danger">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- ============================================================== -->
