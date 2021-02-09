@@ -51,15 +51,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>123</td>
-                                <td>Mark</td>
-                                <td>
-                                    <a href="#" class="badge badge-success">Edit</a>
-                                    <a href="#" class="badge badge-danger">Delete</a>
-                                </td>
-                            </tr>
+                            <?php $i = 1; ?>
+                            <?php foreach ($siswa as $s) : ?>
+                                <tr>
+                                    <th scope="row"><?= $i; ?></th>
+                                    <td><?= $s['nis']; ?></td>
+                                    <td><?= $s['nama']; ?></td>
+                                    <td>
+                                        <a href="#" class="badge badge-success">Edit</a>
+                                        <a href="#" class="badge badge-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                <?php $i++; ?>
+                            <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>

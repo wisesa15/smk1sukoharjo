@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2021 at 10:23 AM
+-- Generation Time: Feb 09, 2021 at 08:26 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.2.24
 
@@ -49,6 +49,14 @@ CREATE TABLE `guru` (
   `nama` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `guru`
+--
+
+INSERT INTO `guru` (`id`, `nip`, `nama`) VALUES
+(1, 123, 'Suprapto'),
+(2, 124, 'Joni');
+
 -- --------------------------------------------------------
 
 --
@@ -71,6 +79,14 @@ CREATE TABLE `kelas` (
   `nama` varchar(128) NOT NULL,
   `id_mapel` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kelas`
+--
+
+INSERT INTO `kelas` (`id`, `nama`, `id_mapel`) VALUES
+(1, 'Ilmu Komputer 2020', 1),
+(2, 'Jaringan 2021', 2);
 
 -- --------------------------------------------------------
 
@@ -107,6 +123,14 @@ CREATE TABLE `mata_pelajaran` (
   `nama` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `mata_pelajaran`
+--
+
+INSERT INTO `mata_pelajaran` (`id`, `nama`) VALUES
+(1, 'Ilmu Komputer'),
+(2, 'Jaringan');
+
 -- --------------------------------------------------------
 
 --
@@ -120,6 +144,15 @@ CREATE TABLE `siswa` (
   `kelas` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`id`, `nis`, `nama`, `kelas`) VALUES
+(1, 123, 'Juan ', 'XII TKJ'),
+(2, 124, 'Jojon', 'XII TKJ'),
+(3, 125, 'Sumanto', 'XII RPL');
+
 -- --------------------------------------------------------
 
 --
@@ -130,15 +163,19 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(128) NOT NULL,
   `password` varchar(256) NOT NULL,
-  `role_id` int(11) NOT NULL
+  `role_id` int(11) NOT NULL,
+  `id_siswa` int(11) DEFAULT NULL,
+  `id_guru` int(11) DEFAULT NULL,
+  `image` varchar(256) NOT NULL,
+  `date_created` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `role_id`) VALUES
-(2, 'admin', '$2y$10$MaZs320e0tTRFi5ZgE4hru4esvM5EAtRG/jYdJI/TXy0AwsdQLdAC', 1);
+INSERT INTO `user` (`id`, `username`, `password`, `role_id`, `id_siswa`, `id_guru`, `image`, `date_created`) VALUES
+(3, 'admin', '$2y$10$9kPSqAp7yWB7gPEv7au9wOVr0eK1AsjD0CD5qRp.VuX75H2udSce2', 1, NULL, NULL, 'default.jpg', 1612851981);
 
 -- --------------------------------------------------------
 
@@ -187,11 +224,11 @@ CREATE TABLE `user_menu` (
 --
 
 INSERT INTO `user_menu` (`id`, `menu`, `url`, `icon`) VALUES
-(1, 'Dashboard', '', ''),
-(2, 'Siswa', '', ''),
-(3, 'Guru', '', ''),
-(4, 'Kelas', '', ''),
-(5, 'Profile', '', '');
+(1, 'Dashboard', 'dashboard', 'fas fa-fw fa-tachometer-alt'),
+(2, 'Siswa', 'siswa', 'fas fa-fw fa-user-graduate'),
+(3, 'Guru', 'guru', 'fas fa-fw fa-chalkboard-teacher'),
+(4, 'Kelas', 'kelas', 'fas fa-fw fa-book-open'),
+(5, 'Profile', 'profile', 'fas fa-fw fa-user-circle');
 
 -- --------------------------------------------------------
 
@@ -303,7 +340,7 @@ ALTER TABLE `aktivitas_kelas`
 -- AUTO_INCREMENT for table `guru`
 --
 ALTER TABLE `guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `jenis_file`
@@ -315,7 +352,7 @@ ALTER TABLE `jenis_file`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kelas_guru`
@@ -333,19 +370,19 @@ ALTER TABLE `kelas_siswa`
 -- AUTO_INCREMENT for table `mata_pelajaran`
 --
 ALTER TABLE `mata_pelajaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`

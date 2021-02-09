@@ -40,7 +40,7 @@
                         <div class="card-body">
                             <h5 class="text-muted">Jumlah Siswa</h5>
                             <div>
-                                <h1 class="mb-1">300</h1>
+                                <h1 class="mb-1"><?= $this->db->count_all_results('siswa'); ?></h1>
                             </div>
                         </div>
                     </div>
@@ -50,7 +50,7 @@
                         <div class="card-body">
                             <h5 class="text-muted">Jumlah Guru</h5>
                             <div>
-                                <h1 class="mb-1">300</h1>
+                                <h1 class="mb-1"><?= $this->db->count_all_results('guru'); ?></h1>
                             </div>
                         </div>
                     </div>
@@ -60,13 +60,13 @@
                         <div class="card-body">
                             <h5 class="text-muted">Jumlah Kelas</h5>
                             <div>
-                                <h1 class="mb-1">300</h1>
+                                <h1 class="mb-1"><?= $this->db->count_all_results('kelas'); ?></h1>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-6">
                     <div class="card">
                         <img class="card-img-top" src="https://source.unsplash.com/random/800x600" alt="Card image cap">
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- ============================================================== -->
             <!-- End content  -->
             <!-- ============================================================== -->
