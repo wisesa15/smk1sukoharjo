@@ -54,7 +54,7 @@
                                         <div class="user-avatar-address">
                                             <p class="border-bottom pb-3">
                                                 <span class="d-xl-inline-block d-block mb-2"><i class="fa fa-map-marker-alt mr-2 text-primary "></i>4045 Denver AvenueLos Angeles, CA 90017</span>
-                                                <span class="mb-2 ml-xl-4 d-xl-inline-block d-block">Joined date: <?= $user['date_created']; ?> </span>
+                                                <span class="mb-2 ml-xl-4 d-xl-inline-block d-block">Joined date: <?= date('d-m-y', $user['date_created']); ?> </span>
                                                 <span class=" mb-2 d-xl-inline-block d-block ml-xl-4">Male
                                                 </span>
                                                 <span class=" mb-2 d-xl-inline-block d-block ml-xl-4">29 Year Old </span>
