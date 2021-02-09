@@ -70,10 +70,10 @@ class Auth extends CI_Controller
     {
         $data = [
             'username' => 'guru',
-            // 'image' => 'default.jpg',
+            'image' => 'default.jpg',
             'password' => password_hash('guru', PASSWORD_DEFAULT),
             'role_id' => 2,
-            // 'date_created' => time()
+            'date_created' => time()
         ];
         $this->db->insert('user', $data);
         redirect('auth');

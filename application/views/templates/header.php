@@ -84,10 +84,40 @@
                                         <?php else : ?>
                                             <a class="nav-link" href="<?= base_url($m['url']); ?>">
                                             <?php endif; ?>
+
                                             <i class="<?= $m['icon']; ?>"></i><?= $m['menu']; ?>
+
                                             </a>
                                         <?php endforeach; ?>
-                                        <!-- </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>Mata Pelajaran</a>
+                                    <div id="submenu-2" class="collapse submenu" style="">
+                                        <ul class="nav flex-column">
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="pages/cards.html">Mata Pelajaran 1 <span class="badge badge-secondary">New</span></a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="pages/general.html">Mata Pelajaran 2</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="pages/carousel.html">Mata Pelajaran 3</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="pages/listgroup.html">Mata Pelajaran 4</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="pages/typography.html">Mata Pelajaran 5</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="pages/accordions.html">Mata Pelajaran 6</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" href="pages/tabs.html">Mata Pelajaran 7</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <!-- </li>
                             <li class="nav-item ">
                                 <a class="nav-link" href="#">
                                     <i class="fas fa-fw fa-user-graduate"></i>Siswa
