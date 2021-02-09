@@ -68,14 +68,14 @@ class Auth extends CI_Controller
 
     public function registration()
     {
-        // $data = [
-        //     'username' => 'admin',
-        //     'image' => 'default.jpg',
-        //     'password' => password_hash('admin', PASSWORD_DEFAULT),
-        //     'role_id' => 1,
-        //     'date_created' => time()
-        // ];
-        // $this->db->insert('user', $data);
+        $data = [
+            'username' => 'guru',
+            // 'image' => 'default.jpg',
+            'password' => password_hash('guru', PASSWORD_DEFAULT),
+            'role_id' => 2,
+            // 'date_created' => time()
+        ];
+        $this->db->insert('user', $data);
         redirect('auth');
     }
 }

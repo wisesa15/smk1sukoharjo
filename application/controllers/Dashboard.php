@@ -14,6 +14,11 @@ class Dashboard extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('dashboard/admin');
             $this->load->view('templates/footer');
+        } else if ($this->session->userdata('role_id') == 2) {
+            //guru
+            $this->load->view('templates/header', $data);
+            $this->load->view('dashboard/guru');
+            $this->load->view('templates/footer');
         }
     }
 }
