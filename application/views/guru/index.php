@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Data Siswa</h2>
+                    <h2 class="pageheader-title">Guru</h2>
                     <!-- <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus
                                 vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p> -->
                     <!-- <div class="page-breadcrumb">
@@ -30,6 +30,7 @@
         <!-- end pageheader  -->
         <!-- ============================================================== -->
 
+
         <div>
             <!-- ============================================================== -->
             <!-- content  -->
@@ -39,13 +40,13 @@
                 <div class="col-md-6">
                     <div class="d-flex justify-content-end">
 
-                        <button type="button" class="btn btn-primary mb-3">+ Tambah Siswa</button>
+                        <button type="button" class="btn btn-primary mb-3">+ Tambah Guru</button>
                     </div>
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">NIS</th>
+                                <th scope="col">NIP</th>
                                 <th scope="col">Nama</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -55,7 +56,7 @@
                             <?php foreach ($siswa as $s) : ?>
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
-                                    <td><?= $s['nis']; ?></td>
+                                    <td><?= $s['nip']; ?></td>
                                     <td><?= $s['nama']; ?></td>
                                     <td>
                                         <a href="#" class="badge badge-success">Edit</a>
@@ -71,31 +72,31 @@
             <!-- ============================================================== -->
             <!-- End content  -->
             <!-- ============================================================== -->
+            </class=>
         </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- footer -->
-    <!-- ============================================================== -->
-    <div class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript: void(0);">About</a>
-                        <a href="javascript: void(0);">Support</a>
-                        <a href="javascript: void(0);">Contact Us</a>
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <div class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="text-md-right footer-links d-none d-sm-block">
+                            <a href="javascript: void(0);">About</a>
+                            <a href="javascript: void(0);">Support</a>
+                            <a href="javascript: void(0);">Contact Us</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- ============================================================== -->
+        <!-- end footer -->
+        <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
-    <!-- end footer -->
+    <!-- end wrapper  -->
     <!-- ============================================================== -->
-</div>
-<!-- ============================================================== -->
-<!-- end wrapper  -->
-<!-- ============================================================== -->
