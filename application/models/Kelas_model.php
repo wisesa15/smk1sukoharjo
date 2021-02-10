@@ -22,4 +22,20 @@ class Kelas_model extends CI_Model
         $result = $this->db->get()->result_array();
         return $result;
     }
+    public function getDetail($id)
+    {
+
+        $result = $this->db->get_where('kelas', ['id' => $id])->row_array();
+        return $result;
+    }
+    public function getPertemuan($id_kelas)
+    {
+        $result = $this->db->get_where('aktivitas_kelas', ['id_kelas' => $id_kelas])->result_array();
+        return $result;
+    }
+    public function getFile($id_pertemuan)
+    {
+        $result = $this->db->get_where('file', ['id_aktivitas' => $id_pertemuan])->result_array();
+        return $result;
+    }
 }

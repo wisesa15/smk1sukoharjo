@@ -42,12 +42,14 @@
                                 <div class="row">
                                     <?php foreach ($kelas as $k) : ?>
                                         <div class="col-md-4">
-                                            <div class="card">
-                                                <img class="card-img-top" src="https://source.unsplash.com/random/800x600" alt="Card image cap">
-                                                <div class="card-body">
-                                                    <h5 class="card-title"><?= $k['nama']; ?></h5>
+                                            <a href="<?= base_url('kelas/detail/') . $k['id'] ?>">
+                                                <div class="card">
+                                                    <img class="card-img-top" src="https://source.unsplash.com/random/800x600" alt="Card image cap">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title"><?= $k['nama']; ?></h5>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     <?php endforeach; ?>
 
