@@ -56,10 +56,11 @@
                                 <tr>
                                     <th scope="row"><?= $i; ?></th>
                                     <td><?= $s['nip']; ?></td>
-                                    <td><?= $s['nama']; ?></td>
+                                    <td><a href="<?= base_url('guru/detail/') . $s['id']; ?>"><?= $s['nama']; ?></a></td>
                                     <td>
                                         <a href="#" class="badge badge-success">Edit</a>
                                         <a href="#" class="badge badge-danger">Delete</a>
+                                        <a href="#" class="badge badge-dark">Reset Password</a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>

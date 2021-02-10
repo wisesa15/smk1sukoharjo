@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2021 at 08:26 AM
--- Server version: 10.4.8-MariaDB
--- PHP Version: 7.2.24
+-- Generation Time: Feb 10, 2021 at 07:30 AM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -77,16 +76,17 @@ CREATE TABLE `jenis_file` (
 CREATE TABLE `kelas` (
   `id` int(11) NOT NULL,
   `nama` varchar(128) NOT NULL,
-  `id_mapel` int(11) NOT NULL
+  `id_mapel` int(11) NOT NULL,
+  `gambar` varchar(256) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `kelas`
 --
 
-INSERT INTO `kelas` (`id`, `nama`, `id_mapel`) VALUES
-(1, 'Ilmu Komputer 2020', 1),
-(2, 'Jaringan 2021', 2);
+INSERT INTO `kelas` (`id`, `nama`, `id_mapel`, `gambar`) VALUES
+(1, 'Ilmu Komputer 2020', 1, ''),
+(2, 'Jaringan 2021', 2, '');
 
 -- --------------------------------------------------------
 
@@ -99,6 +99,14 @@ CREATE TABLE `kelas_guru` (
   `id_guru` int(11) NOT NULL,
   `id_kelas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `kelas_guru`
+--
+
+INSERT INTO `kelas_guru` (`id`, `id_guru`, `id_kelas`) VALUES
+(1, 1, 1),
+(5, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -175,7 +183,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`, `role_id`, `id_siswa`, `id_guru`, `image`, `date_created`) VALUES
-(3, 'admin', '$2y$10$9kPSqAp7yWB7gPEv7au9wOVr0eK1AsjD0CD5qRp.VuX75H2udSce2', 1, NULL, NULL, 'default.jpg', 1612851981);
+(3, 'admin', '$2y$10$9kPSqAp7yWB7gPEv7au9wOVr0eK1AsjD0CD5qRp.VuX75H2udSce2', 1, NULL, NULL, 'default.jpg', 1612851981),
+(4, 'guru', '$2y$10$B1NrD.MCN19EC1MTh07Swetv8doFO6Ahj.CR6y5t3zlfTPsoEs88m', 2, NULL, 1, 'default.jpg', 1612858030);
 
 -- --------------------------------------------------------
 
@@ -258,7 +267,8 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 -- Indexes for table `aktivitas_kelas`
 --
 ALTER TABLE `aktivitas_kelas`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `jenis` (`jenis`);
 
 --
 -- Indexes for table `guru`
@@ -276,19 +286,24 @@ ALTER TABLE `jenis_file`
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_mapel` (`id_mapel`);
 
 --
 -- Indexes for table `kelas_guru`
 --
 ALTER TABLE `kelas_guru`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_guru` (`id_guru`),
+  ADD KEY `id_kelas` (`id_kelas`);
 
 --
 -- Indexes for table `kelas_siswa`
 --
 ALTER TABLE `kelas_siswa`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_kelas` (`id_kelas`),
+  ADD KEY `id_siswa` (`id_siswa`);
 
 --
 -- Indexes for table `mata_pelajaran`
@@ -306,13 +321,18 @@ ALTER TABLE `siswa`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_guru` (`id_guru`),
+  ADD KEY `id_siswa` (`id_siswa`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- Indexes for table `user_access_menu`
 --
 ALTER TABLE `user_access_menu`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `menu_id` (`menu_id`),
+  ADD KEY `role_id` (`role_id`);
 
 --
 -- Indexes for table `user_menu`
@@ -358,7 +378,7 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `kelas_guru`
 --
 ALTER TABLE `kelas_guru`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `kelas_siswa`
@@ -382,7 +402,7 @@ ALTER TABLE `siswa`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user_access_menu`
@@ -401,6 +421,51 @@ ALTER TABLE `user_menu`
 --
 ALTER TABLE `user_role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `aktivitas_kelas`
+--
+ALTER TABLE `aktivitas_kelas`
+  ADD CONSTRAINT `aktivitas_kelas_ibfk_1` FOREIGN KEY (`jenis`) REFERENCES `jenis_file` (`id`);
+
+--
+-- Constraints for table `kelas`
+--
+ALTER TABLE `kelas`
+  ADD CONSTRAINT `kelas_ibfk_1` FOREIGN KEY (`id_mapel`) REFERENCES `mata_pelajaran` (`id`);
+
+--
+-- Constraints for table `kelas_guru`
+--
+ALTER TABLE `kelas_guru`
+  ADD CONSTRAINT `kelas_guru_ibfk_1` FOREIGN KEY (`id_guru`) REFERENCES `guru` (`id`),
+  ADD CONSTRAINT `kelas_guru_ibfk_2` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`);
+
+--
+-- Constraints for table `kelas_siswa`
+--
+ALTER TABLE `kelas_siswa`
+  ADD CONSTRAINT `kelas_siswa_ibfk_1` FOREIGN KEY (`id_kelas`) REFERENCES `kelas` (`id`),
+  ADD CONSTRAINT `kelas_siswa_ibfk_2` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`);
+
+--
+-- Constraints for table `user`
+--
+ALTER TABLE `user`
+  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`id_guru`) REFERENCES `guru` (`id`),
+  ADD CONSTRAINT `user_ibfk_2` FOREIGN KEY (`id_siswa`) REFERENCES `siswa` (`id`),
+  ADD CONSTRAINT `user_ibfk_3` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
+
+--
+-- Constraints for table `user_access_menu`
+--
+ALTER TABLE `user_access_menu`
+  ADD CONSTRAINT `user_access_menu_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `user_menu` (`id`),
+  ADD CONSTRAINT `user_access_menu_ibfk_2` FOREIGN KEY (`role_id`) REFERENCES `user_role` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
