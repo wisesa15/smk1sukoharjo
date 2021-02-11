@@ -101,7 +101,7 @@
                                                 <ul class="nav flex-column">
                                                     <?php foreach ($kelas as $k) : ?>
                                                         <li class="nav-item">
-                                                            <a class="nav-link" href=""><?= $k['nama']; ?></a>
+                                                            <a class="nav-link" href="<?= base_url('kelas/detail/') . $k['id']; ?>"><?= $k['nama']; ?></a>
                                                         </li>
                                                     <?php endforeach; ?>
                                                 </ul>
