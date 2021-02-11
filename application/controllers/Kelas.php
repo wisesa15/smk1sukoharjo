@@ -16,6 +16,11 @@ class Kelas extends CI_Controller
         $data['title'] = 'Kelas';
         $data['user'] = $this->user->getUser($this->session->userdata('username'));
         $data['kelas'] = $this->kelas->getAllKelas();
+        $data['pengajar'] = [];
+        foreach ($data['kelas'] as $k) :
+            $pengajar = $this->kelas->getAllGuru($k['id']);
+            array_push($data['pengajar'], $pengajar);
+        endforeach;
 
         $this->load->view('templates/header', $data);
         $this->load->view('kelas/admin', $data);

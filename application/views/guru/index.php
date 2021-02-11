@@ -36,11 +36,12 @@
             <!-- ============================================================== -->
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-12">
                     <div class="d-flex justify-content-end">
 
                         <button type="button" class="btn btn-primary mb-3">+ Tambah Guru</button>
                     </div>
+                    <?= $this->session->flashdata('message') ?>
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
@@ -58,7 +59,7 @@
                                     <td><?= $s['nip']; ?></td>
                                     <td><a href="<?= base_url('guru/detail/') . $s['id']; ?>"><?= $s['nama']; ?></a></td>
                                     <td>
-                                        <a href="#" class="badge badge-success">Edit</a>
+                                        <a href="<?= base_url('guru/edit/') . $s['id']; ?>" class="badge badge-success">Edit</a>
                                         <a href="#" class="badge badge-danger">Delete</a>
                                         <a href="#" class="badge badge-dark">Reset Password</a>
                                     </td>

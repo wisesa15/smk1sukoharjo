@@ -13,6 +13,17 @@ class Kelas_model extends CI_Model
         return $result;
     }
 
+    public function getAllGuru($id)
+    {
+        $this->db->select('guru.*');
+        $this->db->from('guru');
+        $this->db->join('kelas_guru', 'kelas_guru.id_guru = guru.id');
+        $this->db->where('kelas_guru.id_kelas', $id);
+
+        $result = $this->db->get()->result_array();
+        return $result;
+    }
+
     //mengambil data kelas yang diajar oleh (apabila rolenya 2/guru) atau data kelas yang diambil oleh (apabila rolenya 3/siswa)
     public function getKelas($id, $role)
     {

@@ -35,8 +35,25 @@ class Siswa extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $data['title'] = 'Edit Siswa';
+        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['siswa'] = $this->siswa->getSiswa($id);
+
+        $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('siswa/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->siswa->editSiswa($id);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $data['siswa']['nama'] . '.</div>');
+            redirect('siswa');
+        }
     }
 
     public function delete()
@@ -45,5 +62,20 @@ class Siswa extends CI_Controller
 
     public function resetPassword()
     {
+    }
+
+    //ini buat nyimpen template doang
+    public function template()
+    {
+        $data['title'] = 'Edit Profile';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+        $this->form_validation->set_rules('name', 'Full Name', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated.</div>');
+            redirect('user');
+        }
     }
 }
