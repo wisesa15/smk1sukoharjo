@@ -47,6 +47,11 @@ class Kelas_model extends CI_Model
         $result = $this->db->get_where('kelas', ['id' => $id])->row_array();
         return $result;
     }
+    public function getDetailPertemuan($id_pertemuan)
+    {
+        $result = $this->db->get_where('aktivitas_kelas', ['id' => $id_pertemuan])->row_array();
+        return $result;
+    }
     public function getPertemuan($id_kelas)
     {
         $result = $this->db->get_where('aktivitas_kelas', ['id_kelas' => $id_kelas])->result_array();
@@ -56,5 +61,25 @@ class Kelas_model extends CI_Model
     {
         $result = $this->db->get_where('file', ['id_aktivitas' => $id_pertemuan])->result_array();
         return $result;
+    }
+    public function tambahPertemuan($id)
+    {
+        $data = [
+            'nama_kegiatan' => htmlspecialchars($this->input->post('aktivitas')),
+            'id_kelas' => $id
+        ];
+        $this->db->insert('aktivitas_kelas', $data);
+    }
+    public function tambahMateri($id)
+    {
+        $data = [
+            'nama' => htmlspecialchars($this->input->post('nama_file')),
+            'jenis' => ($this->input->post('jenis')),
+            'tgl_ditampilkan' => date_timestamp_get($this->input->post('dataTampil')),
+            'tenggalwaktu' => date_timestamp_get($this->input->post('dateline')),
+            'nama_file' => 'ini',
+            'id_aktivitas' => $id
+        ];
+        $this->db->insert('file', $data);
     }
 }

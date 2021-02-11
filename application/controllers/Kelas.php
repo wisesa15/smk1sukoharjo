@@ -31,6 +31,7 @@ class Kelas extends CI_Controller
         $data['user'] = $this->user->getUser($this->session->userdata('username'));
         $data['kelas'] = $this->kelas->getAllKelas();
         $data_kelas = $this->kelas->getDetail($id_kelas);
+        $data['detail'] = $data_kelas;
         $data['title'] = $data_kelas['nama'];
         $data_aktivitas = $this->kelas->getPertemuan($id_kelas);
         $data['aktivitas'] = $data_aktivitas;
@@ -42,5 +43,50 @@ class Kelas extends CI_Controller
         $this->load->view('templates/header', $data);
         $this->load->view('kelas/detail', $data);
         $this->load->view('templates/footer');
+    }
+    public function tambahPertemuan($id_kelas)
+    {
+        $data['title'] = 'Tambah Pertemuan';
+        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['detailKelas'] = $this->kelas->getDetail($id_kelas);
+        $data['kelas'] = $this->kelas->getAllKelas();
+
+        $this->form_validation->set_rules('aktivitas', 'Nama Aktivitas', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/tambah_pertemuan', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->kelas->tambahPertemuan($id_kelas);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menambah data ' . $data['kelas']['nama'] . '.</div>');
+            redirect('kelas/detail/' . $id_kelas);
+        }
+    }
+    public function tambahMateri($id_pertemuan)
+    {
+        $data['title'] = 'Tambah Materi';
+        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($id_pertemuan);
+        $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
+        $data['kelas'] = $this->kelas->getAllKelas();
+
+        $this->form_validation->set_rules('nama_file', 'Nama file', 'required|trim');
+        $this->form_validation->set_rules('jenis', 'jenis', 'required|trim');
+        $this->form_validation->set_rules('dataTampil', 'Tanggal Ditampilkan', 'required');
+        $this->form_validation->set_rules('dateline', 'Dateline', 'required');
+
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/tambah_Materi', $data);
+            $this->load->view('templates/footer');
+        } else {
+
+            $this->kelas->tambahMateri($id_pertemuan);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $this->input->post('dataTampil') . '.</div>');
+            redirect('kelas/detail/' . $data['detailPertemuan']['id_kelas']);
+            // redirect('kelas');
+        }
     }
 }

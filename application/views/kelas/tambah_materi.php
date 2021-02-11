@@ -9,23 +9,17 @@
                 <strong>Peringatan</strong>.Pastikan form yang anda isi sesuai dengan form requirement
             </div>
             <h3>Materi Info</h3>
-            <form class="form-horizontal" role="form">
-                <div class="form-group">
-                    <label class="col-lg-3 control-label">Nama Aktivitas </label>
-                    <div class="col-lg-8">
-                        <input class="form-control" value="activity_name" type="text">
-                    </div>
-                </div>
+            <form class="form-horizontal" method="post" action="<?= base_url('kelas/tambahMateri/') . $detailPertemuan['id']; ?>">
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Nama file</label>
                     <div class="col-lg-8">
-                        <input class="form-control" value="file_name" type="text">
+                        <input class="form-control" placeholder="nama file yang ditampilkan" type="text" name="nama_file">
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Jenis Materi</label>
                     <div class="col-lg-8">
-                        <select id="inputState" class="form-control">
+                        <select id="inputState" class="form-control" name="jenis">
                             <option value="1" selected>Materi</option>
                             <option value="2">Tugas</option>
                         </select>
@@ -33,7 +27,7 @@
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Tanggal ditampilkan:</label>
-                    <input type="date" id="date_insert" name="date_insert">
+                    <input type="date" id="date_insert" name="dataTampil">
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Dateline:</label>
@@ -47,9 +41,9 @@
                 <div class="form-group">
                     <label class="col-md-3 control-label"></label>
                     <div class="col-md-8">
-                        <input class="btn btn-primary" value="Save Changes" type="button">
+                        <button type="submit" class="btn btn-primary">Simpan</button>
                         <span></span>
-                        <input class="btn btn-default" value="Cancel" type="reset">
+                        <a class="btn btn-warning" href="<?= base_url('kelas/detail/') . $detailKelas['id']; ?>">cancel</a>
                     </div>
                 </div>
             </form>
