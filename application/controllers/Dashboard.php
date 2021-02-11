@@ -9,6 +9,7 @@ class Dashboard extends CI_Controller
         $this->load->model('User_model', 'user');
         $this->load->model('Guru_model', 'guru');
         $this->load->model('Kelas_model', 'kelas');
+        $this->load->model('Siswa_model', 'siswa');
     }
     public function index()
     {
@@ -27,6 +28,12 @@ class Dashboard extends CI_Controller
             $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
             $this->load->view('templates/header', $data);
             $this->load->view('dashboard/guru', $data);
+            $this->load->view('templates/footer');
+        } else if ($this->session->userdata('role_id') == 3) {
+            $data['siswa'] = $this->siswa->getSiswa($data['user']['id_siswa']);
+            $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id'));
+            $this->load->view('templates/header', $data);
+            $this->load->view('dashboard/siswa', $data);
             $this->load->view('templates/footer');
         }
     }

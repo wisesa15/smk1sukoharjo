@@ -34,7 +34,13 @@ class Guru extends CI_Controller
         $this->load->view('guru/detail', $data);
         $this->load->view('templates/footer');
     }
-
+    public function tambah_materi()
+    {
+        $data['title'] = 'Tambah Pertemuan';
+        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['guru'] = $this->guru->getGuru($id);
+        $data['kelas'] = $this->kelas->getKelas($id, 2);
+    }
     public function edit()
     {
     }
