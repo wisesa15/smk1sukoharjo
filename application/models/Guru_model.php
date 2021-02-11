@@ -20,4 +20,13 @@ class Guru_model extends CI_Model
         $result = $this->db->get('guru')->result_array();
         return $result;
     }
+    public function editGuru($id)
+    {
+        $data = [
+            'nip' => htmlspecialchars($this->input->post('nip')),
+            'nama' => htmlspecialchars($this->input->post('nama'))
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('guru', $data);
+    }
 }

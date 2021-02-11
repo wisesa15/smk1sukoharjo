@@ -18,4 +18,14 @@ class Siswa_model extends CI_Model
         $result = $this->db->get('siswa')->result_array();
         return $result;
     }
+    public function editSiswa($id)
+    {
+        $data = [
+            'nis' => htmlspecialchars($this->input->post('nis')),
+            'nama' => htmlspecialchars($this->input->post('nama')),
+            'kelas' => htmlspecialchars($this->input->post('kelas'))
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('siswa', $data);
+    }
 }
