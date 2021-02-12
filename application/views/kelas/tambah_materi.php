@@ -27,11 +27,11 @@
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Tanggal ditampilkan:</label>
-                    <input type="date" id="date_insert" name="dataTampil">
+                    <input type="datetime-local" id="dataTampil" name="dataTampil" value="<?= date('Y-m-d\TH:i', time()); ?>">
                 </div>
                 <div class="form-group">
                     <label class="col-md-3 control-label">Dateline:</label>
-                    <input type="date" id="dateline" name="dateline">
+                    <input type="datetime-local" id="dateline" name="dateline" value="<?= date('Y-m-d\TH:i', time()); ?>">
                 </div>
                 <div class="from-group">
                     <div class="col-md-3 control-label file-loading">

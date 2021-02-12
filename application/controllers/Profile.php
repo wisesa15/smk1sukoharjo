@@ -29,4 +29,27 @@ class Profile extends CI_Controller
         $this->load->view('profile/index', $data);
         $this->load->view('templates/footer');
     }
+    public function Edit()
+    {
+        $data['title'] = 'Edit Profile';
+        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['kelas'] = $this->kelas->getAllKelas();
+
+        $this->form_validation->set_rules('old_password', 'Old Password', 'required|trim');
+        $this->form_validation->set_rules('password', 'Password', 'trim|matches[n_password]');
+        $this->form_validation->set_rules('n_password', 'New Password', 'trim|matches[password]');
+
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('profile/edit_password', $data);
+            $this->load->view('templates/footer');
+        } else {
+            if (password_verify($this->input->post('old_password'), $data['user']['password'])) {
+                $this->user->edit($data['user']['id']);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated.</div>');
+                redirect('profile');
+            }
+        }
+    }
 }

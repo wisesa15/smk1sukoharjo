@@ -20,4 +20,12 @@ class User_model extends CI_Model
         $result = $this->db->get('user')->result_array();
         return $result;
     }
+    public function edit($id)
+    {
+        $data = [
+            'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+        ];
+        $this->db->where('id', $id);
+        $this->db->update('user', $data);
+    }
 }

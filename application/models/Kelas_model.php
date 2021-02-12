@@ -75,8 +75,8 @@ class Kelas_model extends CI_Model
         $data = [
             'nama' => htmlspecialchars($this->input->post('nama_file')),
             'jenis' => ($this->input->post('jenis')),
-            'tgl_ditampilkan' => date_timestamp_get($this->input->post('dataTampil')),
-            'tenggalwaktu' => date_timestamp_get($this->input->post('dateline')),
+            'tgl_ditampilkan' => strtotime($this->input->post('dataTampil')),
+            'tenggalwaktu' => strtotime($this->input->post('dateline')),
             'nama_file' => 'ini',
             'id_aktivitas' => $id
         ];

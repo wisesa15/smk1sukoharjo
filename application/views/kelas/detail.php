@@ -26,18 +26,34 @@
                                         <li class="list-group-item"><a href="<?= base_url('kelas/tambahMateri/') . $judul_pertemuan['id']; ?>" class="btn btn-primary mt-0">+ Tambah Materi</a>
                                         </li>
                                         <?php foreach ($file[$i] as $nama_materi) : ?>
-                                            <?php if ($nama_materi['jenis'] == 1) : ?>
-                                                <li class="list-group-item">
-                                                    <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
-                                                        <?= $nama_materi['nama']; ?>
-                                                    </h3>
-                                                </li>
+                                            <?php if ($nama_materi['tgl_ditampilkan'] < time()) : ?>
+                                                <?php if ($nama_materi['jenis'] == 1) : ?>
+                                                    <li class="list-group-item">
+                                                        <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
+                                                            <?= $nama_materi['nama']; ?>
+                                                        </h3>
+                                                    </li>
+                                                <?php else : ?>
+                                                    <li class="list-group-item ">
+                                                        <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
+                                                            <?= $nama_materi['nama']; ?>
+                                                        </h3>
+                                                    </li>
+                                                <?php endif; ?>
                                             <?php else : ?>
-                                                <li class="list-group-item ">
-                                                    <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
-                                                        <?= $nama_materi['nama']; ?>
-                                                    </h3>
-                                                </li>
+                                                <?php if ($nama_materi['jenis'] == 1) : ?>
+                                                    <li class="list-group-item">
+                                                        <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
+                                                            <s><?= $nama_materi['nama']; ?></s>
+                                                        </h3>
+                                                    </li>
+                                                <?php else : ?>
+                                                    <li class="list-group-item ">
+                                                        <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
+                                                            <s><?= $nama_materi['nama']; ?></s>
+                                                        </h3>
+                                                    </li>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                         <hr>
@@ -45,10 +61,6 @@
                                 </div>
                                 <?php $i++; ?>
                             <?php endforeach; ?>
-                            <?= $this->session->flashdata('message') ?>
-                            <!-- <div class="next m-2">
-                                            <a href="#" class="btn btn-primary">next page</a>
-                                        </div> -->
                         </div>
                     </div>
                 </div>

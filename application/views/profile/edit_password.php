@@ -12,43 +12,34 @@
             </div>
             <!-- edit form column -->
             <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-                <div class="alert alert-info alert-dismissable">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fas fa-exclamation-triangle"></i>
-                    This is an <strong>alert</strong>.change the password with a word combination that is not known by the people around
-                </div>
+
                 <h3>Personal info</h3>
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" action="<?= base_url('profile/edit'); ?>" method="POST">
+
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">username</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" value="username" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">new username:</label>
-                        <div class="col-lg-8">
-                            <input class="form-control" placeholder="your new username" value="n_username" type="text">
+                        <label class="col-md-3 control-label">Old Password :</label>
+                        <div class="col-md-8">
+                            <input class="form-control" name="old_password" id="old_password" type="password">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Password:</label>
                         <div class="col-md-8">
-                            <input class="form-control" value="11111122333" type="password">
+                            <input class="form-control" name="password" id="password" type="password">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Confirm password:</label>
+                        <label class="col-md-3 control-label" for="n_password">Confirm password:</label>
                         <div class="col-md-8">
-                            <input class="form-control" value="11111122333" type="password">
+                            <input class="form-control" name="n_password" id="n_password" type="password">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-8">
-                            <input class="btn btn-primary" value="Save Changes" type="button">
+                            <button class="btn btn-primary" type="submit">Save Changes</button>
                             <span></span>
-                            <input class="btn btn-default" value="Cancel" type="reset">
+                            <a class="btn btn-warning" href="<?= base_url('profile'); ?>">cancel</a>
                         </div>
                     </div>
                 </form>

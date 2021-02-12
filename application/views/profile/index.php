@@ -68,8 +68,7 @@
                             </div>
                         </div>
                         <div class="border-top user-social-box">
-                            <div class="user-social-media d-xl-inline-block" style="margin-left:80% ;"><button type="button" class="btn btn-primary">Detail </button></div>
-
+                            <div class="user-social-media d-xl-inline-block" style="margin-left:80% ;"><a href="<?= base_url('profile/edit') ?>" class="btn btn-primary">Edit </a></div>
                         </div>
                     </div>
                 </div>

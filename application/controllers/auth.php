@@ -69,9 +69,9 @@ class Auth extends CI_Controller
     public function registration()
     {
         $data = [
-            'username' => 'siswa',
+            'username' => 'guru',
             'image' => 'default.jpg',
-            'password' => password_hash('siswa', PASSWORD_DEFAULT),
+            'password' => password_hash('guru', PASSWORD_DEFAULT),
             'role_id' => 2,
             'date_created' => time()
         ];
