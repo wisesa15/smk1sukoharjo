@@ -14,7 +14,7 @@ class Kelas extends CI_Controller
     {
         //liat role id session
         $data['title'] = 'Kelas';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['kelas'] = $this->kelas->getAllKelas();
         $data['pengajar'] = [];
         foreach ($data['kelas'] as $k) :
@@ -28,7 +28,7 @@ class Kelas extends CI_Controller
     }
     public function detail($id_kelas)
     {
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['kelas'] = $this->kelas->getAllKelas();
         $data_kelas = $this->kelas->getDetail($id_kelas);
         $data['detail'] = $data_kelas;
@@ -47,7 +47,7 @@ class Kelas extends CI_Controller
     public function tambahPertemuan($id_kelas)
     {
         $data['title'] = 'Tambah Pertemuan';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['detailKelas'] = $this->kelas->getDetail($id_kelas);
         $data['kelas'] = $this->kelas->getAllKelas();
 
@@ -66,7 +66,7 @@ class Kelas extends CI_Controller
     public function tambahMateri($id_pertemuan)
     {
         $data['title'] = 'Tambah Materi';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($id_pertemuan);
         $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
         $data['kelas'] = $this->kelas->getAllKelas();

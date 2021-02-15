@@ -12,20 +12,20 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        if ($this->session->userdata('username')) {
-        }
-
-        $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        $this->form_validation->set_rules('password', 'Password', 'required|trim');
-
-        if ($this->form_validation->run() == false) {
-            $data['title'] = 'Login';
-
-            $this->load->view('templates/auth_header', $data);
-            $this->load->view('auth/login');
-            $this->load->view('templates/auth_footer');
+        if ($this->session->userdata('id')) {
         } else {
-            $this->_login();
+            $this->form_validation->set_rules('username', 'Username', 'required|trim');
+            $this->form_validation->set_rules('password', 'Password', 'required|trim');
+
+            if ($this->form_validation->run() == false) {
+                $data['title'] = 'Login';
+
+                $this->load->view('templates/auth_header', $data);
+                $this->load->view('auth/login');
+                $this->load->view('templates/auth_footer');
+            } else {
+                $this->_login();
+            }
         }
     }
 
@@ -34,14 +34,14 @@ class Auth extends CI_Controller
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
-        $user = $this->user->getUser($username);
+        $user = $this->user->getUserByUsername($username);
 
         //usernya ada
         if ($user) {
             if (password_verify($password, $user['password'])) {
                 //jika password sama, login berhasil
                 $data = [
-                    'username' => $user['username'],
+                    'id' => $user['id'],
                     'role_id' => $user['role_id']
                 ];
                 $this->session->set_userdata($data);
@@ -60,7 +60,7 @@ class Auth extends CI_Controller
 
     public function logout()
     {
-        $this->session->unset_userdata('username');
+        $this->session->unset_userdata('id');
         $this->session->unset_userdata('role_id');
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You\'ve been logout!</div>');
         redirect('auth');

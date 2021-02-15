@@ -15,7 +15,7 @@ class Guru extends CI_Controller
     {
         //liat role id session
         $data['title'] = 'Guru';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['siswa'] = $this->guru->getAllGuru();
 
         $this->load->view('templates/header', $data);
@@ -26,7 +26,7 @@ class Guru extends CI_Controller
     public function detail($id)
     {
         $data['title'] = 'Detail Guru';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['guru'] = $this->guru->getGuru($id);
         $data['kelas'] = $this->kelas->getKelas($id, 2);
 
@@ -38,7 +38,7 @@ class Guru extends CI_Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Guru';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['guru'] = $this->guru->getGuru($id);
 
         $this->form_validation->set_rules('nip', 'Nomor Indentitas Pegawai Negeri Sipil', 'required|trim');

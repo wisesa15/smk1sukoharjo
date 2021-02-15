@@ -15,7 +15,7 @@ class Siswa extends CI_Controller
     {
         //liat role id session
         $data['title'] = 'Siswa';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['siswa'] = $this->siswa->getAllSiswa();
 
         $this->load->view('templates/header', $data);
@@ -26,7 +26,7 @@ class Siswa extends CI_Controller
     public function detail($id)
     {
         $data['title'] = 'Detail Siswa';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['siswa'] = $this->siswa->getSiswa($id);
         $data['kelas'] = $this->kelas->getKelas($id, 3);
 
@@ -38,7 +38,7 @@ class Siswa extends CI_Controller
     public function edit($id)
     {
         $data['title'] = 'Edit Siswa';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['siswa'] = $this->siswa->getSiswa($id);
 
         $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim');

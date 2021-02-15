@@ -15,7 +15,7 @@ class Profile extends CI_Controller
     {
         //liat role id session
         $data['title'] = 'Profile';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
 
         if ($data['user']['role_id'] == 1) {
             $this->load->view('templates/header', $data);
@@ -32,7 +32,7 @@ class Profile extends CI_Controller
     public function Edit()
     {
         $data['title'] = 'Edit Profile';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['kelas'] = $this->kelas->getAllKelas();
 
         $this->form_validation->set_rules('old_password', 'Old Password', 'required|trim');

@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller
     {
         //liat role id session
         $data['title'] = 'Dashboard';
-        $data['user'] = $this->user->getUser($this->session->userdata('username'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
 
         if ($this->session->userdata('role_id') == 1) {
             //admin
