@@ -28,9 +28,16 @@ class User_model extends CI_Model
     }
     public function edit($id)
     {
-        $data = [
-            'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
-        ];
+        if ($this->input->post('password') != "") {
+            $data = [
+                'username' => htmlspecialchars($this->input->post('username')),
+                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+            ];
+        } else {
+            $data = [
+                'username' => htmlspecialchars($this->input->post('username'))
+            ];
+        }
         $this->db->where('id', $id);
         $this->db->update('user', $data);
     }

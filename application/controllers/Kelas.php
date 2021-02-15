@@ -28,6 +28,7 @@ class Kelas extends CI_Controller
     }
     public function detail($id_kelas)
     {
+
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['kelas'] = $this->kelas->getAllKelas();
         $data_kelas = $this->kelas->getDetail($id_kelas);
@@ -40,9 +41,15 @@ class Kelas extends CI_Controller
             $file = $this->kelas->getFile($a['id']);
             array_push($data['file'], $file);
         endforeach;
-        $this->load->view('templates/header', $data);
-        $this->load->view('kelas/detail', $data);
-        $this->load->view('templates/footer');
+        if ($data['user']['role_id'] == 2) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/detail', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/detail_siswa', $data);
+            $this->load->view('templates/footer');
+        }
     }
     public function tambahPertemuan($id_kelas)
     {
