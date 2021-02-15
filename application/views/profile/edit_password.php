@@ -15,7 +15,12 @@
 
                 <h3>Personal info</h3>
                 <form class="form-horizontal" action="<?= base_url('profile/edit'); ?>" method="POST">
-
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">username :</label>
+                        <div class="col-md-8">
+                            <input class="form-control" name="username" value="<?= $user['username']; ?>" id="username" type="text">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label">Old Password :</label>
                         <div class="col-md-8">

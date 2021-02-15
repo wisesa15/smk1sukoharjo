@@ -35,6 +35,7 @@ class Profile extends CI_Controller
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['kelas'] = $this->kelas->getAllKelas();
 
+        $this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('old_password', 'Old Password', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'trim|matches[n_password]');
         $this->form_validation->set_rules('n_password', 'New Password', 'trim|matches[password]');
