@@ -66,6 +66,21 @@ class Auth extends CI_Controller
         redirect('auth');
     }
 
+    public function resetPassword($role, $id)
+    {
+        if ($role == 2) {
+            $data = $this->user->getUserGuru($id); //mengambil data uesr yang ingin direset passwordnya berdasarkan id guru / id siswa
+            $this->user->resetPassword($data['id']);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You\'ve reset the password!</div>');
+            redirect('guru');
+        } else if ($role == 3) {
+            $data = $this->user->getUserSiswa($id);
+            $this->user->resetPassword($data['id']);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You\'ve reset the password!</div>');
+            redirect('siswa');
+        }
+    }
+
     public function registration()
     {
         $data = [
