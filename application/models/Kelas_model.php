@@ -62,6 +62,11 @@ class Kelas_model extends CI_Model
         $result = $this->db->get_where('file', ['id_aktivitas' => $id_pertemuan])->result_array();
         return $result;
     }
+    public function getDetailFile($id_materi)
+    {
+        $result = $this->db->get_where('file', ['id' => $id_materi])->row_array();
+        return $result;
+    }
     public function tambahPertemuan($id)
     {
         $data = [
