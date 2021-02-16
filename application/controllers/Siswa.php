@@ -60,8 +60,25 @@ class Siswa extends CI_Controller
     {
     }
 
-    public function resetPassword()
+    public function tambah()
     {
+        $data['title'] = 'Tambah Siswa';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+
+        $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('siswa/tambah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->siswa->tambahSiswa();
+            $this->user->tambahUser(3);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menambahkan siswa baru.</div>');
+            redirect('siswa');
+        }
     }
 
     //ini buat nyimpen template doang

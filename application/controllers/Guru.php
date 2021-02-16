@@ -59,7 +59,23 @@ class Guru extends CI_Controller
     {
     }
 
-    public function resetPassword()
+    public function tambah()
     {
+        $data['title'] = 'Tambah Guru';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+
+        $this->form_validation->set_rules('nip', 'Nomor Induk Pegawai Negeri', 'required|trim');
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('guru/tambah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->guru->tambahGuru();
+            $this->user->tambahUser(2);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menambahkan guru baru.</div>');
+            redirect('guru');
+        }
     }
 }

@@ -39,7 +39,7 @@
                 <div class="col-12">
                     <div class="d-flex justify-content-end">
 
-                        <button type="button" class="btn btn-primary mb-3">+ Tambah Guru</button>
+                        <a href="<?= base_url('guru/tambah') ?>" class="btn btn-primary mb-3">+ Tambah Guru</a>
                     </div>
                     <?= $this->session->flashdata('message') ?>
                     <table class="table table-hover">
