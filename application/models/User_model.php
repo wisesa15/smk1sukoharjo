@@ -67,4 +67,28 @@ class User_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('user', $data);
     }
+    public function tambahUser($role)
+    //menambahkan user dengan role tertentu (2 -> guru, 3 -> siswa)
+    {
+        if ($role == 2) {
+            $user = htmlspecialchars($this->input->post('nip'));
+        } else if ($role == 3) {
+            $user = htmlspecialchars($this->input->post('nis'));
+        }
+        $data = [
+            'username' => $user,
+            'image' => 'default.jpg',
+            'password' => password_hash($user, PASSWORD_DEFAULT),
+            'role_id' => $role,
+            'date_created' => time()
+        ];
+        if ($role == 2) {
+            $guru = $this->db->get_where('guru', ['nip' => $user])->row_array();
+            $data['id_guru'] = $guru['id'];
+        } else if ($role == 3) {
+            $siswa = $this->db->get_where('siswa', ['nis' => $user])->row_array();
+            $data['id_siswa'] = $siswa['id'];
+        }
+        $this->db->insert('user', $data);
+    }
 }

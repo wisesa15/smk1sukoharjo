@@ -29,4 +29,12 @@ class Guru_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('guru', $data);
     }
+    public function tambahGuru()
+    {
+        $data = [
+            'nip' => htmlspecialchars($this->input->post('nip')),
+            'nama' => htmlspecialchars($this->input->post('nama'))
+        ];
+        $this->db->insert('guru', $data);
+    }
 }

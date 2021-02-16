@@ -28,4 +28,13 @@ class Siswa_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('siswa', $data);
     }
+    public function tambahSiswa()
+    {
+        $data = [
+            'nis' => htmlspecialchars($this->input->post('nis')),
+            'nama' => htmlspecialchars($this->input->post('nama')),
+            'kelas' => htmlspecialchars($this->input->post('kelas'))
+        ];
+        $this->db->insert('siswa', $data);
+    }
 }
