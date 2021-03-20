@@ -6,15 +6,17 @@ class Kelas_model extends CI_Model
     public $nama;
     public $idMapel;
 
-    //mengambil data seluruh kelas
+
     public function getAllKelas()
     {
+        //mengambil data seluruh kelas
         $result = $this->db->get('kelas')->result_array();
         return $result;
     }
 
     public function getAllGuru($id)
     {
+        //mengambil semua data guru dengan parameter id_kelas (yang mengajar kelas tersebut)  
         $this->db->select('guru.*');
         $this->db->from('guru');
         $this->db->join('kelas_guru', 'kelas_guru.id_guru = guru.id');
@@ -24,9 +26,9 @@ class Kelas_model extends CI_Model
         return $result;
     }
 
-    //mengambil data kelas yang diajar oleh (apabila rolenya 2/guru) atau data kelas yang diambil oleh (apabila rolenya 3/siswa)
     public function getKelas($id, $role)
     {
+        //mengambil data kelas yang diajar oleh (apabila rolenya 2/guru) atau data kelas yang diambil oleh (apabila rolenya 3/siswa)
         if ($role == 2) {
             $this->db->select('kelas.*');
             $this->db->from('kelas');
