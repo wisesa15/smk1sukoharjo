@@ -13,26 +13,33 @@ class Profile extends CI_Controller
 
     public function index()
     {
-        //liat role id session
-        $data['title'] = 'Profile';
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        /* menampilkan profile user */
+
+        $data['title'] = 'Profile'; //title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
 
         if ($data['user']['role_id'] == 1) {
             $this->load->view('templates/header', $data);
         } else {
             if ($data['user']['role_id'] == 2) {
                 $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
-                $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+                $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar 
+            } else {
+                $data['siswa'] = $this->guru->getSiswa($data['user']['id_siswa']);
+                $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id')); //untuk sidebar
             }
             $this->load->view('templates/header', $data);
         }
         $this->load->view('profile/index', $data);
         $this->load->view('templates/footer');
     }
+
     public function Edit()
     {
-        $data['title'] = 'Edit Profile';
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        /* mengedit profile user */
+
+        $data['title'] = 'Edit Profile'; //title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yang login
         $data['kelas'] = $this->kelas->getAllKelas();
 
         $this->form_validation->set_rules('username', 'Username', 'required|trim');

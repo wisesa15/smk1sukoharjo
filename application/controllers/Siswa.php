@@ -13,7 +13,7 @@ class Siswa extends CI_Controller
 
     public function index()
     {
-        //liat role id session
+        /* menampilkan daftar siswa - untuk admin */
         $data['title'] = 'Siswa';
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['siswa'] = $this->siswa->getAllSiswa();
@@ -25,6 +25,8 @@ class Siswa extends CI_Controller
 
     public function detail($id)
     {
+        /* menampilkan detail siswa berdasarkan id */
+
         $data['title'] = 'Detail Siswa';
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['siswa'] = $this->siswa->getSiswa($id);
@@ -37,6 +39,7 @@ class Siswa extends CI_Controller
 
     public function edit($id)
     {
+        /* edit data siswa berdasarkan id */
         $data['title'] = 'Edit Siswa';
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['siswa'] = $this->siswa->getSiswa($id);
@@ -62,6 +65,8 @@ class Siswa extends CI_Controller
 
     public function tambah()
     {
+        /* menambahkan data siswa berdasarkan id */
+
         $data['title'] = 'Tambah Siswa';
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
 
@@ -81,9 +86,10 @@ class Siswa extends CI_Controller
         }
     }
 
-    //ini buat nyimpen template doang
     public function template()
     {
+        //ini buat nyimpen template doang
+
         $data['title'] = 'Edit Profile';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
 

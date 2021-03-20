@@ -12,11 +12,14 @@ class Kelas extends CI_Controller
 
     public function index()
     {
-        //liat role id session
-        $data['title'] = 'Kelas';
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
-        $data['kelas'] = $this->kelas->getAllKelas();
-        $data['pengajar'] = [];
+        /* menampilkan daftar semua kelas untuk admin */
+
+        $data['title'] = 'Kelas'; //title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
+        $data['kelas'] = $this->kelas->getAllKelas(); //data untuk ditampilkan
+        $data['pengajar'] = []; //data pengajar tiap kelas
+
+        //loop untuk mengambil data pengajar yang mengajar di tiap kelas
         foreach ($data['kelas'] as $k) :
             $pengajar = $this->kelas->getAllGuru($k['id']);
             array_push($data['pengajar'], $pengajar);
@@ -26,10 +29,12 @@ class Kelas extends CI_Controller
         $this->load->view('kelas/admin', $data);
         $this->load->view('templates/footer');
     }
+
     public function detail($id_kelas)
     {
+        /* menampilkan detail kelas berdasarkan id kelas yang ingin dilihat */
 
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yang login
         $data['kelas'] = $this->kelas->getAllKelas();
         $data_kelas = $this->kelas->getDetail($id_kelas);
         $data['detail'] = $data_kelas;
@@ -51,12 +56,15 @@ class Kelas extends CI_Controller
             $this->load->view('templates/footer');
         }
     }
+
     public function tambahPertemuan($id_kelas)
     {
-        $data['title'] = 'Tambah Pertemuan';
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        /* menambah pertemuan di suatu kelas (untuk admin dan guru) */
+
+        $data['title'] = 'Tambah Pertemuan'; //title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login 
         $data['detailKelas'] = $this->kelas->getDetail($id_kelas);
-        $data['kelas'] = $this->kelas->getAllKelas();
+        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar guru (kelas yang dia ajar)
 
         $this->form_validation->set_rules('aktivitas', 'Nama Aktivitas', 'required|trim');
 
@@ -70,13 +78,15 @@ class Kelas extends CI_Controller
             redirect('kelas/detail/' . $id_kelas);
         }
     }
+
     public function tambahMateri($id_pertemuan)
     {
+        /* menambah materi untuk suatu pertemuan pada suatu kelas (untuk admin dan guru) */
         $data['title'] = 'Tambah Materi';
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($id_pertemuan);
         $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
-        $data['kelas'] = $this->kelas->getAllKelas();
+        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar guru (kelas yang dia ajar)
 
         $this->form_validation->set_rules('nama_file', 'Nama file', 'required|trim');
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim');

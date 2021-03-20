@@ -13,10 +13,11 @@ class Guru extends CI_Controller
 
     public function index()
     {
-        //liat role id session
-        $data['title'] = 'Guru';
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
-        $data['siswa'] = $this->guru->getAllGuru();
+        /* menampilkan halaman guru untuk admin*/
+
+        $data['title'] = 'Guru'; //untuk title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //untuk data user yang login
+        $data['siswa'] = $this->guru->getAllGuru(); //ini harusnya guru tapi diganti nanti aja 
 
         $this->load->view('templates/header', $data);
         $this->load->view('guru/index', $data);
@@ -25,10 +26,12 @@ class Guru extends CI_Controller
 
     public function detail($id)
     {
-        $data['title'] = 'Detail Guru';
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
-        $data['guru'] = $this->guru->getGuru($id);
-        $data['kelas'] = $this->kelas->getKelas($id, 2);
+        /* menampilkan halaman detail guru berdasarkan id yang dipilih untuk admin */
+
+        $data['title'] = 'Detail Guru'; //untuk title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //untuk data user yang login
+        $data['guru'] = $this->guru->getGuru($id); //untuk menampilkan data detail data guru
+        $data['kelas'] = $this->kelas->getKelas($id, 2); //untuk menampilkan data yang diajar oleh guru tersebut
 
         $this->load->view('templates/header', $data);
         $this->load->view('guru/detail', $data);
@@ -37,9 +40,11 @@ class Guru extends CI_Controller
 
     public function edit($id)
     {
-        $data['title'] = 'Edit Guru';
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
-        $data['guru'] = $this->guru->getGuru($id);
+        /* form edit data guru */
+
+        $data['title'] = 'Edit Guru'; //untuk title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //untuk data user yang login
+        $data['guru'] = $this->guru->getGuru($id); //untuk menampilkan data guru yang ingin diedit
 
         $this->form_validation->set_rules('nip', 'Nomor Indentitas Pegawai Negeri Sipil', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
@@ -57,12 +62,15 @@ class Guru extends CI_Controller
 
     public function delete()
     {
+        /* delete() digunakan untuk menghapus data guru (param: id) */
     }
 
     public function tambah()
     {
-        $data['title'] = 'Tambah Guru';
-        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        /* tambah() digunakan untuk menambah data guru */
+
+        $data['title'] = 'Tambah Guru'; // untuk title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //untuk data user yang login
 
         $this->form_validation->set_rules('nip', 'Nomor Induk Pegawai Negeri', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
