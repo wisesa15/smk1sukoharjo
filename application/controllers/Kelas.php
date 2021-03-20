@@ -106,4 +106,32 @@ class Kelas extends CI_Controller
             // redirect('kelas');
         }
     }
+    public function editMateri($id_materi)
+    {
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+        $data['title'] = 'Edit Materi';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
+        $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
+        $data['kelas'] = $this->kelas->getAllKelas();
+
+
+        $this->form_validation->set_rules('nama_file', 'Nama file', 'required|trim');
+        $this->form_validation->set_rules('jenis', 'jenis', 'required|trim');
+        $this->form_validation->set_rules('dataTampil', 'Tanggal Ditampilkan', 'required');
+        $this->form_validation->set_rules('dateline', 'Dateline', 'required');
+
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/edit_Materi', $data);
+            $this->load->view('templates/footer');
+        } else {
+
+            $this->kelas->tambahMateri($id_pertemuan);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $this->input->post('dataTampil') . '.</div>');
+            redirect('kelas/detail/' . $data['detailPertemuan']['id_kelas']);
+            // redirect('kelas');
+        }
+    }
 }

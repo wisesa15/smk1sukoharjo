@@ -32,12 +32,14 @@
                                                         <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
                                                             <?= $nama_materi['nama']; ?>
                                                         </h3>
+                                                        <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
                                                     </li>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
                                                         <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
                                                             <?= $nama_materi['nama']; ?>
                                                         </h3>
+                                                        <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
                                                     </li>
                                                 <?php endif; ?>
                                             <?php else : ?>
@@ -46,12 +48,14 @@
                                                         <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
                                                             <s><?= $nama_materi['nama']; ?></s>
                                                         </h3>
+                                                        <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
                                                     </li>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
                                                         <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
                                                             <s><?= $nama_materi['nama']; ?></s>
                                                         </h3>
+                                                        <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
                                                     </li>
                                                 <?php endif; ?>
                                             <?php endif; ?>
