@@ -40,8 +40,14 @@ class Profile extends CI_Controller
 
         $data['title'] = 'Edit Profile'; //title web
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yang login
-        $data['kelas'] = $this->kelas->getAllKelas();
-
+        if ($data['user']['role_id'] == 2) //untuk kepentingan sidebar guru (kelas yang dia ajar)
+        {
+            $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+            $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        } else {
+            $data['siswa'] = $this->guru->getSiswa($data['user']['id_siswa']);
+            $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id')); //untuk sidebar
+        }
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('old_password', 'Old Password', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'trim|matches[n_password]');

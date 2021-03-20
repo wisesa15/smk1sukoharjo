@@ -9,43 +9,55 @@ class User_model extends CI_Model
     public $id_siswa;
     public $id_guru;
 
+
     public function getUser($user)
     {
+        //mengambil data user yang bersesuaian dengan parameter varibale user, dimaan variable user merupakan id_user 
         $result = $this->db->get_where('user', ['id' => $user])->row_array();
         return $result;
     }
 
     public function getUserByUsername($user)
     {
+        //mengambil data user yang bersesuaian dengan parameter varibale user, dimaan variable user merupakan username pengguna  
         $result = $this->db->get_where('user', ['username' => $user])->row_array();
         return $result;
     }
 
     public function getUserSiswa($user)
     {
+        //mengambail data user siswa dengan parameter varibale user, dimana variable user merupakan id_siswa
         $result = $this->db->get_where('user', ['id_siswa' => $user])->row_array();
         return $result;
     }
 
     public function getUserGuru($user)
     {
+        //mengambil data user guru dengan parameter variable user, dimana variable user merupakan id_guru
         $result = $this->db->get_where('user', ['id_guru' => $user])->row_array();
         return $result;
     }
 
     public function getAllUser()
     {
+        //mengambil semua data user 
         $result = $this->db->get('user')->result_array();
         return $result;
     }
+
     public function edit($id)
     {
+        //fungsi edit digunakankan untuk edit akun (merubah username atau password)
         if ($this->input->post('password') != "") {
+            /*jika form password teriisi  maka varibale data akan diisi dengan username atau password 
+            atau berarti ingin mengubah username dan password*/
             $data = [
                 'username' => htmlspecialchars($this->input->post('username')),
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
             ];
         } else {
+            /*jika form password tidak teriisi berarti variable data hanya akan berisi username, ini
+            berarti hanya username yang diganti*/
             $data = [
                 'username' => htmlspecialchars($this->input->post('username'))
             ];
@@ -53,12 +65,17 @@ class User_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('user', $data);
     }
+
     public function resetPassword($id)
     {
+        //resetPassword merupakan fungsi untuk mereset password dengan default password
+        //variable user mengambil data user berdasarkan parameter id_user 
         $user = $this->db->get_where('user', ['id' => $id])->row_array();
         if ($user['role_id'] == 2) {
+            //jika user merupakan guru maka default password nya adalah nip
             $default_pass = $this->db->get_where('guru', ['id' => $user['id_guru']])->row_array()['nip'];
         } else if ($user['role_id'] == 3) {
+            //jika user merukan siswa maka default passwordnya merupakan nis
             $default_pass = $this->db->get_where('siswa', ['id' => $user['id_siswa']])->row_array()['nis'];
         }
         $data = [
@@ -67,6 +84,7 @@ class User_model extends CI_Model
         $this->db->where('id', $id);
         $this->db->update('user', $data);
     }
+
     public function tambahUser($role)
     //menambahkan user dengan role tertentu (2 -> guru, 3 -> siswa)
     {

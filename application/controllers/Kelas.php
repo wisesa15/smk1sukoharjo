@@ -8,6 +8,7 @@ class Kelas extends CI_Controller
         parent::__construct();
         $this->load->model('User_model', 'user');
         $this->load->model('Kelas_model', 'kelas');
+        $this->load->model('guru_model', 'guru');
     }
 
     public function index()
@@ -35,13 +36,17 @@ class Kelas extends CI_Controller
         /* menampilkan detail kelas berdasarkan id kelas yang ingin dilihat */
 
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yang login
-        $data['kelas'] = $this->kelas->getAllKelas();
         $data_kelas = $this->kelas->getDetail($id_kelas);
         $data['detail'] = $data_kelas;
         $data['title'] = $data_kelas['nama'];
         $data_aktivitas = $this->kelas->getPertemuan($id_kelas);
         $data['aktivitas'] = $data_aktivitas;
         $data['file'] = [];
+        if ($data['user']['role_id'] == 2) //untuk kepentingan sidebar guru (kelas yang dia ajar)
+        {
+            $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+            $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        }
         foreach ($data_aktivitas as $a) :
             $file = $this->kelas->getFile($a['id']);
             array_push($data['file'], $file);
@@ -64,7 +69,12 @@ class Kelas extends CI_Controller
         $data['title'] = 'Tambah Pertemuan'; //title web
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login 
         $data['detailKelas'] = $this->kelas->getDetail($id_kelas);
-        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar guru (kelas yang dia ajar)
+
+        if ($data['user']['role_id'] == 2) //untuk kepentingan sidebar guru (kelas yang dia ajar)
+        {
+            $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+            $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        }
 
         $this->form_validation->set_rules('aktivitas', 'Nama Aktivitas', 'required|trim');
 
@@ -86,6 +96,11 @@ class Kelas extends CI_Controller
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($id_pertemuan);
         $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
+        if ($data['user']['role_id'] == 2) //untuk kepentingan sidebar guru (kelas yang dia ajar)
+        {
+            $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+            $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        }
         $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar guru (kelas yang dia ajar)
 
         $this->form_validation->set_rules('nama_file', 'Nama file', 'required|trim');

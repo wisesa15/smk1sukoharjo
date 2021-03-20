@@ -7,21 +7,24 @@ class Guru_model extends CI_Model
     public $nama;
     public $kelas;
 
-    //mengambil data guru berdasarkan idnya
+
     public function getGuru($id)
     {
+        //mengambil data guru berdasarkan idnya
         $result = $this->db->get_where('guru', ['id' => $id])->row_array();
         return $result;
     }
 
-    //mengambil data seluruh guru
     public function getAllGuru()
     {
+        //getAllGuru mengambil semua data guru
         $result = $this->db->get('guru')->result_array();
         return $result;
     }
     public function editGuru($id)
     {
+        //editGuru mengambil data Guru dengan parameter id guru
+        //mengembalikan nilai nip dan nama pada tabel guru
         $data = [
             'nip' => htmlspecialchars($this->input->post('nip')),
             'nama' => htmlspecialchars($this->input->post('nama'))
@@ -31,6 +34,7 @@ class Guru_model extends CI_Model
     }
     public function tambahGuru()
     {
+        //tambahGuru menambahkan nip dan nama pada tabel guru berdasarkan input 
         $data = [
             'nip' => htmlspecialchars($this->input->post('nip')),
             'nama' => htmlspecialchars($this->input->post('nama'))
