@@ -9,7 +9,7 @@
                 <strong>Peringatan</strong>.Pastikan form yang anda isi sesuai dengan form requirement
             </div>
             <h3>Materi Info</h3>
-            <form class="form-horizontal" method="post" action="<?= base_url('kelas/tambahMateri/') . $detailPertemuan['id']; ?>">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<?= base_url('kelas/tambahMateri/') . $detailPertemuan['id']; ?>">
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Nama file</label>
                     <div class="col-lg-8">
@@ -35,6 +35,7 @@
                 </div>
                 <div class="from-group">
                     <div class="col-md-3 control-label file-loading">
+                        <label class="col-md-3 control-label" for="file">File:</label>
                         <input id="input-b7" name="input-b7[]" multiple type="file" class="file" data-allowed-file-extensions='["csv", "txt"]'>
                     </div>
                 </div>
