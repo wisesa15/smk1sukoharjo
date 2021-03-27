@@ -41,4 +41,9 @@ class Guru_model extends CI_Model
         ];
         $this->db->insert('guru', $data);
     }
+    public function hapusGuru($id)
+    {
+        //menghapus data guru berdasarkan idnya
+        $this->db->delete('guru', ['id' => $id]);
+    }
 }

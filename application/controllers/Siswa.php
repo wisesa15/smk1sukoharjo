@@ -59,8 +59,13 @@ class Siswa extends CI_Controller
         }
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $dataUser = $this->user->getUserSiswa($id); //mengambil data user yang ingin dihapus akunnya berdasarkan id_siswa
+        $this->user->delete(3, $dataUser['id']);
+        $this->siswa->hapusSiswa($id);  //menghapus data siswa berdasarkan idnya
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You\'ve succesfully deleted siswa!</div>');
+        redirect('siswa');
     }
 
     public function tambah()
