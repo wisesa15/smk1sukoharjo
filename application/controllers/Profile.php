@@ -9,6 +9,7 @@ class Profile extends CI_Controller
         $this->load->model('User_model', 'user');
         $this->load->model('Kelas_model', 'kelas');
         $this->load->model('Guru_model', 'guru');
+        $this->load->model('Siswa_model', 'siswa');
     }
 
     public function index()
@@ -25,7 +26,7 @@ class Profile extends CI_Controller
                 $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
                 $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar 
             } else {
-                $data['siswa'] = $this->guru->getSiswa($data['user']['id_siswa']);
+                $data['siswa'] = $this->siswa->getSiswa($data['user']['id_siswa']);
                 $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id')); //untuk sidebar
             }
             $this->load->view('templates/header', $data);
@@ -45,7 +46,7 @@ class Profile extends CI_Controller
             $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
             $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
         } else {
-            $data['siswa'] = $this->guru->getSiswa($data['user']['id_siswa']);
+            $data['siswa'] = $this->siswa->getSiswa($data['user']['id_siswa']);
             $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id')); //untuk sidebar
         }
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
