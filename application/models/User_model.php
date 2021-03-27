@@ -109,4 +109,14 @@ class User_model extends CI_Model
         }
         $this->db->insert('user', $data);
     }
+
+    public function delete($role, $id)
+    {
+        /* delete() menghapus akun berdasarkan idsiswa atau idguru */
+        if ($role == 2) {
+            $this->db->delete('user', ['id' => $id]);
+        } else if ($role == 3) {
+            $this->db->delete('user', ['id' => $id]);
+        }
+    }
 }

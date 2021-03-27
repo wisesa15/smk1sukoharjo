@@ -60,9 +60,13 @@ class Guru extends CI_Controller
         }
     }
 
-    public function delete()
+    public function delete($id)
     {
-        /* delete() digunakan untuk menghapus data guru (param: id) */
+        $dataUser = $this->user->getUserGuru($id); //mengambil data user yang ingin dihapus akunnya berdasarkan id_guru
+        $this->user->delete(2, $dataUser['id']);
+        $this->guru->hapusGuru($id);  //menghapus data guru berdasarkan idnya
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">You\'ve succesfully deleted guru!</div>');
+        redirect('guru');
     }
 
     public function tambah()

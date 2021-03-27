@@ -41,4 +41,9 @@ class Siswa_model extends CI_Model
         ];
         $this->db->insert('siswa', $data);
     }
+    public function hapusSiswa($id)
+    {
+        //menghapus data siswa berdasarkan idnya
+        $this->db->delete('siswa', ['id' => $id]);
+    }
 }
