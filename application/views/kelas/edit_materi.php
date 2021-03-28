@@ -35,7 +35,7 @@
                 </div>
                 <div class="from-group">
                     <div class="col-md-3 control-label file-loading">
-                        <input id="input-b7" name="input-b7[]" multiple type="file" class="file" data-allowed-file-extensions='["csv", "txt"]'>
+                        <input id="file" name="file" multiple type="file" class="file" data-allowed-file-extensions='["csv", "txt"]'>
                     </div>
                 </div>
                 <div class="form-group">

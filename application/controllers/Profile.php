@@ -48,6 +48,8 @@ class Profile extends CI_Controller
         } else if ($data['user']['role_id'] == 3) {
             $data['siswa'] = $this->siswa->getSiswa($data['user']['id_siswa']);
             $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id')); //untuk sidebar
+        } else {
+            $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yang login
         }
         $this->form_validation->set_rules('old_password', 'Old Password', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'trim|matches[n_password]');
