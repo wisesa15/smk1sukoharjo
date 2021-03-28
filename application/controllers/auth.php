@@ -16,6 +16,7 @@ class Auth extends CI_Controller
 
         if ($this->session->userdata('id')) {
             //jika sudah login, maka akan di-redirect ke dashboard
+            redirect('dashboard');
         } else {
             //jika belom login, harus login
 

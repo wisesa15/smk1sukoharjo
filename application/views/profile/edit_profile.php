@@ -1,26 +1,22 @@
 <div class="dashboard-wrapper ">
     <div class="container" style="padding-top: 60px;">
-        <h1 class="page-header">Edit Password</h1>
+        <h1 class="page-header">Edit Profile</h1>
         <div class="row">
+            <!-- edit form column -->
             <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
-                <form class="form-horizontal" action="<?= base_url('profile/editpassword'); ?>" method="POST">
+                <form class="form-horizontal" action="<?= base_url('profile/editprofile'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Old Password :</label>
                         <div class="col-md-8">
-                            <input class="form-control" name="old_password" id="old_password" type="password">
+                            <img src="<?= base_url('assets/images/profile/') . $user['image'] ?>" class="img-thumbnail mb-3" alt="avatar">
+                            <input type="file" class="text-center center-block well well-sm" name="image" id="image">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Password:</label>
+                        <label class="col-md-3 control-label">username :</label>
                         <div class="col-md-8">
-                            <input class="form-control" name="password" id="password" type="password">
+                            <input class="form-control" name="username" value="<?= $user['username']; ?>" id="username" type="text">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="n_password">Confirm password:</label>
-                        <div class="col-md-8">
-                            <input class="form-control" name="n_password" id="n_password" type="password">
-                        </div>
+                        <?= form_error('username', '<small class="text-danger pl-3">', '</small>') ?>
                     </div>
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>

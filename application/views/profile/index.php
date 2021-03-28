@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-12">
                                     <div class="text-center">
-                                        <img src="<?= base_url('') ?>assets/images/<?= $user['image']; ?>" alt="User Avatar" class="rounded-circle user-avatar-xxl">
+                                        <img src="<?= base_url('assets/images/profile/') . $user['image']; ?>" alt="User Avatar" class="rounded-circle user-avatar-xxl">
                                     </div>
                                 </div>
                                 <div class="col-xl-10 col-lg-8 col-md-8 col-sm-8 col-12">
@@ -60,7 +60,7 @@
                                                 <span class=" mb-2 d-xl-inline-block d-block ml-xl-4">29 Year Old </span>
                                             </p>
                                             <div class="mt-3">
-                                                <a href="#" class="badge badge-light mr-1">XII IPA</a>
+                                                <a href="#" class="badge badge-light mr-0">XII IPA</a>
                                             </div>
                                         </div>
                                     </div>
@@ -68,7 +68,10 @@
                             </div>
                         </div>
                         <div class="border-top user-social-box">
-                            <div class="user-social-media d-xl-inline-block" style="margin-left:80% ;"><a href="<?= base_url('profile/edit') ?>" class="btn btn-primary">Edit </a></div>
+                            <div class="user-social-media d-xl-inline-block">
+                                <a href=" <?= base_url('profile/editprofile') ?>" class="btn btn-primary">Edit Profile</a>
+                                <a href="<?= base_url('profile/editpassword') ?>" class="btn btn-primary">Edit Password</a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -45,25 +45,27 @@ class User_model extends CI_Model
         return $result;
     }
 
-    public function edit($id)
+    public function editpassword($id)
     {
-        //fungsi edit digunakankan untuk edit akun (merubah username atau password)
-        if ($this->input->post('password') != "") {
-            /*jika form password teriisi  maka varibale data akan diisi dengan username atau password 
-            atau berarti ingin mengubah username dan password*/
-            $data = [
-                'username' => htmlspecialchars($this->input->post('username')),
-                'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
-            ];
-        } else {
-            /*jika form password tidak teriisi berarti variable data hanya akan berisi username, ini
-            berarti hanya username yang diganti*/
-            $data = [
-                'username' => htmlspecialchars($this->input->post('username'))
-            ];
-        }
+        //fungsi edit digunakankan untuk edit akun (password)
+        $data = [
+            'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT)
+        ];
         $this->db->where('id', $id);
         $this->db->update('user', $data);
+    }
+
+    public function editprofile($id, $username, $image = NULL)
+    {
+        //fungsi edit digunakankan untuk edit akun (profile)
+
+        //cek apakah ada gambar
+        if ($image) {
+            $this->db->set('image', $image);
+        }
+        $this->db->set('username', $username);
+        $this->db->where('id', $id);
+        $this->db->update('user');
     }
 
     public function resetPassword($id)

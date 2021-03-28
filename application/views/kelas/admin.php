@@ -64,7 +64,6 @@
                                     <td>
                                         <a href="#" class="badge badge-success">Edit</a>
                                         <a href="#" class="badge badge-danger">Delete</a>
-                                        <a href="#" class="badge badge-dark">Reset Password</a>
                                     </td>
                                 </tr>
                                 <?php $i++; ?>
