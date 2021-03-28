@@ -36,7 +36,7 @@
                 <div class="from-group">
                     <div class="col-md-3 control-label file-loading">
                         <label class="col-md-3 control-label" for="file">File:</label>
-                        <input id="input-b7" name="input-b7[]" multiple type="file" class="file" data-allowed-file-extensions='["csv", "txt"]'>
+                        <input type="file" name="userfile" size="20" required="" />
                     </div>
                 </div>
                 <div class="form-group">

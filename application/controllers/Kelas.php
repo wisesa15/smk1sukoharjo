@@ -108,7 +108,26 @@ class Kelas extends CI_Controller
         $this->form_validation->set_rules('dataTampil', 'Tanggal Ditampilkan', 'required');
         $this->form_validation->set_rules('dateline', 'Dateline', 'required');
 
+        $config['upload_path']          = './assets/file/';
+        $config['allowed_types']        = 'pdf|ppt|docx';
+        $config['max_size']             = 10000;
 
+
+        $this->load->library('upload', $config);
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/tambah_Materi', $data);
+            $this->load->view('templates/footer');
+        } else {
+            if ($this->upload->do_upload('userfile')) {
+                $nama_file = $this->upload->data();
+                $nama_file = $nama_file['file_name'];
+            }
+            $this->kelas->tambahMateri($id_pertemuan, $nama_file);
+            redirect('kelas/detail/' . $data['detailPertemuan']['id_kelas']);
+        }
+        /*
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('kelas/tambah_Materi', $data);
@@ -119,7 +138,7 @@ class Kelas extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $this->input->post('dataTampil') . '.</div>');
             redirect('kelas/detail/' . $data['detailPertemuan']['id_kelas']);
             // redirect('kelas');
-        }
+        }*/
     }
     public function editMateri($id_materi)
     {

@@ -91,7 +91,7 @@ class Kelas_model extends CI_Model
     }
 
 
-    public function tambahMateri($id)
+    public function tambahMateri($id, $file)
     {
         //menambahkan materi pada suatu pertemuan dengan parameter id_aktivitas(id pertemuan )
         $data = [
@@ -99,32 +99,9 @@ class Kelas_model extends CI_Model
             'jenis' => ($this->input->post('jenis')),
             'tgl_ditampilkan' => strtotime($this->input->post('dataTampil')),
             'tenggalwaktu' => strtotime($this->input->post('dateline')),
-            'nama_file' => 'ini',
-            'id_aktivitas' => $id,
-            'gambar' => ' '
+            'nama_file' => $file,
+            'id_aktivitas' => $id
         ];
-        //upload gambar
-        $data['gambar'] = upload();
-        if ($data['gambar'] != false) {
-            return False;
-        } else {
-            $this->db->insert('file', $data);
-        }
-    }
-    public function upload()
-    {
-        $namaFile = $_FILES['file']['names'];
-        $ukuranFile = $_FILES['file']['size'];
-        $error = $_FILES['file']['error'];
-        $tmpName = $_FILES['file']['tmp_name'];
-
-
-        //cek apakah tidak ada gambar di upload
-        if ($error == 4) {
-            echo "<script>
-                allert('upload file terlebih dahulu');
-            <\script>";
-            return false;
-        }
+        $this->db->insert('file', $data);
     }
 }
