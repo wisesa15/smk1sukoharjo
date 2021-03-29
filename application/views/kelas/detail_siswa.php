@@ -23,7 +23,7 @@
                                             <?php if ($nama_materi['tgl_ditampilkan'] < time()) : ?>
                                                 <?php if ($nama_materi['jenis'] == 1) : ?>
                                                     <li class="list-group-item">
-                                                        <a href="<?= base_url('assets/file/') . $nama_materi['nama_file']; ?>">
+                                                        <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">
                                                             <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>
@@ -31,7 +31,7 @@
                                                     </a>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
-                                                        <a href="<?= base_url('assets/file/') . $nama_materi['nama_file']; ?>">
+                                                        <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">
                                                             <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>

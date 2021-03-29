@@ -168,4 +168,21 @@ class Kelas extends CI_Controller
             // redirect('kelas');
         }
     }
+
+    public function detailMateri($id_materi)
+    {
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+        $data['title'] = 'Detail Materi';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
+        $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
+        $data['kelas'] = $this->kelas->getAllKelas();
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+
+
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('kelas/detail_materi_siswa', $data);
+        $this->load->view('templates/footer');
+    }
 }
