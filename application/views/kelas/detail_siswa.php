@@ -28,7 +28,6 @@
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>
                                                     </li>
-                                                    </a>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
                                                         <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">

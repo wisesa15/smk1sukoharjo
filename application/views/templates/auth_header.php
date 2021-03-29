@@ -17,5 +17,4 @@
 
     <!-- Custom styles for this template-->
     <link href="<?= base_url('assets/vendor/sbadmin/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
-
 </head>

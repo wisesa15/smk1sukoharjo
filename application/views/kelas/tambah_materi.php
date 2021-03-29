@@ -26,6 +26,12 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-md-3 control-label" for="summernote">Keterangan</label>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" id="summernote" name="keterangan" rows="6"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-md-3 control-label">Tanggal ditampilkan:</label>
                     <input type="datetime-local" id="dataTampil" name="dataTampil" value="<?= date('Y-m-d\TH:i', time()); ?>">
                 </div>

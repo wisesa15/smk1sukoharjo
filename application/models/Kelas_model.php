@@ -100,7 +100,8 @@ class Kelas_model extends CI_Model
             'tgl_ditampilkan' => strtotime($this->input->post('dataTampil')),
             'tenggalwaktu' => strtotime($this->input->post('dateline')),
             'nama_file' => $file,
-            'id_aktivitas' => $id
+            'id_aktivitas' => $id,
+            'keterangan' => $this->input->post('keterangan')
         ];
         $this->db->insert('file', $data);
     }
