@@ -7,7 +7,7 @@
                 <form class="form-horizontal" action="<?= base_url('profile/editprofile'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group">
                         <div class="col-md-8">
-                            <img src="<?= base_url('assets/images/profile/') . $user['image'] ?>" class="img-thumbnail mb-3" alt="avatar">
+                            <img src="<?= base_url('assets/images/profile/') . $user['image'] ?>" class="user-avatar-xxl rounded-circle mb-3" alt="avatar">
                             <input type="file" class="text-center center-block well well-sm" name="image" id="image">
                         </div>
                     </div>

@@ -23,15 +23,19 @@
                                             <?php if ($nama_materi['tgl_ditampilkan'] < time()) : ?>
                                                 <?php if ($nama_materi['jenis'] == 1) : ?>
                                                     <li class="list-group-item">
-                                                        <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
-                                                            <?= $nama_materi['nama']; ?>
-                                                        </h3>
+                                                        <a href="<?= base_url('assets/file/') . $nama_materi['nama_file']; ?>">
+                                                            <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
+                                                                <?= $nama_materi['nama']; ?>
+                                                            </h3>
                                                     </li>
+                                                    </a>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
-                                                        <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
-                                                            <?= $nama_materi['nama']; ?>
-                                                        </h3>
+                                                        <a href="<?= base_url('assets/file/') . $nama_materi['nama_file']; ?>">
+                                                            <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
+                                                                <?= $nama_materi['nama']; ?>
+                                                            </h3>
+                                                        </a>
                                                     </li>
                                                 <?php endif; ?>
                                             <?php else : ?>
