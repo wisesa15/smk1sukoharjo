@@ -107,6 +107,7 @@ class Kelas extends CI_Controller
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim');
         $this->form_validation->set_rules('dataTampil', 'Tanggal Ditampilkan', 'required');
         $this->form_validation->set_rules('dateline', 'Dateline', 'required');
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
         $config['upload_path']          = './assets/file/';
         $config['allowed_types']        = 'pdf|ppt|docx';
