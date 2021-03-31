@@ -9,6 +9,7 @@ class Kelas extends CI_Controller
         $this->load->model('User_model', 'user');
         $this->load->model('Kelas_model', 'kelas');
         $this->load->model('guru_model', 'guru');
+        $this->load->model('siswa_model', 'siswa');
     }
 
     public function index()
@@ -59,6 +60,48 @@ class Kelas extends CI_Controller
             $this->load->view('templates/header', $data);
             $this->load->view('kelas/detail_siswa', $data);
             $this->load->view('templates/footer');
+        }
+    }
+
+    public function tambah()
+    {
+        /* menambahkan kelas baru */
+
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yang login
+        $data['title'] = 'Tambah Kelas';
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/tambah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $nama = htmlspecialchars($this->input->post('nama'));
+            $upload_image = $_FILES['gambar']['name'];
+            $new_image = NULL;
+            if ($upload_image) {
+                $config['upload_path'] = './assets/images/profile';
+                $config['allowed_types'] = 'jpg|png|jpeg';
+                $config['max_size']     = '10000';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('gambar')) {
+                    $new_image = $this->upload->data('file_name');
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Tolong pilih gambar yang sesuai</div>');
+                    redirect('kelas/tambah');
+                    // echo $this->upload->display_errors();
+                }
+            }
+            if ($new_image) {
+                $this->kelas->tambah($nama, $new_image);
+            } else {
+                $this->kelas->tambah($nama);
+            }
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menambahkan kelas</div>');
+            redirect('kelas');
         }
     }
 

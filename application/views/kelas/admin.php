@@ -39,8 +39,9 @@
                 <div class="col-md-12">
                     <div class="d-flex justify-content-end">
 
-                        <button type="button" class="btn btn-primary mb-3">+ Tambah Kelas</button>
+                        <a href="<?= base_url('kelas/tambah') ?>" class="btn btn-primary mb-3">+ Tambah Kelas</a>
                     </div>
+                    <?= $this->session->flashdata('message') ?>
                     <table class="table table-hover">
                         <thead class="thead-dark">
                             <tr>
