@@ -247,4 +247,72 @@ class Kelas extends CI_Controller
             redirect('kelas/detailMateri/' . $data['file']['id']);
         }
     }
+
+    public function hapus($id_kelas)
+    {
+        $this->kelas->hapus($id_kelas);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menghapus data kelas</div>');
+        redirect('kelas');
+    }
+    public function tambahSiswa($id_kelas)
+    {
+        $data['title'] = 'Tambah Siswa'; //title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
+        $data['infokelas'] = $this->kelas->getDetail($id_kelas); //untuk mendapatkan data kelas yang ingin ditambahkan siswanya
+        $data['siswa'] = $this->siswa->getAllSiswa(); //mendapatkan seluruh data siswa
+
+        // $this->form_validation->set_rules('siswa', 'Data Siswa', 'callback_check_default');
+        // $this->form_validation->set_message('check_default', 'You need to select something other than the default');
+
+
+        // if ($this->form_validation->run() == false) {
+        if (!$_POST) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/tambah_siswa', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $daftar_siswa = $this->input->post('siswa'); //daftar siswa yang mau ditambahkan
+            $data_siswa = array(); // array yang berisi array associative dengan isi [id_kelas => 0, id_siswa => $ds]
+            foreach ($daftar_siswa as $ds) :
+                array_push($data_siswa, ['id_kelas' => $id_kelas, 'id_siswa' => $ds]);
+            endforeach;
+            $this->kelas->tambahSiswa($data_siswa);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan siswa untuk kelas' . $data['infokelas']['nama'] . '</div>');
+            redirect('kelas');
+        }
+    }
+    public function tambahGuru($id_kelas)
+    {
+        $data['title'] = 'Tambah Guru'; //title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
+        $data['infokelas'] = $this->kelas->getDetail($id_kelas); //untuk mendapatkan data kelas yang ingin ditambahkan siswanya
+        $data['guru'] = $this->guru->getAllGuru(); //mendapatkan seluruh data guru
+
+        // $this->form_validation->set_rules('siswa', 'Data Siswa', 'callback_check_default');
+        // $this->form_validation->set_message('check_default', 'You need to select something other than the default');
+
+
+        // if ($this->form_validation->run() == false) {
+        if (!$_POST) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/tambah_guru', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $daftar_guru = $this->input->post('guru'); //daftar siswa yang mau ditambahkan
+            $data_guru = array(); // array yang berisi array associative dengan isi [id_kelas => 0, id_siswa => $ds]
+            foreach ($daftar_guru as $dg) :
+                array_push($data_guru, ['id_kelas' => $id_kelas, 'id_guru' => $dg]);
+            endforeach;
+            $this->kelas->tambahGuru($data_guru);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan guru untuk kelas' . $data['infokelas']['nama'] . '</div>');
+            redirect('kelas');
+        }
+    }
+    // public function check_default($array)
+    // {
+    //     if (!is_array($array)) {
+    //         return FALSE;
+    //     }
+    //     return TRUE;
+    // }
 }

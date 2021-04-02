@@ -123,4 +123,17 @@ class Kelas_model extends CI_Model
         ];
         $this->db->insert('file_tugas_siswa', $data);
     }
+    public function hapus($id)
+    {
+        //menghapus data kelas berdasarkan idnya
+        $this->db->delete('kelas', ['id' => $id]);
+    }
+    public function tambahSiswa($data)
+    {
+        $this->db->insert_batch('kelas_siswa', $data);
+    }
+    public function tambahGuru($data)
+    {
+        $this->db->insert_batch('kelas_guru', $data);
+    }
 }

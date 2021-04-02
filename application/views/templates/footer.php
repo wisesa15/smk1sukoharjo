@@ -11,9 +11,18 @@
 <script src="<?= base_url(''); ?>assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
 <!-- slimscroll js -->
 <script src="<?= base_url(''); ?>assets/vendor/slimscroll/jquery.slimscroll.js"></script>
+<!--  buat multiple select -->
+<script src="<?= base_url(''); ?>assets/vendor/select2/js/select2.min.js"></script>
 <!-- main js -->
 <script src="<?= base_url(''); ?>assets/libs/js/main-js.js"></script>
 <script src="<?= base_url('assets/vendor/'); ?>summernote/js/summernote-bs4.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            tags: true
+        });
+    });
+</script>
 <script>
     $(document).ready(function() {
         $('#summernote').summernote({

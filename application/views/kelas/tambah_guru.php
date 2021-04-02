@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Data Siswa</h2>
+                    <h2 class="pageheader-title">Tambah Siswa</h2>
                     <!-- <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus
                                 vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p> -->
                     <!-- <div class="page-breadcrumb">
@@ -30,56 +30,40 @@
         <!-- end pageheader  -->
         <!-- ============================================================== -->
 
-        <div>
-            <!-- ============================================================== -->
-            <!-- content  -->
-            <!-- ============================================================== -->
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex justify-content-end">
-
-                        <a href="<?= base_url('siswa/tambah'); ?>" class="btn btn-primary mb-3">+ Tambah Siswa</a>
-                    </div>
-                    <?= $this->session->flashdata('message') ?>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered first">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">NIS</th>
-                                            <th scope="col">Nama</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php $i = 1; ?>
-                                        <?php foreach ($siswa as $s) : ?>
-                                            <tr>
-                                                <th scope="row"><?= $i; ?></th>
-                                                <td><?= $s['nis']; ?></td>
-                                                <td><a href="<?= base_url('siswa/detail/') . $s['id']; ?>"><?= $s['nama']; ?></a></td>
-                                                <td>
-                                                    <a href="<?= base_url('siswa/edit/') . $s['id']; ?>" class="badge badge-success">Edit</a>
-                                                    <a href="<?= base_url('siswa/delete/') . $s['id']; ?>" class="badge badge-danger">Delete</a>
-                                                    <a href="<?= base_url('auth/resetpassword/3/') . $s['id']; ?>" class="badge badge-dark">Reset Password</a>
-                                                </td>
-                                            </tr>
-                                            <?php $i++; ?>
+        <!-- ============================================================== -->
+        <!-- content  -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <h3><?= $infokelas['nama'] ?></h3>
+                <div class="card">
+                    <div class="card-body">
+                        <form action="<?= base_url('kelas/tambahguru/') . $infokelas['id']; ?>" method="POST">
+                            <div class="form-group">
+                                <label class="col-md-12 control-label">Guru</label>
+                                <?php echo form_error('guru'); ?>
+                                <div class="col-md-12">
+                                    <select class="js-example-basic-multiple" multiple="multiple" name="guru[]">
+                                        <!-- <option value="" selected></option> -->
+                                        <?php foreach ($guru as $g) : ?>
+                                            <option value="<?= $g['id']; ?>"><?= $g['id']; ?> - <?= $g['nama']; ?></option>
                                         <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-lg-8">
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                                <a href="<?= base_url('kelas') ?>" class="btn btn-secondary">Batalkan</a>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End content  -->
-            <!-- ============================================================== -->
         </div>
+        <!-- ============================================================== -->
+        <!-- End content  -->
+        <!-- ============================================================== -->
+
     </div>
     <!-- ============================================================== -->
     <!-- footer -->
