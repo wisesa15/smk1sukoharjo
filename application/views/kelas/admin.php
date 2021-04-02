@@ -66,8 +66,8 @@
                                                     <?php endforeach; ?>
                                                 </td>
                                                 <td>
-                                                    <a href="<?= base_url('kelas/tambahsiswa/') . $k['id']; ?>" class="badge badge-primary">Tambah Siswa</a>
-                                                    <a href="<?= base_url('kelas/tambahguru/') . $k['id']; ?>" class="badge badge-primary">Tambah Guru</a>
+                                                    <a href="<?= base_url('kelas/atursiswa/') . $k['id']; ?>" class="badge badge-primary">Atur Siswa</a>
+                                                    <a href="<?= base_url('kelas/aturguru/') . $k['id']; ?>" class="badge badge-primary">Atur Guru</a>
                                                     <a href="<?= base_url('kelas/hapus/') . $k['id']; ?>" class="badge badge-danger">Delete</a>
                                                 </td>
                                             </tr>

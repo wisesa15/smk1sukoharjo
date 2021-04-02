@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Tambah Siswa</h2>
+                    <h2 class="pageheader-title"><?= $title; ?></h2>
                     <!-- <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus
                                 vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p> -->
                     <!-- <div class="page-breadcrumb">
@@ -35,18 +35,54 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <h3><?= $infokelas['nama'] ?></h3>
+                <div class="bg-white mb-4">
+                    <h3 class="text-center p-3"><?= $infokelas['nama'] ?></h3>
+                </div>
                 <div class="card">
+                    <h5 class="card-header">Daftar Guru</h5>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered first">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nama Guru</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $i = 1; ?>
+                                <?php $daftar_guru = array(); ?>
+                                <?php foreach ($kelas_guru as $kg) : ?>
+                                    <tr>
+                                        <td><?= $i; ?></td>
+                                        <td><?= $kg['nama'] ?></td>
+                                        <?php array_push($daftar_guru, $kg['id']); ?>
+                                        <?php $i = $i + 1 ?>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="card-body">
-                        <form action="<?= base_url('kelas/tambahguru/') . $infokelas['id']; ?>" method="POST">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="card">
+                    <h5 class="card-header">Tambah Guru</h5>
+                    <div class="card-body">
+                        <form action="<?= base_url('kelas/aturguru/') . $infokelas['id']; ?>" method="POST">
                             <div class="form-group">
                                 <label class="col-md-12 control-label">Guru</label>
-                                <?php echo form_error('guru'); ?>
+                                <div class="invalid-feedback"><?php echo form_error('guru'); ?></div>
                                 <div class="col-md-12">
                                     <select class="js-example-basic-multiple" multiple="multiple" name="guru[]">
                                         <!-- <option value="" selected></option> -->
                                         <?php foreach ($guru as $g) : ?>
-                                            <option value="<?= $g['id']; ?>"><?= $g['id']; ?> - <?= $g['nama']; ?></option>
+                                            <?php if (!in_array($g['id'], $daftar_guru)) : ?>
+                                                <option value="<?= $g['id']; ?>"><?= $g['id']; ?> - <?= $g['nama']; ?></option>
+                                            <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>

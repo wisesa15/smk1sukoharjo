@@ -130,10 +130,34 @@ class Kelas_model extends CI_Model
     }
     public function tambahSiswa($data)
     {
+        // menambahkan data guru dan kelas yang diajarnya
+        // $data berisi id guru dan id kelas yg diajar
         $this->db->insert_batch('kelas_siswa', $data);
     }
     public function tambahGuru($data)
     {
+        // menambahkan data guru dan kelas yang diajarnya
+        // $data berisi id guru dan id kelas yang diajar
         $this->db->insert_batch('kelas_guru', $data);
+    }
+    public function getKelasSiswa($id_kelas)
+    {
+        // mendapatkan daftar siswa yang mengambil kelas tersebut
+        $this->db->select('s.id as id, s.nama as nama');
+        $this->db->from('kelas_siswa as ks');
+        $this->db->join('siswa as s', 'ks.id_siswa = s.id');
+        $this->db->where('id_kelas', $id_kelas);
+        $result = $this->db->get()->result_array();
+        return $result;
+    }
+    public function getKelasGuru($id_kelas)
+    {
+        // mendapatkan daftar guru yang mengambil kelas tersebut
+        $this->db->select('g.id as id, g.nama as nama');
+        $this->db->from('kelas_guru as kg');
+        $this->db->join('guru as g', 'kg.id_guru = g.id');
+        $this->db->where('id_kelas', $id_kelas);
+        $result = $this->db->get()->result_array();
+        return $result;
     }
 }

@@ -254,12 +254,13 @@ class Kelas extends CI_Controller
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menghapus data kelas</div>');
         redirect('kelas');
     }
-    public function tambahSiswa($id_kelas)
+    public function aturSiswa($id_kelas)
     {
-        $data['title'] = 'Tambah Siswa'; //title web
+        $data['title'] = 'Pengaturan Siswa'; //title web
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
         $data['infokelas'] = $this->kelas->getDetail($id_kelas); //untuk mendapatkan data kelas yang ingin ditambahkan siswanya
         $data['siswa'] = $this->siswa->getAllSiswa(); //mendapatkan seluruh data siswa
+        $data['kelas_siswa'] = $this->kelas->getKelasSiswa($id_kelas); // data siswa yang mengambil kelas dengan id kelas = $id_kelas
 
         // $this->form_validation->set_rules('siswa', 'Data Siswa', 'callback_check_default');
         // $this->form_validation->set_message('check_default', 'You need to select something other than the default');
@@ -268,7 +269,7 @@ class Kelas extends CI_Controller
         // if ($this->form_validation->run() == false) {
         if (!$_POST) {
             $this->load->view('templates/header', $data);
-            $this->load->view('kelas/tambah_siswa', $data);
+            $this->load->view('kelas/atur_siswa', $data);
             $this->load->view('templates/footer');
         } else {
             $daftar_siswa = $this->input->post('siswa'); //daftar siswa yang mau ditambahkan
@@ -281,12 +282,13 @@ class Kelas extends CI_Controller
             redirect('kelas');
         }
     }
-    public function tambahGuru($id_kelas)
+    public function aturGuru($id_kelas)
     {
-        $data['title'] = 'Tambah Guru'; //title web
+        $data['title'] = 'Pengaturan Guru'; //title web
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
         $data['infokelas'] = $this->kelas->getDetail($id_kelas); //untuk mendapatkan data kelas yang ingin ditambahkan siswanya
         $data['guru'] = $this->guru->getAllGuru(); //mendapatkan seluruh data guru
+        $data['kelas_guru'] = $this->kelas->getKelasGuru($id_kelas); // data guru yang mengambil kelas dengan id kelas = $id_kelas
 
         // $this->form_validation->set_rules('siswa', 'Data Siswa', 'callback_check_default');
         // $this->form_validation->set_message('check_default', 'You need to select something other than the default');
@@ -295,7 +297,7 @@ class Kelas extends CI_Controller
         // if ($this->form_validation->run() == false) {
         if (!$_POST) {
             $this->load->view('templates/header', $data);
-            $this->load->view('kelas/tambah_guru', $data);
+            $this->load->view('kelas/atur_guru', $data);
             $this->load->view('templates/footer');
         } else {
             $daftar_guru = $this->input->post('guru'); //daftar siswa yang mau ditambahkan
