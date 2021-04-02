@@ -298,4 +298,85 @@ class Kelas extends CI_Controller
         foreach ($data['allSiswa'] as $data_siswa):
             $data['check'] = $this->kelas->checkPekerjaan($data['siswa']['id'], $data['file']['id']);
     }
+    public function hapus($id_kelas)
+    {
+        $this->kelas->hapus($id_kelas);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menghapus data kelas</div>');
+        redirect('kelas');
+    }
+    public function aturSiswa($id_kelas)
+    {
+        $data['title'] = 'Pengaturan Siswa'; //title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
+        $data['infokelas'] = $this->kelas->getDetail($id_kelas); //untuk mendapatkan data kelas yang ingin ditambahkan siswanya
+        $data['siswa'] = $this->siswa->getAllSiswa(); //mendapatkan seluruh data siswa
+        $data['kelas_siswa'] = $this->kelas->getKelasSiswa($id_kelas); // data siswa yang mengambil kelas dengan id kelas = $id_kelas
+
+        // $this->form_validation->set_rules('siswa', 'Data Siswa', 'callback_check_default');
+        // $this->form_validation->set_message('check_default', 'You need to select something other than the default');
+
+
+        // if ($this->form_validation->run() == false) {
+        if (!$_POST) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/atur_siswa', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $daftar_siswa = $this->input->post('siswa'); //daftar siswa yang mau ditambahkan
+            $data_siswa = array(); // array yang berisi array associative dengan isi [id_kelas => 0, id_siswa => $ds]
+            foreach ($daftar_siswa as $ds) :
+                array_push($data_siswa, ['id_kelas' => $id_kelas, 'id_siswa' => $ds]);
+            endforeach;
+            $this->kelas->tambahSiswa($data_siswa);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan siswa untuk kelas' . $data['infokelas']['nama'] . '</div>');
+            redirect('kelas');
+        }
+    }
+    public function aturGuru($id_kelas)
+    {
+        $data['title'] = 'Pengaturan Guru'; //title web
+        $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
+        $data['infokelas'] = $this->kelas->getDetail($id_kelas); //untuk mendapatkan data kelas yang ingin ditambahkan siswanya
+        $data['guru'] = $this->guru->getAllGuru(); //mendapatkan seluruh data guru
+        $data['kelas_guru'] = $this->kelas->getKelasGuru($id_kelas); // data guru yang mengambil kelas dengan id kelas = $id_kelas
+
+        // $this->form_validation->set_rules('siswa', 'Data Siswa', 'callback_check_default');
+        // $this->form_validation->set_message('check_default', 'You need to select something other than the default');
+
+
+        // if ($this->form_validation->run() == false) {
+        if (!$_POST) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/atur_guru', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $daftar_guru = $this->input->post('guru'); //daftar siswa yang mau ditambahkan
+            $data_guru = array(); // array yang berisi array associative dengan isi [id_kelas => 0, id_siswa => $ds]
+            foreach ($daftar_guru as $dg) :
+                array_push($data_guru, ['id_kelas' => $id_kelas, 'id_guru' => $dg]);
+            endforeach;
+            $this->kelas->tambahGuru($data_guru);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan guru untuk kelas ' . $data['infokelas']['nama'] . '</div>');
+            redirect('kelas');
+        }
+    }
+    public function hapusSiswa()
+    {
+        $idSiswa = $this->input->post('idSiswa');
+        $idKelas = $this->input->post('idKelas');
+        $this->kelas->hapusSiswa($idSiswa, $idKelas);
+    }
+    public function hapusGuru()
+    {
+        $idGuru = $this->input->post('idGuru');
+        $idKelas = $this->input->post('idKelas');
+        $this->kelas->hapusGuru($idGuru, $idKelas);
+    }
+    // public function check_default($array)
+    // {
+    //     if (!is_array($array)) {
+    //         return FALSE;
+    //     }
+    //     return TRUE;
+    // }
 }

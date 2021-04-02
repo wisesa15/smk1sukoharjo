@@ -42,32 +42,38 @@
                         <a href="<?= base_url('siswa/tambah'); ?>" class="btn btn-primary mb-3">+ Tambah Siswa</a>
                     </div>
                     <?= $this->session->flashdata('message') ?>
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">NIS</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            <?php foreach ($siswa as $s) : ?>
-                                <tr>
-                                    <th scope="row"><?= $i; ?></th>
-                                    <td><?= $s['nis']; ?></td>
-                                    <td><a href="<?= base_url('siswa/detail/') . $s['id']; ?>"><?= $s['nama']; ?></a></td>
-                                    <td>
-                                        <a href="<?= base_url('siswa/edit/') . $s['id']; ?>" class="badge badge-success">Edit</a>
-                                        <a href="<?= base_url('siswa/delete/') . $s['id']; ?>" class="badge badge-danger">Delete</a>
-                                        <a href="<?= base_url('auth/resetpassword/3/') . $s['id']; ?>" class="badge badge-dark">Reset Password</a>
-                                    </td>
-                                </tr>
-                                <?php $i++; ?>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered first">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">NIS</th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($siswa as $s) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $i; ?></th>
+                                                <td><?= $s['nis']; ?></td>
+                                                <td><a href="<?= base_url('siswa/detail/') . $s['id']; ?>"><?= $s['nama']; ?></a></td>
+                                                <td>
+                                                    <a href="<?= base_url('siswa/ubah/') . $s['id']; ?>" class="badge badge-success">Ubah</a>
+                                                    <a href="<?= base_url('siswa/hapus/') . $s['id']; ?>" class="badge badge-danger">Hapus</a>
+                                                    <a href="<?= base_url('auth/resetpassword/3/') . $s['id']; ?>" class="badge badge-dark">Reset Password</a>
+                                                </td>
+                                            </tr>
+                                            <?php $i++; ?>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- ============================================================== -->

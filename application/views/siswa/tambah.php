@@ -44,9 +44,11 @@
             </div>
             <div class=" form-group">
                 <label for="kelas">Kelas</label>
+                <div class="invalid-feedback"><?= form_error('kelas'); ?></div>
                 <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Kelas">
             </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
+            <a href="<?= base_url('siswa') ?>" class="btn btn-secondary">Batalkan</a>
         </form>
         <!-- ============================================================== -->
         <!-- End content  -->

@@ -38,7 +38,7 @@ class Guru extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function edit($id)
+    public function ubah($id)
     {
         /* form edit data guru */
 
@@ -60,7 +60,7 @@ class Guru extends CI_Controller
         }
     }
 
-    public function delete($id)
+    public function hapus($id)
     {
         $dataUser = $this->user->getUserGuru($id); //mengambil data user yang ingin dihapus akunnya berdasarkan id_guru
         $this->user->delete(2, $dataUser['id']);
@@ -76,7 +76,7 @@ class Guru extends CI_Controller
         $data['title'] = 'Tambah Guru'; // untuk title web
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //untuk data user yang login
 
-        $this->form_validation->set_rules('nip', 'Nomor Induk Pegawai Negeri', 'required|trim');
+        $this->form_validation->set_rules('nip', 'Nomor Induk Pegawai Negeri', 'required|trim|is_unique[guru.nip]');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
 
         if ($this->form_validation->run() == false) {

@@ -36,41 +36,48 @@
             <!-- ============================================================== -->
 
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                     <div class="d-flex justify-content-end">
 
                         <a href="<?= base_url('kelas/tambah') ?>" class="btn btn-primary mb-3">+ Tambah Kelas</a>
                     </div>
                     <?= $this->session->flashdata('message') ?>
-                    <table class="table table-hover">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nama Kelas</th>
-                                <th scope="col">Nama Pengajar</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php $i = 1; ?>
-                            <?php foreach ($kelas as $k) : ?>
-                                <tr>
-                                    <th scope="row"><?= $i; ?></th>
-                                    <td><a href="<?= base_url('kelas/detail/') . $k['id']; ?>"><?= $k['nama']; ?></a></td>
-                                    <td>
-                                        <?php foreach ($pengajar[$i - 1] as $p) : ?>
-                                            <a href="<?= base_url('guru/detail/') . $p['id']; ?>" class="badge badge-light"><?= $p['nama']; ?></a>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered first">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Nama Kelas</th>
+                                            <th scope="col">Nama Pengajar</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php $i = 1; ?>
+                                        <?php foreach ($kelas as $k) : ?>
+                                            <tr>
+                                                <th scope="row"><?= $i; ?></th>
+                                                <td><a href="<?= base_url('kelas/detail/') . $k['id']; ?>"><?= $k['nama']; ?></a></td>
+                                                <td>
+                                                    <?php foreach ($pengajar[$i - 1] as $p) : ?>
+                                                        <a href="<?= base_url('guru/detail/') . $p['id']; ?>" class="badge badge-dark"><?= $p['nama']; ?></a>
+                                                    <?php endforeach; ?>
+                                                </td>
+                                                <td>
+                                                    <a href="<?= base_url('kelas/atursiswa/') . $k['id']; ?>" class="badge badge-primary">Atur Siswa</a>
+                                                    <a href="<?= base_url('kelas/aturguru/') . $k['id']; ?>" class="badge badge-primary">Atur Guru</a>
+                                                    <a href="<?= base_url('kelas/hapus/') . $k['id']; ?>" class="badge badge-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                            <?php $i++; ?>
                                         <?php endforeach; ?>
-                                    </td>
-                                    <td>
-                                        <a href="#" class="badge badge-success">Edit</a>
-                                        <a href="#" class="badge badge-danger">Delete</a>
-                                    </td>
-                                </tr>
-                                <?php $i++; ?>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- ============================================================== -->

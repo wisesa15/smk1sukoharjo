@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="<?= base_url(''); ?>assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?= base_url(''); ?>assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="<?= base_url(''); ?>assets/vendor/fonts/flag-icon-css/flag-icon.min.css"> -->
+    <link rel="stylesheet" href="<?= base_url(''); ?>assets/vendor/select2/css/select2.css">
+    <link rel="stylesheet" href="<?= base_url(''); ?>assets/vendor/inputmask/css/inputmask.css">
     <!-- Summenote -->
     <link href="<?= base_url('assets/vendor/'); ?>summernote/css/summernote-bs4.css" rel="stylesheet">
     <title><?= $title; ?></title>

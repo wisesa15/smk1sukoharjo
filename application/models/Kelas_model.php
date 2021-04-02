@@ -130,7 +130,6 @@ class Kelas_model extends CI_Model
         ];
         $this->db->insert('file_tugas_siswa', $data);
     }
-
     public function editMateri($id, $file = null)
     {
         //menambahkan materi pada suatu pertemuan dengan parameter id_aktivitas(id pertemuan )
@@ -176,13 +175,49 @@ class Kelas_model extends CI_Model
         $result = $this->db->get()->row_array();
         return $result;
     }
-
-    public function getAllSiswaKelas($id)
+    public function hapus($id)
     {
-        $this->db->select('kelas_siswa.*');
-        $this->db->from('kelas_siswa');
-        $this->db->where('kelas_siswa.id_kelas', $id);
+        //menghapus data kelas berdasarkan idnya
+        $this->db->delete('kelas', ['id' => $id]);
+    }
+    public function tambahSiswa($data)
+    {
+        // menambahkan data guru dan kelas yang diajarnya
+        // $data berisi id guru dan id kelas yg diajar
+        $this->db->insert_batch('kelas_siswa', $data);
+    }
+    public function tambahGuru($data)
+    {
+        // menambahkan data guru dan kelas yang diajarnya
+        // $data berisi id guru dan id kelas yang diajar
+        $this->db->insert_batch('kelas_guru', $data);
+    }
+    public function getKelasSiswa($id_kelas)
+    {
+        // mendapatkan daftar siswa yang mengambil kelas tersebut
+        $this->db->select('s.id as id, s.nama as nama');
+        $this->db->from('kelas_siswa as ks');
+        $this->db->join('siswa as s', 'ks.id_siswa = s.id');
+        $this->db->where('id_kelas', $id_kelas);
         $result = $this->db->get()->result_array();
         return $result;
+    }
+    public function getKelasGuru($id_kelas)
+    {
+        // mendapatkan daftar guru yang mengambil kelas tersebut
+        $this->db->select('g.id as id, g.nama as nama');
+        $this->db->from('kelas_guru as kg');
+        $this->db->join('guru as g', 'kg.id_guru = g.id');
+        $this->db->where('id_kelas', $id_kelas);
+        $result = $this->db->get()->result_array();
+        return $result;
+    }
+    public function hapusSiswa($id_siswa, $id_kelas)
+    {
+        $this->db->delete('kelas_siswa', ['id_siswa' => $id_siswa, 'id_kelas' => $id_kelas]);
+    }
+    public function hapusGuru($id_guru, $id_kelas)
+    {
+        $this->db->delete('kelas_guru', ['id_guru' => $id_guru, 'id_kelas' => $id_kelas]);
     }
 }
