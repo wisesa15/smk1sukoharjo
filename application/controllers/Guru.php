@@ -76,7 +76,7 @@ class Guru extends CI_Controller
         $data['title'] = 'Tambah Guru'; // untuk title web
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //untuk data user yang login
 
-        $this->form_validation->set_rules('nip', 'Nomor Induk Pegawai Negeri', 'required|trim');
+        $this->form_validation->set_rules('nip', 'Nomor Induk Pegawai Negeri', 'required|trim|is_unique[guru.nip]');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
 
         if ($this->form_validation->run() == false) {

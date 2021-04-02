@@ -75,7 +75,7 @@ class Siswa extends CI_Controller
         $data['title'] = 'Tambah Siswa';
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
 
-        $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim');
+        $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim|is_unique[siswa.nis]');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
         $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
 
