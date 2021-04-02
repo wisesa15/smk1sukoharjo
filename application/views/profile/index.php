@@ -52,15 +52,13 @@
                                         </div>
                                         <!--  <div class="float-right"><a href="#" class="user-avatar-email text-secondary">www.henrybarbara.com</a></div> -->
                                         <div class="user-avatar-address">
-                                            <p class="border-bottom pb-3">
-                                                <span class="d-xl-inline-block d-block mb-2"><i class="fa fa-map-marker-alt mr-2 text-primary "></i>4045 Denver AvenueLos Angeles, CA 90017</span>
-                                                <span class="mb-2 ml-xl-4 d-xl-inline-block d-block">Joined date: <?= date('d-m-y', $user['date_created']); ?> </span>
-                                                <span class=" mb-2 d-xl-inline-block d-block ml-xl-4">Male
-                                                </span>
-                                                <span class=" mb-2 d-xl-inline-block d-block ml-xl-4">29 Year Old </span>
-                                            </p>
+
                                             <div class="mt-3">
-                                                <a href="#" class="badge badge-light mr-0">XII IPA</a>
+                                                <?php if ($user['role_id'] == 2) : ?>
+                                                    <a href="#" class="badge badge-light mr-0"><?= $guru['nama']; ?></a>
+                                                <?php elseif ($user['role_id'] == 3) : ?>
+                                                    <a href="#" class="badge badge-light mr-0"><?= $siswa['nama']; ?></a>
+                                                <?php endif ?>
                                             </div>
                                         </div>
                                     </div>

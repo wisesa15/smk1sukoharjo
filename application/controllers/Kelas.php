@@ -289,14 +289,29 @@ class Kelas extends CI_Controller
         $data['file'] = $this->kelas->getDetailFile($id_materi);
         $data['title'] = 'Master Materi';
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
-        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
-        $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
+        //$data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
+        //$data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
         $data['file'] = $this->kelas->getDetailFile($id_materi);
         $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
         $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
-        $data['allSiswa'] = $this->kelas->getAllSiswaKelas($data['kelas']['id']);
-        foreach ($data['allSiswa'] as $data_siswa):
-            $data['check'] = $this->kelas->checkPekerjaan($data['siswa']['id'], $data['file']['id']);
+        $data['materi'] = $this->kelas->getMateri($id_materi);
+        $data['allSiswa'] = $this->kelas->getKelasSiswa($data['materi']['id_kelas']);
+        $i = 0;
+        foreach ($data['allSiswa'] as $data_siswa) :
+            if ($this->kelas->checkPekerjaan($data_siswa['id'], $data['file']['id']) != null) {
+                $status = 1;
+                $data['allSiswa'][$i]['materi'] = $this->kelas->getFileSiswa($data_siswa['id'], $data['file']['id']);
+            } else {
+                $status = 0;
+            }
+            $data['allSiswa'][$i]['status'] = $status;
+            $i++;
+        endforeach;
+        //var_dump($data['allSiswa']);
+        //die;
+        $this->load->view('templates/header', $data);
+        $this->load->view('kelas/download_file_siswa', $data);
+        $this->load->view('templates/footer');
     }
     public function hapus($id_kelas)
     {

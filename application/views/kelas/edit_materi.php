@@ -19,9 +19,14 @@
                 <div class="form-group">
                     <label class="col-lg-3 control-label">Jenis Materi</label>
                     <div class="col-lg-8">
-                        <select id="inputState" class="form-control" name="jenis" value="<?= $file['jenis']; ?>">
-                            <option value="1" selected>Materi</option>
-                            <option value="2">Tugas</option>
+                        <select id="inputState" class="form-control" name="jenis">
+                            <?php if ($file['jenis'] == 1) : ?>
+                                <option value="1" selected>Materi</option>
+                                <option value="2">Tugas</option>
+                            <?php elseif ($file['jenis'] == 2) : ?>
+                                <option value="1">Materi</option>
+                                <option value="2" selected>Tugas</option>
+                            <?php endif; ?>
                         </select>
                     </div>
                 </div>

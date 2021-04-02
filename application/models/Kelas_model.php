@@ -102,7 +102,21 @@ class Kelas_model extends CI_Model
 
     public function getMateri($id)
     {
-        $result = $this->db->get_where('file', ['id' => $id])->row_array();
+        $this->db->select('f.* , ak.id_kelas as id_kelas');
+        $this->db->from('file as f');
+        $this->db->join('aktivitas_kelas as ak', 'f.id_aktivitas = ak.id');
+        $this->db->where('f.id', $id);
+        $result = $this->db->get()->row_array();
+        return $result;
+    }
+
+    public function getFileSiswa($id_siswa, $id_file)
+    {
+        $this->db->select('file_tugas_siswa.*');
+        $this->db->from('file_tugas_siswa');
+        $this->db->where('id_siswa', $id_siswa);
+        $this->db->where('id_file', $id_file);
+        $result = $this->db->get()->row_array();
         return $result;
     }
 
@@ -212,6 +226,7 @@ class Kelas_model extends CI_Model
         $result = $this->db->get()->result_array();
         return $result;
     }
+
     public function hapusSiswa($id_siswa, $id_kelas)
     {
         $this->db->delete('kelas_siswa', ['id_siswa' => $id_siswa, 'id_kelas' => $id_kelas]);
