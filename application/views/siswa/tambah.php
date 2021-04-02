@@ -48,6 +48,7 @@
                 <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Kelas">
             </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
+            <a href="<?= base_url('siswa') ?>" class="btn btn-secondary">Batalkan</a>
         </form>
         <!-- ============================================================== -->
         <!-- End content  -->

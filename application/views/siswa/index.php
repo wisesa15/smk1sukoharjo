@@ -62,8 +62,8 @@
                                                 <td><?= $s['nis']; ?></td>
                                                 <td><a href="<?= base_url('siswa/detail/') . $s['id']; ?>"><?= $s['nama']; ?></a></td>
                                                 <td>
-                                                    <a href="<?= base_url('siswa/edit/') . $s['id']; ?>" class="badge badge-success">Edit</a>
-                                                    <a href="<?= base_url('siswa/delete/') . $s['id']; ?>" class="badge badge-danger">Delete</a>
+                                                    <a href="<?= base_url('siswa/ubah/') . $s['id']; ?>" class="badge badge-success">Ubah</a>
+                                                    <a href="<?= base_url('siswa/hapus/') . $s['id']; ?>" class="badge badge-danger">Hapus</a>
                                                     <a href="<?= base_url('auth/resetpassword/3/') . $s['id']; ?>" class="badge badge-dark">Reset Password</a>
                                                 </td>
                                             </tr>

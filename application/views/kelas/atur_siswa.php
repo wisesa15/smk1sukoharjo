@@ -46,6 +46,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nama Siswa</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,6 +56,7 @@
                                     <tr>
                                         <td><?= $i; ?></td>
                                         <td><?= $ks['nama'] ?></td>
+                                        <td><a href="#" class="badge badge-danger hapus-siswa" data-siswa="<?= $ks['id'] ?>" data-kelas="<?= $infokelas['id'] ?>">Hapus</a></td>
                                         <?php array_push($daftar_siswa, $ks['id']); ?>
                                         <?php $i = $i + 1 ?>
                                     </tr>

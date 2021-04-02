@@ -306,9 +306,21 @@ class Kelas extends CI_Controller
                 array_push($data_guru, ['id_kelas' => $id_kelas, 'id_guru' => $dg]);
             endforeach;
             $this->kelas->tambahGuru($data_guru);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan guru untuk kelas' . $data['infokelas']['nama'] . '</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan guru untuk kelas ' . $data['infokelas']['nama'] . '</div>');
             redirect('kelas');
         }
+    }
+    public function hapusSiswa()
+    {
+        $idSiswa = $this->input->post('idSiswa');
+        $idKelas = $this->input->post('idKelas');
+        $this->kelas->hapusSiswa($idSiswa, $idKelas);
+    }
+    public function hapusGuru()
+    {
+        $idGuru = $this->input->post('idGuru');
+        $idKelas = $this->input->post('idKelas');
+        $this->kelas->hapusGuru($idGuru, $idKelas);
     }
     // public function check_default($array)
     // {

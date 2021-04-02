@@ -33,7 +33,7 @@
         <!-- ============================================================== -->
         <!-- content  -->
         <!-- ============================================================== -->
-        <form action="<?= base_url('siswa/edit/') . $siswa['id']; ?>" method="POST">
+        <form action="<?= base_url('siswa/ubah/') . $siswa['id']; ?>" method="POST">
             <div class="form-group">
                 <label for="nis">Nomor Induk Sekolah</label>
                 <input type="text" class="form-control" id="nis" name="nis" placeholder="NIS" value="<?= $siswa['nis'] ?>">
@@ -46,7 +46,8 @@
                 <label for="kelas">Kelas</label>
                 <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Kelas" value="<?= $siswa['kelas'] ?>">
             </div>
-            <button type="submit" class="btn btn-primary">Edit</button>
+            <button type="submit" class="btn btn-primary">Ubah</button>
+            <a href="<?= base_url('siswa') ?>" class="btn btn-secondary">Batalkan</a>
         </form>
         <!-- ============================================================== -->
         <!-- End content  -->

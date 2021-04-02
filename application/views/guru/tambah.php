@@ -45,6 +45,7 @@
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama">
             </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
+            <a href="<?= base_url('guru') ?>" class="btn btn-secondary">Batalkan</a>
         </form>
         <!-- ============================================================== -->
         <!-- End content  -->

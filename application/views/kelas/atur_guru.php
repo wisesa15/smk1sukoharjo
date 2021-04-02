@@ -55,6 +55,7 @@
                                     <tr>
                                         <td><?= $i; ?></td>
                                         <td><?= $kg['nama'] ?></td>
+                                        <td><a href="#" class="badge badge-danger hapus-guru" data-guru="<?= $kg['id'] ?>" data-kelas="<?= $infokelas['id'] ?>">Hapus</a></td>
                                         <?php array_push($daftar_guru, $kg['id']); ?>
                                         <?php $i = $i + 1 ?>
                                     </tr>

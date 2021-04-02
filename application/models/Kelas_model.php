@@ -160,4 +160,12 @@ class Kelas_model extends CI_Model
         $result = $this->db->get()->result_array();
         return $result;
     }
+    public function hapusSiswa($id_siswa, $id_kelas)
+    {
+        $this->db->delete('kelas_siswa', ['id_siswa' => $id_siswa, 'id_kelas' => $id_kelas]);
+    }
+    public function hapusGuru($id_guru, $id_kelas)
+    {
+        $this->db->delete('kelas_guru', ['id_guru' => $id_guru, 'id_kelas' => $id_kelas]);
+    }
 }

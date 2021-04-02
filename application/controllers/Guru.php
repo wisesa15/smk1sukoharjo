@@ -38,7 +38,7 @@ class Guru extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function edit($id)
+    public function ubah($id)
     {
         /* form edit data guru */
 
@@ -60,7 +60,7 @@ class Guru extends CI_Controller
         }
     }
 
-    public function delete($id)
+    public function hapus($id)
     {
         $dataUser = $this->user->getUserGuru($id); //mengambil data user yang ingin dihapus akunnya berdasarkan id_guru
         $this->user->delete(2, $dataUser['id']);

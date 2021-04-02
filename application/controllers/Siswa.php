@@ -37,7 +37,7 @@ class Siswa extends CI_Controller
         $this->load->view('templates/footer');
     }
 
-    public function edit($id)
+    public function ubah($id)
     {
         /* edit data siswa berdasarkan id */
         $data['title'] = 'Edit Siswa';
@@ -59,7 +59,7 @@ class Siswa extends CI_Controller
         }
     }
 
-    public function delete($id)
+    public function hapus($id)
     {
         $dataUser = $this->user->getUserSiswa($id); //mengambil data user yang ingin dihapus akunnya berdasarkan id_siswa
         $this->user->delete(3, $dataUser['id']);

@@ -31,6 +31,44 @@
         });
     });
 </script>
+<script>
+    $('.hapus-siswa').on('click', function(event) {
+        event.preventDefault();
+        const idKelas = $(this).data('kelas');
+        const idSiswa = $(this).data('siswa');
+
+        $.ajax({
+            url: "<?= base_url('kelas/hapussiswa') ?>",
+            type: "post",
+            data: {
+                idKelas: idKelas,
+                idSiswa: idSiswa
+            },
+            success: function() {
+                document.location.href = "<?= base_url('kelas/atursiswa/') ?>" + idKelas;
+            }
+        })
+    });
+</script>
+<script>
+    $('.hapus-guru').on('click', function(event) {
+        event.preventDefault();
+        const idKelas = $(this).data('kelas');
+        const idGuru = $(this).data('guru');
+
+        $.ajax({
+            url: "<?= base_url('kelas/hapusguru') ?>",
+            type: "post",
+            data: {
+                idKelas: idKelas,
+                idGuru: idGuru
+            },
+            success: function() {
+                document.location.href = "<?= base_url('kelas/aturguru/') ?>" + idKelas;
+            }
+        })
+    });
+</script>
 <!-- chart chartist js -->
 <!-- <script src="<?= base_url(''); ?>assets/vendor/charts/chartist-bundle/chartist.min.js"></script> -->
 <!-- sparkline js -->
