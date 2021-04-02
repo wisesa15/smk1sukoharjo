@@ -9,6 +9,7 @@ class Kelas extends CI_Controller
         $this->load->model('User_model', 'user');
         $this->load->model('Kelas_model', 'kelas');
         $this->load->model('guru_model', 'guru');
+        $this->load->model('Siswa_model', 'siswa');
     }
 
     public function index()
@@ -46,6 +47,10 @@ class Kelas extends CI_Controller
         {
             $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
             $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        } else  if ($data['user']['role_id'] == 3) //untuk kepentingan sidebar guru (kelas yang dia ajar)
+        {
+            $data['siswa'] = $this->siswa->getSiswa($data['user']['id_siswa']);
+            $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id'));
         }
         foreach ($data_aktivitas as $a) :
             $file = $this->kelas->getFile($a['id']);
@@ -181,9 +186,23 @@ class Kelas extends CI_Controller
         $data['file'] = $this->kelas->getDetailFile($id_materi);
 
 
+        $config['upload_path']          = './assets/file/';
+        $config['allowed_types']        = 'pdf|ppt|docx';
+        $config['max_size']             = 10000;
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('kelas/detail_materi_siswa', $data);
-        $this->load->view('templates/footer');
+        $this->load->library('upload', $config);
+
+        if (!$_FILES) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/detail_materi_siswa', $data);
+            $this->load->view('templates/footer');
+        } else {
+            if ($this->upload->do_upload('userfile')) {
+                $nama_file = $this->upload->data();
+                $nama_file = $nama_file['file_name'];
+            }
+            $this->kelas->uploadMateri($data['file']['id'], $nama_file);
+            redirect('kelas/detailMateri/' . $data['file']['id']);
+        }
     }
 }

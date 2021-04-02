@@ -105,4 +105,12 @@ class Kelas_model extends CI_Model
         ];
         $this->db->insert('file', $data);
     }
+    public function uploadMateri($id_file, $file)
+    {
+        $data = [
+            'id_file' => $id_file,
+            'nama_file' => $file
+        ];
+        $this->db->insert('file_tugas_siswa', $data);
+    }
 }
