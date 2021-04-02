@@ -20,6 +20,12 @@ class Siswa_model extends CI_Model
         $result = $this->db->get('siswa')->result_array();
         return $result;
     }
+    public function getAllSiswaLimit($mulaiData, $jmlData)
+    {
+        //mengambil semua data siswa dengan limit
+        $result = $this->db->get('siswa')->result_array();
+        return $result;
+    }
     public function editSiswa($id)
     {
         //mengambil data siswa dengan parameter id siswa lalu mengupdate data nim atau nama atau kelas berdasarkan input 
