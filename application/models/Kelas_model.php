@@ -100,6 +100,11 @@ class Kelas_model extends CI_Model
         $this->db->insert('aktivitas_kelas', $data);
     }
 
+    public function getMateri($id)
+    {
+        $result = $this->db->get_where('file', ['id' => $id])->row_array();
+        return $result;
+    }
 
     public function tambahMateri($id, $file)
     {
@@ -115,12 +120,69 @@ class Kelas_model extends CI_Model
         ];
         $this->db->insert('file', $data);
     }
-    public function uploadMateri($id_file, $file)
+
+    public function uploadMateri($id_siswa, $id_file, $file)
     {
         $data = [
             'id_file' => $id_file,
-            'nama_file' => $file
+            'nama_file' => $file,
+            'id_siswa' => $id_siswa
         ];
         $this->db->insert('file_tugas_siswa', $data);
+    }
+
+    public function editMateri($id, $file = null)
+    {
+        //menambahkan materi pada suatu pertemuan dengan parameter id_aktivitas(id pertemuan )
+        if ($file != null) {
+            $data = [
+                'nama' => htmlspecialchars($this->input->post('nama_file')),
+                'jenis' => ($this->input->post('jenis')),
+                'tgl_ditampilkan' => strtotime($this->input->post('dataTampil')),
+                'tenggalwaktu' => strtotime($this->input->post('dateline')),
+                'nama_file' => $file,
+                'keterangan' => $this->input->post('keterangan')
+            ];
+        } elseif ($file == null) {
+            $data = [
+                'nama' => htmlspecialchars($this->input->post('nama_file')),
+                'jenis' => ($this->input->post('jenis')),
+                'tgl_ditampilkan' => strtotime($this->input->post('dataTampil')),
+                'tenggalwaktu' => strtotime($this->input->post('dateline')),
+                'keterangan' => $this->input->post('keterangan')
+            ];
+        }
+        $this->db->select('file.*');
+        $this->db->from('file');
+        $this->db->where('id', $id);
+        $this->db->update('file', $data);
+        //$this->db->get_where('file', ['id' => $id],);
+        //$this->db->update('file', $data);
+    }
+
+    public function deleteMateri($id)
+    {
+        //menghapus data siswa berdasarkan idnya
+        $this->db->where('id', $id);
+        $this->db->delete('file');
+    }
+
+    public function checkPekerjaan($id_siswa, $id_file)
+    {
+        $this->db->select('file_tugas_siswa.*');
+        $this->db->from('file_tugas_siswa');
+        $this->db->where('id_siswa', $id_siswa);
+        $this->db->where('id_file', $id_file);
+        $result = $this->db->get()->row_array();
+        return $result;
+    }
+
+    public function getAllSiswaKelas($id)
+    {
+        $this->db->select('kelas_siswa.*');
+        $this->db->from('kelas_siswa');
+        $this->db->where('kelas_siswa.id_kelas', $id);
+        $result = $this->db->get()->result_array();
+        return $result;
     }
 }

@@ -104,9 +104,9 @@ class Auth extends CI_Controller
         fungsi sementara untuk menambahkan user*/
 
         $data = [
-            'username' => 'siswa',
+            'username' => 'siswa2',
             'image' => 'default.jpg',
-            'password' => password_hash('siswa', PASSWORD_DEFAULT),
+            'password' => password_hash('siswa2', PASSWORD_DEFAULT),
             'role_id' => 3,
             'date_created' => time()
         ];

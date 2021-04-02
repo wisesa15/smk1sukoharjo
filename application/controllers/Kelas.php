@@ -47,7 +47,7 @@ class Kelas extends CI_Controller
         {
             $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
             $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
-        } else  if ($data['user']['role_id'] == 3) //untuk kepentingan sidebar guru (kelas yang dia ajar)
+        } else  if ($data['user']['role_id'] == 3) //untuk kepentingan sidebar siswa
         {
             $data['siswa'] = $this->siswa->getSiswa($data['user']['id_siswa']);
             $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id'));
@@ -196,25 +196,53 @@ class Kelas extends CI_Controller
         $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
         $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
         $data['kelas'] = $this->kelas->getAllKelas();
-
+        $data['materi'] = $this->kelas->getMateri($id_materi);
+        $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
+        if ($data['user']['role_id'] == 2) //untuk kepentingan sidebar guru (kelas yang dia ajar)
+        {
+            $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+            $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        }
+        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar guru (kelas yang dia ajar)
 
         $this->form_validation->set_rules('nama_file', 'Nama file', 'required|trim');
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim');
         $this->form_validation->set_rules('dataTampil', 'Tanggal Ditampilkan', 'required');
         $this->form_validation->set_rules('dateline', 'Dateline', 'required');
+        $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
+        $config['upload_path']          = './assets/file/';
+        $config['allowed_types']        = 'pdf|ppt|docx';
+        $config['max_size']             = 10000;
+
+
+        $this->load->library('upload', $config);
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
             $this->load->view('kelas/edit_Materi', $data);
             $this->load->view('templates/footer');
         } else {
-
-            $this->kelas->tambahMateri($id_pertemuan);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $this->input->post('dataTampil') . '.</div>');
+            if ($this->upload->do_upload('userfile')) {
+                $nama_file = $this->upload->data();
+                $nama_file = $nama_file['file_name'];
+            }
+            $this->kelas->editMateri($data['materi']['id'], $nama_file);
             redirect('kelas/detail/' . $data['detailPertemuan']['id_kelas']);
-            // redirect('kelas');
         }
+    }
+    public function deleteMateri($id_materi)
+    {
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+        $data['title'] = 'Delete Materi';
+        $id = $data['detailPertemuan']['id_kelas'];
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
+        $this->kelas->deleteMateri($id_materi);
+        redirect('kelas/detail/' . $id);
     }
 
     public function detailMateri($id_materi)
@@ -224,8 +252,17 @@ class Kelas extends CI_Controller
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
         $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
-        $data['kelas'] = $this->kelas->getAllKelas();
         $data['file'] = $this->kelas->getDetailFile($id_materi);
+        if ($data['user']['role_id'] == 2) //untuk kepentingan sidebar guru (kelas yang dia ajar)
+        {
+            $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+            $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        } else  if ($data['user']['role_id'] == 3) //untuk kepentingan sidebar siswa
+        {
+            $data['siswa'] = $this->siswa->getSiswa($data['user']['id_siswa']);
+            $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id'));
+            $data['check'] = $this->kelas->checkPekerjaan($data['siswa']['id'], $data['file']['id']);
+        }
 
 
         $config['upload_path']          = './assets/file/';
@@ -233,7 +270,6 @@ class Kelas extends CI_Controller
         $config['max_size']             = 10000;
 
         $this->load->library('upload', $config);
-
         if (!$_FILES) {
             $this->load->view('templates/header', $data);
             $this->load->view('kelas/detail_materi_siswa', $data);
@@ -243,8 +279,23 @@ class Kelas extends CI_Controller
                 $nama_file = $this->upload->data();
                 $nama_file = $nama_file['file_name'];
             }
-            $this->kelas->uploadMateri($data['file']['id'], $nama_file);
+            $this->kelas->uploadMateri($data['siswa']['id'], $data['file']['id'], $nama_file);
             redirect('kelas/detailMateri/' . $data['file']['id']);
         }
+    }
+
+    public function masterFile($id_materi)
+    {
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+        $data['title'] = 'Master Materi';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
+        $data['detailKelas'] = $this->kelas->getDetail($data['detailPertemuan']['id_kelas']);
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+        $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        $data['allSiswa'] = $this->kelas->getAllSiswaKelas($data['kelas']['id']);
+        foreach ($data['allSiswa'] as $data_siswa):
+            $data['check'] = $this->kelas->checkPekerjaan($data['siswa']['id'], $data['file']['id']);
     }
 }

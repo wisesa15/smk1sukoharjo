@@ -29,33 +29,41 @@
                                             <?php if ($nama_materi['tgl_ditampilkan'] < time()) : ?>
                                                 <?php if ($nama_materi['jenis'] == 1) : ?>
                                                     <li class="list-group-item">
-                                                        <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
-                                                            <?= $nama_materi['nama']; ?>
-                                                        </h3>
-                                                        <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
+                                                        <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">
+                                                            <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
+                                                                <?= $nama_materi['nama']; ?>
+                                                            </h3>
+                                                            <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Delete</a>
                                                     </li>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
-                                                        <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
-                                                            <?= $nama_materi['nama']; ?>
-                                                        </h3>
-                                                        <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
+                                                        <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">
+                                                            <h3 style="display :inline;"><i class="fas fa-tasks"></i>
+                                                                <?= $nama_materi['nama']; ?>
+                                                            </h3>
+                                                            <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Delete</a>
                                                     </li>
                                                 <?php endif; ?>
                                             <?php else : ?>
                                                 <?php if ($nama_materi['jenis'] == 1) : ?>
                                                     <li class="list-group-item">
-                                                        <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
-                                                            <s><?= $nama_materi['nama']; ?></s>
-                                                        </h3>
-                                                        <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
+                                                        <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">
+                                                            <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
+                                                                <?= $nama_materi['nama']; ?>
+                                                            </h3>
+                                                            <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Delete</a>
                                                     </li>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
-                                                        <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
-                                                            <s><?= $nama_materi['nama']; ?></s>
-                                                        </h3>
-                                                        <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
+                                                        <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">
+                                                            <h3 style="display :inline;"><i class="fas fa-tasks"></i>
+                                                                <?= $nama_materi['nama']; ?>
+                                                            </h3>
+                                                            <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Delete</a>
                                                     </li>
                                                 <?php endif; ?>
                                             <?php endif; ?>
