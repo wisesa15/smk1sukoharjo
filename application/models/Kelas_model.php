@@ -27,7 +27,7 @@ class Kelas_model extends CI_Model
     public function getKelasCount()
     {
         //mendapatkan jumlah Kelas yang ada
-        return $this->db->count_all('siswa');
+        return $this->db->count_all('kelas');
     }
     public function getKelasLimit($limit, $start)
     {
