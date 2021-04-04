@@ -13,6 +13,7 @@
             <a href="<?= base_url('assets/file/') . $file['nama_file']; ?>" class="badge badge-primary btn-lg ml-3 p-3"><i class="fa-fw fas fa-download"></i>
                 <p>Download Materi</p>
             </a>
+            <div class="mt-3"><?= $this->session->flashdata('message') ?> </div>
             <?php if ($user['role_id'] == 3 and $check == null and $file['tenggalwaktu'] >= time()) : ?>
                 <?php if ($file['jenis'] == 2) : ?>
                     <form class="form-horizontal" method="post" enctype="multipart/form-data" action="<?= base_url('kelas/detailMateri/') . $file['id']; ?>">

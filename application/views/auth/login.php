@@ -20,13 +20,13 @@
                                     <?= $this->session->flashdata('message'); ?>
                                     <form class="user" action="<?= base_url('auth'); ?>" method="post">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Enter Username...">
+                                            <input type="text" class="form-control form-control-user" id="username" name="username" placeholder="Masukan Username...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" id="password" name="password" placeholder="Password">
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Masuk
                                         </button>
                                     </form>
                                 </div>

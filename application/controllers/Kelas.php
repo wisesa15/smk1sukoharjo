@@ -308,7 +308,8 @@ class Kelas extends CI_Controller
         $id = $data['detailPertemuan']['id_kelas'];
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
-        $this->kelas->deleteMateri($id_materi);
+        $this->kelas->deleteMateri($data['file']['id']);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menghapus data materi</div>');
         redirect('kelas/detail/' . $id);
     }
 
@@ -347,6 +348,7 @@ class Kelas extends CI_Controller
                 $nama_file = $nama_file['file_name'];
             }
             $this->kelas->uploadMateri($data['siswa']['id'], $data['file']['id'], $nama_file);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil Upload Tugas Anda</div>');
             redirect('kelas/detailMateri/' . $data['file']['id']);
         }
     }
@@ -461,4 +463,19 @@ class Kelas extends CI_Controller
     //     }
     //     return TRUE;
     // }
+    public function hapusTugasSiswa($id_materi, $id_siswa)
+    {
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
+        $data['file'] = $this->kelas->getDetailFile($id_materi);
+        $data['title'] = 'Delete Tugas Siswa';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['detailPertemuan'] = $this->kelas->getDetailPertemuan($data['file']['id_aktivitas']);
+        /*$this->kelas->deleteMateri($data['file']['id']);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menghapus data materi</div>');*/
+        $this->kelas->hapusFileSiswa($id_siswa, $id_materi);
+
+        redirect('kelas/masterFile/' . $data['file']['id']);
+    }
 }
