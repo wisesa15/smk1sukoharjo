@@ -40,7 +40,7 @@ class Guru extends CI_Controller
         $config['attributes'] = array('class' => 'page-link');
         $this->pagination->initialize($config);
         $data['links'] = $this->pagination->create_links();
-        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $page = ($this->uri->segment(3) * $config['per_page']) ? $this->uri->segment(3) : 0;
         $data['page'] = $page;
         $data['guru'] = $this->guru->getGuruLimit($config['per_page'], $page);
 
