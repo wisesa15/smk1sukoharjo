@@ -45,6 +45,7 @@ class Kelas extends CI_Controller
         $data['links'] = $this->pagination->create_links();
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         $data['kelas'] = $this->kelas->getKelasLimit($config['per_page'], $page); //data untuk ditampilkan
+        $data['page'] = $page;
 
         //loop untuk mengambil data pengajar yang mengajar di tiap kelas
         foreach ($data['kelas'] as $k) :

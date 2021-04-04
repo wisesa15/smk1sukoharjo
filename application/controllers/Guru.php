@@ -41,6 +41,7 @@ class Guru extends CI_Controller
         $this->pagination->initialize($config);
         $data['links'] = $this->pagination->create_links();
         $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['page'] = $page;
         $data['guru'] = $this->guru->getGuruLimit($config['per_page'], $page);
 
         $this->load->view('templates/header', $data);
