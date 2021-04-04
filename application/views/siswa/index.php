@@ -72,6 +72,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <nav aria-label="Page navigation example" class="pt-5">
+                                <ul class="pagination">
+                                    <?= $links; ?>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>

@@ -19,7 +19,6 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nama Kelas</th>
-                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -24,6 +24,19 @@ class Kelas_model extends CI_Model
         return $result;
     }
 
+    public function getKelasCount()
+    {
+        //mendapatkan jumlah Kelas yang ada
+        return $this->db->count_all('siswa');
+    }
+    public function getKelasLimit($limit, $start)
+    {
+        //mengambil semua data siswa dengan limit
+        $this->db->limit($limit, $start);
+        $result = $this->db->get('kelas')->result_array();
+        return $result;
+    }
+
     public function getAllGuru($id)
     {
         //mengambil semua data guru dengan parameter id_kelas (yang mengajar kelas tersebut)  
@@ -234,5 +247,15 @@ class Kelas_model extends CI_Model
     public function hapusGuru($id_guru, $id_kelas)
     {
         $this->db->delete('kelas_guru', ['id_guru' => $id_guru, 'id_kelas' => $id_kelas]);
+    }
+    public function editKelas($id, $nama, $gambar = NULL)
+    {
+        //mengubah kelas siswa
+        if ($gambar) {
+            $this->db->set('gambar', $gambar);
+        }
+        $this->db->set('nama', $nama);
+        $this->db->where('id', $id);
+        $this->db->update('kelas');
     }
 }

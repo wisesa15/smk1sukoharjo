@@ -20,9 +20,15 @@ class Siswa_model extends CI_Model
         $result = $this->db->get('siswa')->result_array();
         return $result;
     }
-    public function getAllSiswaLimit($mulaiData, $jmlData)
+    public function getSiswaCount()
+    {
+        //mendapatkan jumlah siswa yang ada
+        return $this->db->count_all('siswa');
+    }
+    public function getSiswaLimit($limit, $start)
     {
         //mengambil semua data siswa dengan limit
+        $this->db->limit($limit, $start);
         $result = $this->db->get('siswa')->result_array();
         return $result;
     }

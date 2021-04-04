@@ -56,7 +56,7 @@
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; ?>
-                                        <?php foreach ($siswa as $s) : ?>
+                                        <?php foreach ($guru as $s) : ?>
                                             <tr>
                                                 <th scope="row"><?= $i; ?></th>
                                                 <td><?= $s['nip']; ?></td>
@@ -72,6 +72,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <nav aria-label="Page navigation example" class="pt-5">
+                                <ul class="pagination">
+                                    <?= $links; ?>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>

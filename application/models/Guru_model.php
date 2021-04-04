@@ -21,6 +21,18 @@ class Guru_model extends CI_Model
         $result = $this->db->get('guru')->result_array();
         return $result;
     }
+    public function getGuruCount()
+    {
+        //mendapatkan jumlah siswa yang ada
+        return $this->db->count_all('guru');
+    }
+    public function getGuruLimit($limit, $start)
+    {
+        //mengambil semua data siswa dengan limit
+        $this->db->limit($limit, $start);
+        $result = $this->db->get('guru')->result_array();
+        return $result;
+    }
     public function editGuru($id)
     {
         //editGuru mengambil data Guru dengan parameter id guru

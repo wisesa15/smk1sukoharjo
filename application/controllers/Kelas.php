@@ -18,8 +18,33 @@ class Kelas extends CI_Controller
 
         $data['title'] = 'Kelas'; //title web
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
-        $data['kelas'] = $this->kelas->getAllKelas(); //data untuk ditampilkan
         $data['pengajar'] = []; //data pengajar tiap kelas
+
+        $config['base_url'] = base_url('kelas/index');
+        $config['total_rows'] = $this->kelas->getKelasCount();
+        $config['per_page'] = 20;
+        $config['num_links'] = 1;
+        $config['first_link'] = 'First';
+        $config['first_tag_open'] = '<li class="page-item">';
+        $config['first_tag_close'] = '</li>';
+        $config['last_link'] = 'Last';
+        $config['last_tag_open'] = '<li class="page-item">';
+        $config['last_tag_close'] = '</li>';
+        $config['next_link'] = '<span aria-hidden="true">»</span><span class="sr-only">Next</span>';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_link'] = '<span aria-hidden="true">«</span><span class="sr-only">Previous</span>';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+        $config['num_tag_open'] = '<li class="page-item">';
+        $config['num_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['attributes'] = array('class' => 'page-link');
+        $this->pagination->initialize($config);
+        $data['links'] = $this->pagination->create_links();
+        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $data['kelas'] = $this->kelas->getKelasLimit($config['per_page'], $page); //data untuk ditampilkan
 
         //loop untuk mengambil data pengajar yang mengajar di tiap kelas
         foreach ($data['kelas'] as $k) :
@@ -56,7 +81,7 @@ class Kelas extends CI_Controller
             $file = $this->kelas->getFile($a['id']);
             array_push($data['file'], $file);
         endforeach;
-        if ($data['user']['role_id'] == 2) {
+        if ($data['user']['role_id'] == 2 || $data['user']['role_id'] == 1) {
             $this->load->view('templates/header', $data);
             $this->load->view('kelas/detail', $data);
             $this->load->view('templates/footer');
@@ -105,6 +130,48 @@ class Kelas extends CI_Controller
                 $this->kelas->tambah($nama);
             }
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menambahkan kelas</div>');
+            redirect('kelas');
+        }
+    }
+
+    public function ubah($id_kelas)
+    {
+        /* edit data kelas berdasarkan id */
+        $data['title'] = 'Ubah Kelas';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $data['kelas'] = $this->kelas->getDetail($id_kelas);
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/edit', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $nama = htmlspecialchars($this->input->post('nama'));
+            $upload_image = $_FILES['gambar']['name'];
+            $new_image = NULL;
+            if ($upload_image) {
+                $config['upload_path'] = './assets/images/profile';
+                $config['allowed_types'] = 'jpg|png|jpeg';
+                $config['max_size']     = '10000';
+
+                $this->load->library('upload', $config);
+
+                if ($this->upload->do_upload('gambar')) {
+                    $new_image = $this->upload->data('file_name');
+                } else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Tolong pilih gambar yang sesuai dengan format jpg atau png</div>');
+                    redirect('kelas/tambah');
+                    // echo $this->upload->display_errors();
+                }
+            }
+            if ($new_image) {
+                $this->kelas->editKelas($id_kelas, $nama, $new_image);
+            } else {
+                $this->kelas->editKelas($id_kelas, $nama);
+            }
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $data['kelas']['nama'] . '.</div>');
             redirect('kelas');
         }
     }
