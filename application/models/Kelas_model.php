@@ -265,7 +265,7 @@ class Kelas_model extends CI_Model
         $this->db->set('nama', $nama);
         $this->db->where('id', $id);
         $this->db->update('kelas');
-
+    }
     public function hapusFileSiswa($id_siswa, $id_file)
     {
         $this->db->select('file_tugas_siswa.*');

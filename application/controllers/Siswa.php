@@ -21,6 +21,7 @@ class Siswa extends CI_Controller
         $config['total_rows'] = $this->siswa->getSiswaCount();
         $config['per_page'] = 20;
         $config['num_links'] = 1;
+        $config['use_page_numbers'] = TRUE;
         $config['first_link'] = 'First';
         $config['first_tag_open'] = '<li class="page-item">';
         $config['first_tag_close'] = '</li>';
@@ -40,7 +41,7 @@ class Siswa extends CI_Controller
         $config['attributes'] = array('class' => 'page-link');
         $this->pagination->initialize($config);
         $data['links'] = $this->pagination->create_links();
-        $page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+        $page = ($this->uri->segment(3) * $config['per_page']) ? $this->uri->segment(3) : 0;
         $data['page'] = $page;
         $data['siswa'] = $this->siswa->getSiswaLimit($config['per_page'], $page);
 
