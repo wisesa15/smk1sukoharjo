@@ -82,7 +82,7 @@
                                         <!-- <option value="" selected></option> -->
                                         <?php foreach ($guru as $g) : ?>
                                             <?php if (!in_array($g['id'], $daftar_guru)) : ?>
-                                                <option value="<?= $g['id']; ?>"><?= $g['id']; ?> - <?= $g['nama']; ?></option>
+                                                <option value="<?= $g['id']; ?>"><?= $g['nip']; ?> - <?= $g['nama']; ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>

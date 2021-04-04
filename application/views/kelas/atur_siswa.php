@@ -83,7 +83,7 @@
                                         <!-- <option value="" selected></option> -->
                                         <?php foreach ($siswa as $s) : ?>
                                             <?php if (!in_array($s['id'], $daftar_siswa)) : ?>
-                                                <option value="<?= $s['id']; ?>"><?= $s['id']; ?> - <?= $s['nama']; ?></option>
+                                                <option value="<?= $s['id']; ?>"><?= $s['nis']; ?> - <?= $s['nama']; ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     </select>
