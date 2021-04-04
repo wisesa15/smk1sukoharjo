@@ -55,7 +55,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i = $page * 20 + 1; ?>
+                                        <?php $i = $page + 1; ?>
                                         <?php foreach ($kelas as $k) : ?>
                                             <tr>
                                                 <th scope="row"><?= $i; ?></th>

@@ -55,7 +55,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i = $page * 20 + 1; ?>
+                                        <?php $i = $page + 1; ?>
                                         <?php foreach ($guru as $s) : ?>
                                             <tr>
                                                 <th scope="row"><?= $i; ?></th>

@@ -43,7 +43,7 @@ class Kelas extends CI_Controller
         $config['attributes'] = array('class' => 'page-link');
         $this->pagination->initialize($config);
         $data['links'] = $this->pagination->create_links();
-        $page = ($this->uri->segment(3) * $config['per_page']) ? $this->uri->segment(3) : 0;
+        $page = ($this->uri->segment(3)) ? ($this->uri->segment(3) - 1) * $config['per_page'] : 0;
         $data['kelas'] = $this->kelas->getKelasLimit($config['per_page'], $page); //data untuk ditampilkan
         $data['page'] = $page;
 
