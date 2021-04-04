@@ -37,20 +37,8 @@
                                                         </a>
                                                     </li>
                                                 <?php endif; ?>
-                                            <?php else : ?>
-                                                <?php if ($nama_materi['jenis'] == 1) : ?>
-                                                    <li class="list-group-item">
-                                                        <h3 style="display :inline;"><i class="fas fa-print mr-2"></i>
-                                                            <s><?= $nama_materi['nama']; ?></s>
-                                                        </h3>
-                                                    </li>
-                                                <?php else : ?>
-                                                    <li class="list-group-item ">
-                                                        <h3 style="display :inline;"><i class="fas fa-tasks mr-2"></i>
-                                                            <s><?= $nama_materi['nama']; ?></s>
-                                                        </h3>
-                                                    </li>
-                                                <?php endif; ?>
+
+
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                         <hr>

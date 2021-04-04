@@ -10,6 +10,7 @@
                                 <h1><?= $title; ?></h1>
                             </div>
                         </div>
+                        <?= $this->session->flashdata('message') ?>
                     </div>
                     <div class="card">
                         <div class="content mt-2.5 ml-2 ">
@@ -26,7 +27,7 @@
                                         <li class="list-group-item"><a href="<?= base_url('kelas/tambahMateri/') . $judul_pertemuan['id']; ?>" class="btn btn-primary mt-0">+ Tambah Materi</a>
                                         </li>
                                         <?php foreach ($file[$i] as $nama_materi) : ?>
-                                            <?php if ($nama_materi['tgl_ditampilkan'] < time()) : ?>
+                                            <?php if ($nama_materi['tgl_ditampilkan'] <= time()) : ?>
                                                 <?php if ($nama_materi['jenis'] == 1) : ?>
                                                     <li class="list-group-item">
                                                         <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">
@@ -34,7 +35,7 @@
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>
                                                             <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
-                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Delete</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">hapus</a>
                                                     </li>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
@@ -43,10 +44,10 @@
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>
                                                             <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
-                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Delete</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Hapus</a>
                                                     </li>
                                                 <?php endif; ?>
-                                            <?php else : ?>
+                                            <?php else :  ?>
                                                 <?php if ($nama_materi['jenis'] == 1) : ?>
                                                     <li class="list-group-item">
                                                         <a href="<?= base_url('kelas/detailMateri/') . $nama_materi['id']; ?>">
@@ -54,7 +55,8 @@
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>
                                                             <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
-                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Delete</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Hapus</a>
+                                                            <a href="" class="badge badge-info">Hanya Guru</a>
                                                     </li>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
@@ -63,7 +65,8 @@
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>
                                                             <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
-                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Delete</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">Hapus</a>
+                                                            <a href="" class="badge badge-info">Hanya Guru</a>
                                                     </li>
                                                 <?php endif; ?>
                                             <?php endif; ?>

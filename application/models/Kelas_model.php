@@ -176,6 +176,14 @@ class Kelas_model extends CI_Model
     public function deleteMateri($id)
     {
         //menghapus data siswa berdasarkan idnya
+        //menghapus data siswa yang dikumpulkan
+        $this->db->select('file_tugas_siswa.*');
+        $this->db->from('file_tugas_siswa');
+        $this->db->where('id_file', $id);
+        $this->db->delete('file_tugas_siswa');
+        //menghapus materi
+        $this->db->select('file.*');
+        $this->db->from('file');
         $this->db->where('id', $id);
         $this->db->delete('file');
     }
@@ -234,5 +242,14 @@ class Kelas_model extends CI_Model
     public function hapusGuru($id_guru, $id_kelas)
     {
         $this->db->delete('kelas_guru', ['id_guru' => $id_guru, 'id_kelas' => $id_kelas]);
+    }
+
+    public function hapusFileSiswa($id_siswa, $id_file)
+    {
+        $this->db->select('file_tugas_siswa.*');
+        $this->db->from('file_tugas_siswa');
+        $this->db->where('id_siswa', $id_siswa);
+        $this->db->where('id_file', $id_file);
+        $this->db->delete('file_tugas_siswa');
     }
 }
