@@ -377,8 +377,6 @@ class Kelas extends CI_Controller
             $data['allSiswa'][$i]['status'] = $status;
             $i++;
         endforeach;
-        //var_dump($data['allSiswa']);
-        //die;
         $this->load->view('templates/header', $data);
         $this->load->view('kelas/download_file_siswa', $data);
         $this->load->view('templates/footer');
@@ -413,7 +411,7 @@ class Kelas extends CI_Controller
                 array_push($data_siswa, ['id_kelas' => $id_kelas, 'id_siswa' => $ds]);
             endforeach;
             $this->kelas->tambahSiswa($data_siswa);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan siswa untuk kelas' . $data['infokelas']['nama'] . '</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan siswa untuk kelas ' . $data['infokelas']['nama'] . '</div>');
             redirect('kelas');
         }
     }

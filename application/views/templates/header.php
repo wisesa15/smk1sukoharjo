@@ -34,6 +34,7 @@
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
                 <!-- Judul -->
+                <img class="ml-3" style="height: 2.5em;" src="<?= base_url('assets/images/logo/logo-128.png'); ?>"></img>
                 <a class="navbar-brand" href="index.html">SMK N 1 SUKOHARJO</a>
                 <!-- Tombol to see profile when navbar collapsed -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
