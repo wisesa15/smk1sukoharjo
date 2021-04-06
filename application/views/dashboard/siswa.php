@@ -55,9 +55,7 @@
 
                                 </div>
                             </div>
-                            <div class="next m-2">
-                                <a href="#" class="btn btn-primary">next page</a>
-                            </div>
+
                         </div>
                     </div>
                 </div>

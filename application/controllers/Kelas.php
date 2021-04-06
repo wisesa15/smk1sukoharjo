@@ -403,8 +403,6 @@ class Kelas extends CI_Controller
             $data['allSiswa'][$i]['status'] = $status;
             $i++;
         endforeach;
-        //var_dump($data['allSiswa']);
-        //die;
         $this->load->view('templates/header', $data);
         $this->load->view('kelas/download_file_siswa', $data);
         $this->load->view('templates/footer');

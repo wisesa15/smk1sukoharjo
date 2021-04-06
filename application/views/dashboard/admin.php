@@ -66,6 +66,19 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="image-fluid">
+                            <img class="img-fluid card-img-top" src="<?= base_url('/assets/images/logo/rsz_depan.png'); ?>" alt="Card image cap">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">SMK 1 SUKOHARJO</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- <div class="row">
                 <div class="col-md-6">
                     <div class="card">
