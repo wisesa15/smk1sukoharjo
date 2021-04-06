@@ -68,6 +68,8 @@ class Kelas extends CI_Controller
         $data['title'] = $data_kelas['nama'];
         $data_aktivitas = $this->kelas->getPertemuan($id_kelas);
         $data['aktivitas'] = $data_aktivitas;
+        //var_dump($data['aktivitas']);
+        //die;
         $data['file'] = [];
         if ($data['user']['role_id'] == 2) //untuk kepentingan sidebar guru (kelas yang dia ajar)
         {
@@ -203,7 +205,28 @@ class Kelas extends CI_Controller
             redirect('kelas/detail/' . $id_kelas);
         }
     }
-
+    public function editPertemuan($id_pertemuan)
+    {
+        $data['pertemuan'] = $this->kelas->getDetailPertemuan($id_pertemuan);
+        $data['title'] = 'Edit Pertemuan';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        /*$data['detailPertemuan'] = $this->kelas->getDetailPertemuan($id_pertemuan);
+        $data['detailKelas'] = $this->kelas->getDetail($data['kelasP']['id_kelas']);*/
+        $data['kelasP'] = $this->kelas->getKelasP($id_pertemuan);
+        $data['detailKelas'] = $this->kelas->getDetail($data['kelasP']['id']);
+        $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        $this->form_validation->set_rules('newAktivitas', 'Aktivitas Baru', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('kelas/edit_Pertemuan', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $nama_aktivitas = $this->input->post('newAktivitas');
+            $this->kelas->editPertemuan($id_pertemuan, $nama_aktivitas);
+            redirect('kelas/detail/' . $data['kelasP']['id_kelas']);
+        }
+    }
     public function tambahMateri($id_pertemuan)
     {
         /* menambah materi untuk suatu pertemuan pada suatu kelas (untuk admin dan guru) */
@@ -299,6 +322,9 @@ class Kelas extends CI_Controller
             redirect('kelas/detail/' . $data['detailPertemuan']['id_kelas']);
         }
     }
+
+
+
     public function deleteMateri($id_materi)
     {
         $data['file'] = $this->kelas->getDetailFile($id_materi);
@@ -413,7 +439,7 @@ class Kelas extends CI_Controller
                 array_push($data_siswa, ['id_kelas' => $id_kelas, 'id_siswa' => $ds]);
             endforeach;
             $this->kelas->tambahSiswa($data_siswa);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan siswa untuk kelas' . $data['infokelas']['nama'] . '</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mendaftarkan siswa untuk kelas ' . $data['infokelas']['nama'] . '</div>');
             redirect('kelas');
         }
     }

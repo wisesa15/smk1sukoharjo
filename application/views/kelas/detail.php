@@ -20,7 +20,12 @@
                             <?php $i = 0; ?>
                             <?php foreach ($aktivitas as $judul_pertemuan) : ?>
                                 <hr class="mb-0">
-                                <h1 class="card-header text-center"><?= $judul_pertemuan['nama_kegiatan']; ?></h1>
+                                <div>
+                                    <h1 class="card-header text-center"><?= $judul_pertemuan['nama_kegiatan']; ?>
+                                        <a href="<?= base_url('kelas/editPertemuan/') . $judul_pertemuan['id']; ?>" class="badge badge-success">Edit</a>
+                                    </h1>
+                                </div>
+
                                 <hr class="mt-0 mb-0">
                                 <div>
                                     <ul class="list-group list-group-flush">
@@ -35,7 +40,7 @@
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>
                                                             <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
-                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">hapus</a>
+                                                            <a href="<?= base_url('kelas/delekelas/editMateriteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">hapus</a>
                                                     </li>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">

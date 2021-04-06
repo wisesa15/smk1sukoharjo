@@ -73,11 +73,14 @@ class Kelas_model extends CI_Model
         $result = $this->db->get_where('kelas', ['id' => $id])->row_array();
         return $result;
     }
-
+    public function getKelasP($id_aktivitas)
+    {
+        $result = $this->db->get_where('aktivitas_kelas', ['id_kelas' => $id_aktivitas])->row_array();
+        return $result;
+    }
     public function getDetailPertemuan($id_pertemuan)
     {
         //mengambil data detail pertemuan berdasarkan id_pertemuan 
-        //mengembalikan banyaknya file pada suatu pertemuan
         $result = $this->db->get_where('aktivitas_kelas', ['id' => $id_pertemuan])->row_array();
         return $result;
     }
@@ -273,5 +276,13 @@ class Kelas_model extends CI_Model
         $this->db->where('id_siswa', $id_siswa);
         $this->db->where('id_file', $id_file);
         $this->db->delete('file_tugas_siswa');
+    }
+    public function editPertemuan($id_pertemuna, $nama)
+    {
+        $this->db->select('aktivitas_kelas.*');
+        $this->db->from('aktivitas_kelas');
+        $this->db->set('nama_kegiatan', $nama);
+        $this->db->where('id', $id_pertemuna);
+        $this->db->update('aktivitas_kelas');
     }
 }
