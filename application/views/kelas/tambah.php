@@ -49,6 +49,18 @@
                     <input type="file" class="text-center center-block well well-sm" name="gambar" id="gambar">
                 </div>
             </div>
+            <div class="form-group">
+                <div class="col-lg-8">
+                    <label for="guru[]">Guru</label>
+                    <div class="invalid-feedback"><?php echo form_error('guru'); ?></div>
+                    <select class="js-example-basic-multiple" multiple="multiple" name="guru[]">
+                        <!-- <option value="" selected></option> -->
+                        <?php foreach ($guru as $g) : ?>
+                            <option value="<?= $g['id']; ?>"><?= $g['nip']; ?> - <?= $g['nama']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
             <div class="col-lg-8">
                 <button type="submit" class="btn btn-primary">Tambah</button>
                 <a href="<?= base_url('kelas') ?>" class="btn btn-secondary">Batalkan</a>

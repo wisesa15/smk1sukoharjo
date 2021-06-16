@@ -15,6 +15,7 @@ class Kelas_model extends CI_Model
         $this->db->set('nama', $nama);
 
         $this->db->insert('kelas');
+        return $this->db->insert_id();
     }
 
     public function getAllKelas()
