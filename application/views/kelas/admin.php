@@ -51,6 +51,7 @@
                                             <th scope="col">#</th>
                                             <th scope="col">Nama Kelas</th>
                                             <th scope="col">Nama Pengajar</th>
+                                            <th scope="col">Tahun Ajaran</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
@@ -65,6 +66,7 @@
                                                         <a href="<?= base_url('guru/detail/') . $p['id']; ?>" class="badge badge-dark"><?= $p['nama']; ?></a>
                                                     <?php endforeach; ?>
                                                 </td>
+                                                <td><?= $k['tahun_ajaran']; ?></td>
                                                 <td>
                                                     <a href="<?= base_url('kelas/atursiswa/') . $k['id']; ?>" class="badge badge-primary">Atur Siswa</a>
                                                     <a href="<?= base_url('kelas/aturguru/') . $k['id']; ?>" class="badge badge-primary">Atur Guru</a>
@@ -93,14 +95,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                        Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">About</a>
-                            <a href="javascript: void(0);">Support</a>
-                            <a href="javascript: void(0);">Contact Us</a>
-                        </div>
+                        Copyright © <?= date('Y'); ?> SMK 1 Sukoharjo. All rights reserved.
                     </div>
                 </div>
             </div>

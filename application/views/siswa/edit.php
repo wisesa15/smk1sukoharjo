@@ -43,8 +43,14 @@
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" value="<?= $siswa['nama'] ?>">
             </div>
             <div class=" form-group">
-                <label for="kelas">Kelas</label>
-                <input type="text" class="form-control" id="kelas" name="kelas" placeholder="Kelas" value="<?= $siswa['kelas'] ?>">
+                <label for="jurusan">Jurusan</label>
+                <div class="invalid-feedback"><?= form_error('jurusan'); ?></div>
+                <input type="text" class="form-control" id="jurusan" name="jurusan" placeholder="Jurusan" value="<?= $siswa['jurusan'] ?>">
+            </div>
+            <div class=" form-group">
+                <label for="tahun-masuk">Tahun Masuk</label>
+                <div class="invalid-feedback"><?= form_error('tahun-masuk'); ?></div>
+                <input type="number" class="form-control" id="tahun-masuk" name="tahun-masuk" placeholder="Tahun Masuk" value="<?= $siswa['tahun_masuk'] ?>">
             </div>
             <button type="submit" class="btn btn-primary">Ubah</button>
             <a href="<?= base_url('siswa') ?>" class="btn btn-secondary">Batalkan</a>
@@ -61,14 +67,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript: void(0);">About</a>
-                        <a href="javascript: void(0);">Support</a>
-                        <a href="javascript: void(0);">Contact Us</a>
-                    </div>
+                    Copyright © <?= date('Y'); ?> SMK 1 Sukoharjo. All rights reserved.
                 </div>
             </div>
         </div>

@@ -51,6 +51,18 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-8">
+                    <label for="tahun-ajaran">Tahun Ajaran</label></br>
+                    <select class="form-control" name="tahun-ajaran" id="tahun-ajaran" name="tahun-ajaran">
+                        <?php for ($i = 7; $i > 0; $i--) : ?>
+                            <?php $x = $i - 3; ?>
+                            <?php $y = $i - 4; ?>
+                            <option value="<?= date('Y', strtotime('-' . $x . ' year')) . "/" . date('Y', strtotime('-' . $y . ' year')); ?>" <?php if ($x == 0) echo 'selected'; ?>><?= date('Y', strtotime('-' . $x . ' year')) . "/" . date('Y', strtotime('-' . $y . ' year')); ?></option>
+                        <?php endfor; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-8">
                     <label for="guru[]">Guru</label>
                     <div class="invalid-feedback"><?php echo form_error('guru'); ?></div>
                     <select class="js-example-basic-multiple" multiple="multiple" name="guru[]">
@@ -78,14 +90,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript: void(0);">About</a>
-                        <a href="javascript: void(0);">Support</a>
-                        <a href="javascript: void(0);">Contact Us</a>
-                    </div>
+                    Copyright © <?= date('Y'); ?> SMK 1 Sukoharjo. All rights reserved.
                 </div>
             </div>
         </div>

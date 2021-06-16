@@ -27,6 +27,12 @@ class Dashboard extends CI_Controller
             //apabila role user adalah guru
             $data['guru'] = $this->guru->getGuru($data['user']['id_guru']); //menyiapkan data guru yang login
             $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //menyiapkan data kelas guru yang login untuk sidebar
+            $data['pengajar'] = []; //data pengajar tiap kelas
+            //loop untuk mengambil data pengajar yang mengajar di tiap kelas
+            foreach ($data['kelas'] as $k) :
+                $pengajar = $this->kelas->getAllGuru($k['id']);
+                array_push($data['pengajar'], $pengajar);
+            endforeach;
             $this->load->view('templates/header', $data);
             $this->load->view('dashboard/guru', $data);
             $this->load->view('templates/footer');
@@ -34,6 +40,12 @@ class Dashboard extends CI_Controller
             //apabila role user adalah siswa
             $data['siswa'] = $this->siswa->getSiswa($data['user']['id_siswa']); //menyiapkan data siswa yang login
             $data['kelas'] = $this->kelas->getKelas($data['siswa']['id'], $this->session->userdata('role_id')); //menyiapkan data kelas siswa yang login untuk sidebar
+            $data['pengajar'] = []; //data pengajar tiap kelas
+            //loop untuk mengambil data pengajar yang mengajar di tiap kelas
+            foreach ($data['kelas'] as $k) :
+                $pengajar = $this->kelas->getAllGuru($k['id']);
+                array_push($data['pengajar'], $pengajar);
+            endforeach;
             $this->load->view('templates/header', $data);
             $this->load->view('dashboard/siswa', $data);
             $this->load->view('templates/footer');

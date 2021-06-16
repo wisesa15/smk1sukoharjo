@@ -38,7 +38,8 @@ class Siswa_model extends CI_Model
         $data = [
             'nis' => htmlspecialchars($this->input->post('nis')),
             'nama' => htmlspecialchars($this->input->post('nama')),
-            'kelas' => htmlspecialchars($this->input->post('kelas'))
+            'jurusan' => htmlspecialchars($this->input->post('jurusan')),
+            'tahun_masuk' => htmlspecialchars($this->input->post('tahun-masuk'))
         ];
         $this->db->where('id', $id);
         $this->db->update('siswa', $data);
@@ -49,7 +50,8 @@ class Siswa_model extends CI_Model
         $data = [
             'nis' => htmlspecialchars($this->input->post('nis')),
             'nama' => htmlspecialchars($this->input->post('nama')),
-            'kelas' => htmlspecialchars($this->input->post('kelas'))
+            'jurusan' => htmlspecialchars($this->input->post('jurusan')),
+            'tahun_masuk' => htmlspecialchars($this->input->post('tahun-masuk'))
         ];
         $this->db->insert('siswa', $data);
     }

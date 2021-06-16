@@ -46,7 +46,8 @@ class Siswa extends CI_Controller
 
         $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
+        $this->form_validation->set_rules('jurusan', 'Jurusan', 'required|trim');
+        $this->form_validation->set_rules('tahun-masuk', 'Tahun Masuk', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -77,7 +78,8 @@ class Siswa extends CI_Controller
 
         $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim|is_unique[siswa.nis]');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
-        $this->form_validation->set_rules('kelas', 'Kelas', 'required|trim');
+        $this->form_validation->set_rules('jurusan', 'Jurusan', 'required|trim');
+        $this->form_validation->set_rules('tahun-masuk', 'Tahun Masuk', 'required|trim');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);

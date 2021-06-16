@@ -40,17 +40,25 @@
                             <hr class="mt-0">
                             <div class="neat ">
                                 <div class="row">
+                                    <?php $i = 1; ?>
                                     <?php foreach ($kelas as $k) : ?>
                                         <div class="col-md-4">
                                             <a href="<?= base_url('kelas/detail/') . $k['id'] ?>">
                                                 <div class="card">
-                                                    <img class="card-img-top" src="https://source.unsplash.com/random/800x600" alt="Card image cap">
+                                                    <img class="card-img-top" src="<?= base_url('assets/images/kelas/') . $k['gambar']; ?>" alt="Gambar Kelas">
                                                     <div class="card-body">
                                                         <h5 class="card-title"><?= $k['nama']; ?></h5>
+                                                        <p><?= $k['tahun_ajaran']; ?></p>
+                                                        <div>
+                                                            <?php foreach ($pengajar[$i - 1] as $p) : ?>
+                                                                <span class="badge badge-dark"><?= $p['nama']; ?></span>
+                                                            <?php endforeach; ?>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </a>
                                         </div>
+                                        <?php $i++; ?>
                                     <?php endforeach; ?>
                                 </div>
                             </div>

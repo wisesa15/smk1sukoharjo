@@ -86,6 +86,7 @@ class Kelas extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $nama = htmlspecialchars($this->input->post('nama'));
+            $tahun_ajaran = $this->input->post('tahun-ajaran');
             $upload_image = $_FILES['gambar']['name'];
             $new_image = NULL;
             if ($upload_image) {
@@ -104,9 +105,9 @@ class Kelas extends CI_Controller
                 }
             }
             if ($new_image) {
-                $id_kelas = $this->kelas->tambah($nama, $new_image);
+                $id_kelas = $this->kelas->tambah($nama, $tahun_ajaran, $new_image);
             } else {
-                $id_kelas = $this->kelas->tambah($nama);
+                $id_kelas = $this->kelas->tambah($nama, $tahun_ajaran);
             }
             // menambahkan guru ke kelas tersebut
             $daftar_guru = $this->input->post('guru'); //daftar siswa yang mau ditambahkan

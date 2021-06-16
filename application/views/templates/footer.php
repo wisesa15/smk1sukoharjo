@@ -76,6 +76,12 @@
         $('#datatable').DataTable();
     });
 </script>
+<script>
+    // hide alert setelah 3 detik
+    var timeout = 3000; // in miliseconds (3*1000)
+
+    $('.alert').delay(timeout).fadeOut(300);
+</script>
 <!-- chart chartist js -->
 <!-- <script src="<?= base_url(''); ?>assets/vendor/charts/chartist-bundle/chartist.min.js"></script> -->
 <!-- sparkline js -->
