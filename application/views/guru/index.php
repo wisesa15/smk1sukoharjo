@@ -45,7 +45,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered first">
+                                <table class="table table-striped table-bordered" id="datatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -55,7 +55,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i = $page + 1; ?>
+                                        <?php $i = 1; ?>
                                         <?php foreach ($guru as $s) : ?>
                                             <tr>
                                                 <th scope="row"><?= $i; ?></th>
@@ -72,11 +72,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <nav aria-label="Page navigation example" class="pt-5">
-                                <ul class="pagination">
-                                    <?= $links; ?>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>

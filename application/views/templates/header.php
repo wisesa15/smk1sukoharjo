@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="<?= base_url(''); ?>assets/vendor/inputmask/css/inputmask.css">
     <!-- Summenote -->
     <link href="<?= base_url('assets/vendor/'); ?>summernote/css/summernote-bs4.css" rel="stylesheet">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
     <title><?= $title; ?></title>
 </head>
 

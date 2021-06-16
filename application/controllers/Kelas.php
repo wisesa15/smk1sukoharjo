@@ -20,32 +20,7 @@ class Kelas extends CI_Controller
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
         $data['pengajar'] = []; //data pengajar tiap kelas
 
-        $config['base_url'] = base_url('kelas/index');
-        $config['total_rows'] = $this->kelas->getKelasCount();
-        $config['per_page'] = 20;
-        $config['num_links'] = 1;
-        $config['first_link'] = 'First';
-        $config['first_tag_open'] = '<li class="page-item">';
-        $config['first_tag_close'] = '</li>';
-        $config['last_link'] = 'Last';
-        $config['last_tag_open'] = '<li class="page-item">';
-        $config['last_tag_close'] = '</li>';
-        $config['next_link'] = '<span aria-hidden="true">»</span><span class="sr-only">Next</span>';
-        $config['next_tag_open'] = '<li class="page-item">';
-        $config['next_tag_close'] = '</li>';
-        $config['prev_link'] = '<span aria-hidden="true">«</span><span class="sr-only">Previous</span>';
-        $config['prev_tag_open'] = '<li class="page-item">';
-        $config['prev_tag_close'] = '</li>';
-        $config['num_tag_open'] = '<li class="page-item">';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['attributes'] = array('class' => 'page-link');
-        $this->pagination->initialize($config);
-        $data['links'] = $this->pagination->create_links();
-        $page = ($this->uri->segment(3)) ? ($this->uri->segment(3) - 1) * $config['per_page'] : 0;
-        $data['kelas'] = $this->kelas->getKelasLimit($config['per_page'], $page); //data untuk ditampilkan
-        $data['page'] = $page;
+        $data['kelas'] = $this->kelas->getAllKelas(); //data untuk ditampilkan
 
         //loop untuk mengambil data pengajar yang mengajar di tiap kelas
         foreach ($data['kelas'] as $k) :
