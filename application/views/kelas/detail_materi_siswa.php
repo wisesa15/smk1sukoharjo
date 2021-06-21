@@ -4,7 +4,15 @@
             <div class="ecommerce-widget">
                 <div class="container-fluid">
                     <div class="card ">
-                        <h1 class="card-header text-center"><?= $file['nama']; ?></h1>
+                        <h1 class="card-header text-center"><?= $file['nama']; ?><?php if ($user['role_id'] == 3 and $check != null) : ?>
+                            <span class="badge badge-success">Sudah Mengumpulkan</span>
+                        <?php elseif ($user['role_id'] == 3 and $check == null and  $file['tenggalwaktu'] < time()) : ?>
+                            <span class="badge badge-danger">Telat Mengumpulkan</span>
+                        <?php elseif ($user['role_id'] == 3 and $check == null and  $file['tenggalwaktu'] >= time()) : ?>
+                            <span class="badge badge-warning">Belum Mengumpulkan</span>
+                        <?php endif; ?>
+                        </h1>
+                        <span style="background-color:#F3B600; text-align:center; color:black; ">Tenggat Waktu : <?= date('d/m/Y H:i', $file['tenggalwaktu']); ?></span>
                         <hr class="mt-0 mb-3">
                         <div class="card-body"><?= $file['keterangan'] ?></div>
                     </div>
@@ -30,11 +38,7 @@
                     <a href="<?= base_url('kelas/masterFile/') . $file['id']; ?>" type="submit" class="ml-2 badge badge-success ml-3 p-3"><i class="fa-fw fas fa-file-upload"></i><br> DOWNLOAD HASIL</a>
                 <?php endif; ?>
             <?php endif; ?>
-            <?php if ($user['role_id'] == 3 and $check != null) : ?>
-                <div class="badge badge-success btn-lg ml-3 p-3">
-                    <p>Sudah Mengumpulkan </p>
-                </div>
-            <?php endif; ?>
+
         </div>
     </div>
 </div>
