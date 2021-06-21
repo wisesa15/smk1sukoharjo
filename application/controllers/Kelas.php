@@ -20,32 +20,7 @@ class Kelas extends CI_Controller
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yg login
         $data['pengajar'] = []; //data pengajar tiap kelas
 
-        $config['base_url'] = base_url('kelas/index');
-        $config['total_rows'] = $this->kelas->getKelasCount();
-        $config['per_page'] = 20;
-        $config['num_links'] = 1;
-        $config['first_link'] = 'First';
-        $config['first_tag_open'] = '<li class="page-item">';
-        $config['first_tag_close'] = '</li>';
-        $config['last_link'] = 'Last';
-        $config['last_tag_open'] = '<li class="page-item">';
-        $config['last_tag_close'] = '</li>';
-        $config['next_link'] = '<span aria-hidden="true">»</span><span class="sr-only">Next</span>';
-        $config['next_tag_open'] = '<li class="page-item">';
-        $config['next_tag_close'] = '</li>';
-        $config['prev_link'] = '<span aria-hidden="true">«</span><span class="sr-only">Previous</span>';
-        $config['prev_tag_open'] = '<li class="page-item">';
-        $config['prev_tag_close'] = '</li>';
-        $config['num_tag_open'] = '<li class="page-item">';
-        $config['num_tag_close'] = '</li>';
-        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
-        $config['cur_tag_close'] = '</a></li>';
-        $config['attributes'] = array('class' => 'page-link');
-        $this->pagination->initialize($config);
-        $data['links'] = $this->pagination->create_links();
-        $page = ($this->uri->segment(3)) ? ($this->uri->segment(3) - 1) * $config['per_page'] : 0;
-        $data['kelas'] = $this->kelas->getKelasLimit($config['per_page'], $page); //data untuk ditampilkan
-        $data['page'] = $page;
+        $data['kelas'] = $this->kelas->getAllKelas(); //data untuk ditampilkan
 
         //loop untuk mengambil data pengajar yang mengajar di tiap kelas
         foreach ($data['kelas'] as $k) :
@@ -101,6 +76,7 @@ class Kelas extends CI_Controller
 
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yang login
         $data['title'] = 'Tambah Kelas';
+        $data['guru'] = $this->guru->getAllGuru(); //mendapatkan seluruh data guru
 
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
 
@@ -110,6 +86,7 @@ class Kelas extends CI_Controller
             $this->load->view('templates/footer');
         } else {
             $nama = htmlspecialchars($this->input->post('nama'));
+            $tahun_ajaran = $this->input->post('tahun-ajaran');
             $upload_image = $_FILES['gambar']['name'];
             $new_image = NULL;
             if ($upload_image) {
@@ -128,10 +105,17 @@ class Kelas extends CI_Controller
                 }
             }
             if ($new_image) {
-                $this->kelas->tambah($nama, $new_image);
+                $id_kelas = $this->kelas->tambah($nama, $tahun_ajaran, $new_image);
             } else {
-                $this->kelas->tambah($nama);
+                $id_kelas = $this->kelas->tambah($nama, $tahun_ajaran);
             }
+            // menambahkan guru ke kelas tersebut
+            $daftar_guru = $this->input->post('guru'); //daftar siswa yang mau ditambahkan
+            $data_guru = array(); // array yang berisi array associative dengan isi [id_kelas => 0, id_siswa => $ds]
+            foreach ($daftar_guru as $dg) :
+                array_push($data_guru, ['id_kelas' => $id_kelas, 'id_guru' => $dg]);
+            endforeach;
+            $this->kelas->tambahGuru($data_guru);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menambahkan kelas</div>');
             redirect('kelas');
         }
@@ -214,8 +198,10 @@ class Kelas extends CI_Controller
         $data['detailKelas'] = $this->kelas->getDetail($data['kelasP']['id_kelas']);*/
         $data['kelasP'] = $this->kelas->getKelasP($id_pertemuan);
         $data['detailKelas'] = $this->kelas->getDetail($data['kelasP']['id']);
-        $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
-        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        if ($data['user']['role_id'] == 2) {
+            $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
+            $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
+        }
         $this->form_validation->set_rules('newAktivitas', 'Aktivitas Baru', 'required');
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -239,8 +225,6 @@ class Kelas extends CI_Controller
             $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
             $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
         }
-        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar guru (kelas yang dia ajar)
-
         $this->form_validation->set_rules('nama_file', 'Nama file', 'required|trim');
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim');
         $this->form_validation->set_rules('dataTampil', 'Tanggal Ditampilkan', 'required');
@@ -294,7 +278,6 @@ class Kelas extends CI_Controller
             $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
             $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
         }
-        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar guru (kelas yang dia ajar)
 
         $this->form_validation->set_rules('nama_file', 'Nama file', 'required|trim');
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim');
@@ -409,6 +392,10 @@ class Kelas extends CI_Controller
     }
     public function hapus($id_kelas)
     {
+        $guru = $this->kelas->getKelasGuru($id_kelas); // guru yang mengajar di kelas yang mau dihapus
+        foreach ($guru as $g) :
+            $this->kelas->hapusGuru($g['id'], $id_kelas);
+        endforeach;
         $this->kelas->hapus($id_kelas);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menghapus data kelas</div>');
         redirect('kelas');

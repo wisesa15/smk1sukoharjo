@@ -45,22 +45,26 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered first">
+                                <table class="table table-bordered table-striped" id="datatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">NIS</th>
                                             <th scope="col">Nama</th>
+                                            <th scope="col">Jurusan</th>
+                                            <th scope="col">Tahun Masuk</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i = $page + 1; ?>
+                                        <?php $i = 1; ?>
                                         <?php foreach ($siswa as $s) : ?>
                                             <tr>
                                                 <th scope="row"><?= $i; ?></th>
                                                 <td><?= $s['nis']; ?></td>
                                                 <td><a href="<?= base_url('siswa/detail/') . $s['id']; ?>"><?= $s['nama']; ?></a></td>
+                                                <td><?= $s['jurusan']; ?></td>
+                                                <td><?= $s['tahun_masuk']; ?></td>
                                                 <td>
                                                     <a href="<?= base_url('siswa/ubah/') . $s['id']; ?>" class="badge badge-success">Ubah</a>
                                                     <a href="<?= base_url('siswa/hapus/') . $s['id']; ?>" class="badge badge-danger">Hapus</a>
@@ -72,11 +76,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <nav aria-label="Page navigation example" class="pt-5">
-                                <ul class="pagination">
-                                    <?= $links; ?>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -93,14 +92,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                </div>
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                    <div class="text-md-right footer-links d-none d-sm-block">
-                        <a href="javascript: void(0);">About</a>
-                        <a href="javascript: void(0);">Support</a>
-                        <a href="javascript: void(0);">Contact Us</a>
-                    </div>
+                    Copyright © <?= date('Y'); ?> SMK 1 Sukoharjo. All rights reserved.
                 </div>
             </div>
         </div>

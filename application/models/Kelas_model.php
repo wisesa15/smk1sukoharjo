@@ -6,15 +6,19 @@ class Kelas_model extends CI_Model
     public $nama;
     public $idMapel;
 
-    public function tambah($nama, $gambar = NULL)
+    public function tambah($nama, $tahun_ajaran, $gambar = NULL)
     {
         //menambahkan data kelas
         if ($gambar) {
             $this->db->set('gambar', $gambar);
+        } else {
+            $this->db->set('gambar', 'default_kelas.jpg');
         }
         $this->db->set('nama', $nama);
+        $this->db->set('tahun_ajaran', $tahun_ajaran);
 
         $this->db->insert('kelas');
+        return $this->db->insert_id();
     }
 
     public function getAllKelas()

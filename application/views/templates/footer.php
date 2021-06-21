@@ -69,6 +69,19 @@
         })
     });
 </script>
+<!-- datatables js -->
+<script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#datatable').DataTable();
+    });
+</script>
+<script>
+    // hide alert setelah 3 detik
+    var timeout = 3000; // in miliseconds (3*1000)
+
+    $('.alert').delay(timeout).fadeOut(300);
+</script>
 <!-- chart chartist js -->
 <!-- <script src="<?= base_url(''); ?>assets/vendor/charts/chartist-bundle/chartist.min.js"></script> -->
 <!-- sparkline js -->

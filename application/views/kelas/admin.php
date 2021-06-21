@@ -45,17 +45,18 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered first">
+                                <table class="table table-striped table-bordered" id="datatable">
                                     <thead>
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Nama Kelas</th>
                                             <th scope="col">Nama Pengajar</th>
+                                            <th scope="col">Tahun Ajaran</th>
                                             <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php $i = $page + 1; ?>
+                                        <?php $i = 1; ?>
                                         <?php foreach ($kelas as $k) : ?>
                                             <tr>
                                                 <th scope="row"><?= $i; ?></th>
@@ -65,6 +66,7 @@
                                                         <a href="<?= base_url('guru/detail/') . $p['id']; ?>" class="badge badge-dark"><?= $p['nama']; ?></a>
                                                     <?php endforeach; ?>
                                                 </td>
+                                                <td><?= $k['tahun_ajaran']; ?></td>
                                                 <td>
                                                     <a href="<?= base_url('kelas/atursiswa/') . $k['id']; ?>" class="badge badge-primary">Atur Siswa</a>
                                                     <a href="<?= base_url('kelas/aturguru/') . $k['id']; ?>" class="badge badge-primary">Atur Guru</a>
@@ -77,11 +79,6 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <nav aria-label="Page navigation example" class="pt-5">
-                                <ul class="pagination">
-                                    <?= $links; ?>
-                                </ul>
-                            </nav>
                         </div>
                     </div>
                 </div>
@@ -98,14 +95,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                        Copyright © 2018 Concept. All rights reserved. Dashboard by <a href="https://colorlib.com/wp/">Colorlib</a>.
-                    </div>
-                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="text-md-right footer-links d-none d-sm-block">
-                            <a href="javascript: void(0);">About</a>
-                            <a href="javascript: void(0);">Support</a>
-                            <a href="javascript: void(0);">Contact Us</a>
-                        </div>
+                        Copyright © <?= date('Y'); ?> SMK 1 Sukoharjo. All rights reserved.
                     </div>
                 </div>
             </div>
