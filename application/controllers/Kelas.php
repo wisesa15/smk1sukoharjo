@@ -225,8 +225,6 @@ class Kelas extends CI_Controller
             $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
             $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id'));
         }
-        $data['kelas'] = $this->kelas->getKelas($data['guru']['id'], $this->session->userdata('role_id')); //untuk sidebar guru (kelas yang dia ajar)
-
         $this->form_validation->set_rules('nama_file', 'Nama file', 'required|trim');
         $this->form_validation->set_rules('jenis', 'jenis', 'required|trim');
         $this->form_validation->set_rules('dataTampil', 'Tanggal Ditampilkan', 'required');
