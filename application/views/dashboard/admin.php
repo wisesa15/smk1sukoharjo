@@ -10,18 +10,6 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
                     <h2 class="pageheader-title">Dashboard</h2>
-                    <!-- <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus
-                                vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p> -->
-                    <!-- <div class="page-breadcrumb">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a>
-                                        </li>
-                                        <li class="breadcrumb-item active" aria-current="page">E-Commerce Dashboard
-                                            Template</li>
-                                    </ol>
-                                </nav>
-                            </div> -->
                     <hr>
                 </div>
             </div>
@@ -67,10 +55,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="image-fluid">
-                            <img class="img-fluid card-img-top" src="<?= base_url('/assets/images/logo/rsz_depan.png'); ?>" alt="Card image cap">
+                            <img class="img-fluid card-img-top" src="<?= base_url('/assets/images/logo/depan.png'); ?>" alt="Card image cap">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">SMK 1 SUKOHARJO</h5>
@@ -78,49 +66,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/800x600" alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 1</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/801x601" alt="Card image cap" width="100%">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 2</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/802x602" alt="Card image cap" height="100%">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 1</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/803x603" alt="Card image cap" width="100%">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 2</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card">
-                        <img class="card-img-top" src="https://source.unsplash.com/random/804x604" alt="Card image cap" width="100%">
-                        <div class="card-body">
-                            <h5 class="card-title">Nama Kelas 2</h5>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <!-- ============================================================== -->
             <!-- End content  -->
             <!-- ============================================================== -->

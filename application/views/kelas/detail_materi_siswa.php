@@ -30,6 +30,11 @@
                     <a href="<?= base_url('kelas/masterFile/') . $file['id']; ?>" type="submit" class="ml-2 badge badge-success ml-3 p-3"><i class="fa-fw fas fa-file-upload"></i><br> DOWNLOAD HASIL</a>
                 <?php endif; ?>
             <?php endif; ?>
+            <?php if ($user['role_id'] == 3 and $check != null) : ?>
+                <div class="badge badge-success btn-lg ml-3 p-3">
+                    <p>Sudah Mengumpulkan </p>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
