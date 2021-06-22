@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex justify-content-end">
-
+                        <a href="<?= base_url('siswa/import'); ?>" class="btn btn-primary mb-3 mr-2">+ Import CSV</a>
                         <a href="<?= base_url('siswa/tambah'); ?>" class="btn btn-primary mb-3">+ Tambah Siswa</a>
                     </div>
                     <?= $this->session->flashdata('message') ?>

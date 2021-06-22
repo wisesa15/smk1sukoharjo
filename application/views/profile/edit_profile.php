@@ -21,9 +21,9 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label"></label>
                         <div class="col-md-8">
-                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                            <button class="btn btn-primary" type="submit">Simpan Perubahan</button>
                             <span></span>
-                            <a class="btn btn-warning" href="<?= base_url('profile'); ?>">cancel</a>
+                            <a class="btn btn-warning" href="<?= base_url('profile'); ?>">Batalkan</a>
                         </div>
                     </div>
                 </form>

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="page-header">
-                    <h2 class="pageheader-title">Tambah Kelas</h2>
+                    <h2 class="pageheader-title">Import CSV Siswa</h2>
                     <!-- <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus
                                 vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p> -->
                     <!-- <div class="page-breadcrumb">
@@ -26,9 +26,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-8">
-            <?= $this->session->flashdata('message') ?>
-        </div>
         <!-- ============================================================== -->
         <!-- end pageheader  -->
         <!-- ============================================================== -->
@@ -36,24 +33,12 @@
         <!-- ============================================================== -->
         <!-- content  -->
         <!-- ============================================================== -->
-        <form action="<?= base_url('kelas/ubah/') . $kelas['id']; ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= base_url('siswa/import'); ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
-                <div class="col-lg-8">
-                    <label for="nis">Nama Kelas</label>
-                    <input type="text" class="form-control" id="nama" name="nama" value="<?= $kelas['nama'] ?>">
-                    <?= form_error('nama'); ?>
-                </div>
+                <input type="file" name="file" />
             </div>
-            <div class="form-group">
-                <div class="col-lg-8">
-                    <label for="gambar">Gambar</label></br>
-                    <input type="file" class="text-center center-block well well-sm" name="gambar" id="gambar">
-                </div>
-            </div>
-            <div class="col-lg-8">
-                <button type="submit" class="btn btn-primary">Ubah</button>
-                <a href="<?= base_url('kelas') ?>" class="btn btn-secondary">Batalkan</a>
-            </div>
+            <button type="submit" class="btn btn-primary" name="importSubmit">Tambah</button>
+            <a href="<?= base_url('siswa') ?>" class="btn btn-secondary">Batalkan</a>
         </form>
         <!-- ============================================================== -->
         <!-- End content  -->

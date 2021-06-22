@@ -37,20 +37,23 @@
             <div class="form-group">
                 <label for="nis">Nomor Induk Sekolah</label>
                 <input type="text" class="form-control" id="nis" name="nis" placeholder="NIS" value="<?= $siswa['nis'] ?>">
+                <?= form_error('nis') ?>
             </div>
             <div class="form-group">
                 <label for="nis">Nama</label>
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" value="<?= $siswa['nama'] ?>">
+                <?= form_error('nama') ?>
             </div>
             <div class=" form-group">
                 <label for="jurusan">Jurusan</label>
-                <div class="invalid-feedback"><?= form_error('jurusan'); ?></div>
                 <input type="text" class="form-control" id="jurusan" name="jurusan" placeholder="Jurusan" value="<?= $siswa['jurusan'] ?>">
+                <?= form_error('jurusan') ?>
             </div>
             <div class=" form-group">
                 <label for="tahun-masuk">Tahun Masuk</label>
                 <div class="invalid-feedback"><?= form_error('tahun-masuk'); ?></div>
                 <input type="number" class="form-control" id="tahun-masuk" name="tahun-masuk" placeholder="Tahun Masuk" value="<?= $siswa['tahun_masuk'] ?>">
+                <?= form_error('tahun-masuk') ?>
             </div>
             <button type="submit" class="btn btn-primary">Ubah</button>
             <a href="<?= base_url('siswa') ?>" class="btn btn-secondary">Batalkan</a>
