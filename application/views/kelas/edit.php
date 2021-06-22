@@ -41,6 +41,7 @@
                 <div class="col-lg-8">
                     <label for="nis">Nama Kelas</label>
                     <input type="text" class="form-control" id="nama" name="nama" value="<?= $kelas['nama'] ?>">
+                    <?= form_error('nama'); ?>
                 </div>
             </div>
             <div class="form-group">

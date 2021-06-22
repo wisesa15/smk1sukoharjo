@@ -37,10 +37,12 @@
             <div class="form-group">
                 <label for="nip">Nomor Induk Sekolah</label>
                 <input type="text" class="form-control" id="nip" name="nip" placeholder="NIP" value="<?= $guru['nip'] ?>">
+                <?= form_error('nip'); ?>
             </div>
             <div class="form-group">
                 <label for="nis">Nama</label>
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" value="<?= $guru['nama'] ?>">
+                <?= form_error('nama'); ?>
             </div>
             <button type="submit" class="btn btn-primary">Ubah</button>
             <a href="<?= base_url('guru') ?>" class="btn btn-secondary">Batalkan</a>

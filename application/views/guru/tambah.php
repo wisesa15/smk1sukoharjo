@@ -35,14 +35,14 @@
         <!-- ============================================================== -->
         <form action="<?= base_url('guru/tambah'); ?>" method="POST">
             <div class="form-group">
-                <label for="nis">Nomor Induk Pegawai Negeri Sipi;</label>
-                <div class="invalid-feedback"><?= form_error('nip'); ?></div>
+                <label for="nis">Nomor Induk Pegawai Negeri Sipil</label>
                 <input type="text" class="form-control" id="nip" name="nip" placeholder="NIP">
+                <?= form_error('nip'); ?>
             </div>
             <div class="form-group">
                 <label for="nis">Nama</label>
-                <div class="invalid-feedback"><?= form_error('nama'); ?></div>
                 <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama">
+                <?= form_error('nama'); ?>
             </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
             <a href="<?= base_url('guru') ?>" class="btn btn-secondary">Batalkan</a>

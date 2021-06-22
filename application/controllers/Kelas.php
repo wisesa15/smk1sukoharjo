@@ -79,6 +79,7 @@ class Kelas extends CI_Controller
         $data['guru'] = $this->guru->getAllGuru(); //mendapatkan seluruh data guru
 
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
+        $this->form_validation->set_rules('tahun-ajaran', 'Tahun Ajaran', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -111,11 +112,13 @@ class Kelas extends CI_Controller
             }
             // menambahkan guru ke kelas tersebut
             $daftar_guru = $this->input->post('guru'); //daftar siswa yang mau ditambahkan
-            $data_guru = array(); // array yang berisi array associative dengan isi [id_kelas => 0, id_siswa => $ds]
-            foreach ($daftar_guru as $dg) :
-                array_push($data_guru, ['id_kelas' => $id_kelas, 'id_guru' => $dg]);
-            endforeach;
-            $this->kelas->tambahGuru($data_guru);
+            if ($daftar_guru) {
+                $data_guru = array(); // array yang berisi array associative dengan isi [id_kelas => 0, id_siswa => $ds]
+                foreach ($daftar_guru as $dg) :
+                    array_push($data_guru, ['id_kelas' => $id_kelas, 'id_guru' => $dg]);
+                endforeach;
+                $this->kelas->tambahGuru($data_guru);
+            }
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil menambahkan kelas</div>');
             redirect('kelas');
         }

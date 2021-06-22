@@ -41,6 +41,7 @@
                 <div class="col-lg-8">
                     <label for="nis">Nama Kelas</label>
                     <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama">
+                    <?= form_error('nama'); ?>
                 </div>
             </div>
             <div class="form-group">
@@ -59,12 +60,12 @@
                             <option value="<?= date('Y', strtotime('-' . $x . ' year')) . "/" . date('Y', strtotime('-' . $y . ' year')); ?>" <?php if ($x == 0) echo 'selected'; ?>><?= date('Y', strtotime('-' . $x . ' year')) . "/" . date('Y', strtotime('-' . $y . ' year')); ?></option>
                         <?php endfor; ?>
                     </select>
+                    <?= form_error('tahun-ajaran'); ?>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-lg-8">
                     <label for="guru[]">Guru</label>
-                    <div class="invalid-feedback"><?php echo form_error('guru'); ?></div>
                     <select class="js-example-basic-multiple" multiple="multiple" name="guru[]">
                         <!-- <option value="" selected></option> -->
                         <?php foreach ($guru as $g) : ?>

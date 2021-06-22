@@ -7,6 +7,16 @@ class Siswa_model extends CI_Model
     public $nama;
     public $kelas;
 
+    public function check_unique_nis($id = '', $nis)
+    {
+        $this->db->where('nis', $nis);
+        if ($id) {
+            $this->db->where_not_in('id', $id);
+        }
+        return $this->db->get('siswa')->num_rows();
+    }
+
+
     public function getSiswa($id)
     {
         //mengambil data siswa dengan parameter id_siswa

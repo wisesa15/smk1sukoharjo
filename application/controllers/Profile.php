@@ -51,9 +51,9 @@ class Profile extends CI_Controller
         } else {
             $data['user'] = $this->user->getUser($this->session->userdata('id')); //data user yang login
         }
-        $this->form_validation->set_rules('old_password', 'Old Password', 'required|trim');
-        $this->form_validation->set_rules('password', 'Password', 'trim|matches[n_password]');
-        $this->form_validation->set_rules('n_password', 'New Password', 'trim|matches[password]');
+        $this->form_validation->set_rules('old_password', 'Password Lama', 'required|trim');
+        $this->form_validation->set_rules('password', 'Password Baru', 'required|trim');
+        $this->form_validation->set_rules('n_password', 'Konfirmasi Password', 'required|trim|matches[password]');
 
 
         if ($this->form_validation->run() == false) {
@@ -63,8 +63,13 @@ class Profile extends CI_Controller
         } else {
             if (password_verify($this->input->post('old_password'), $data['user']['password'])) {
                 $this->user->editpassword($data['user']['id']);
-                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated.</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Profile telah berhasil diperbarui.</div>');
                 redirect('profile');
+            } else {
+                $this->load->view('templates/header', $data);
+                $this->load->view('profile/edit_password', $data);
+                $this->load->view('templates/footer');
+                $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Password Salah</div>');
             }
         }
     }

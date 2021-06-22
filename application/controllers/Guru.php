@@ -47,7 +47,7 @@ class Guru extends CI_Controller
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //untuk data user yang login
         $data['guru'] = $this->guru->getGuru($id); //untuk menampilkan data guru yang ingin diedit
 
-        $this->form_validation->set_rules('nip', 'Nomor Indentitas Pegawai Negeri Sipil', 'required|trim');
+        $this->form_validation->set_rules('nip', 'Nomor Indentitas Pegawai Negeri Sipil', 'required|trim|is_unique[siswa.nis]|callback_nip_edit[' . $id . ']');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
 
         if ($this->form_validation->run() == false) {
@@ -59,6 +59,18 @@ class Guru extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $data['guru']['nama'] . '.</div>');
             redirect('guru');
         }
+    }
+
+    public function nip_edit($nip, $id)
+    {
+        $result = $this->guru->check_unique_nip($id, $nip);
+        if ($result == 0)
+            $response = true;
+        else {
+            $this->form_validation->set_message('nip_edit', 'Bidang {field} harus unik' . $result);
+            $response = false;
+        }
+        return $response;
     }
 
     public function hapus($id)
@@ -77,7 +89,7 @@ class Guru extends CI_Controller
         $data['title'] = 'Tambah Guru'; // untuk title web
         $data['user'] = $this->user->getUser($this->session->userdata('id')); //untuk data user yang login
 
-        $this->form_validation->set_rules('nip', 'Nomor Induk Pegawai Negeri', 'required|trim|is_unique[guru.nip]');
+        $this->form_validation->set_rules('nip', 'Nomor Induk Pegawai Negeri', 'required|trim|is_unique[guru.nip]|is_unique[siswa.nis]');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
 
         if ($this->form_validation->run() == false) {

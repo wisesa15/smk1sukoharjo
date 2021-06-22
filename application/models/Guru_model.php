@@ -7,6 +7,15 @@ class Guru_model extends CI_Model
     public $nama;
     public $kelas;
 
+    public function check_unique_nip($id = '', $nip)
+    {
+        $this->db->where('nip', $nip);
+        if ($id) {
+            $this->db->where_not_in('id', $id);
+        }
+        return $this->db->get('guru')->num_rows();
+        // return $id;
+    }
 
     public function getGuru($id)
     {

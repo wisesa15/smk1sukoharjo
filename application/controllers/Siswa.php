@@ -44,10 +44,10 @@ class Siswa extends CI_Controller
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
         $data['siswa'] = $this->siswa->getSiswa($id);
 
-        $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim');
+        $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim|is_unique[guru.nip]|callback_nis_edit[' . $id . ']');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
         $this->form_validation->set_rules('jurusan', 'Jurusan', 'required|trim');
-        $this->form_validation->set_rules('tahun-masuk', 'Tahun Masuk', 'required|trim');
+        $this->form_validation->set_rules('tahun-masuk', 'Tahun Masuk', 'required|trim|exact_length[4]');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -58,6 +58,18 @@ class Siswa extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $data['siswa']['nama'] . '.</div>');
             redirect('siswa');
         }
+    }
+
+    public function nis_edit($nis, $id)
+    {
+        $result = $this->siswa->check_unique_nis($id, $nis);
+        if ($result == 0)
+            $response = true;
+        else {
+            $this->form_validation->set_message('nis_edit', 'Bidang {field} harus unik' . $result);
+            $response = false;
+        }
+        return $response;
     }
 
     public function hapus($id)
@@ -76,10 +88,10 @@ class Siswa extends CI_Controller
         $data['title'] = 'Tambah Siswa';
         $data['user'] = $this->user->getUser($this->session->userdata('id'));
 
-        $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim|is_unique[siswa.nis]');
+        $this->form_validation->set_rules('nis', 'Nomor Induk Sekolah', 'required|trim|is_unique[siswa.nis]|is_unique[guru.nip]');
         $this->form_validation->set_rules('nama', 'Nama', 'required|trim');
         $this->form_validation->set_rules('jurusan', 'Jurusan', 'required|trim');
-        $this->form_validation->set_rules('tahun-masuk', 'Tahun Masuk', 'required|trim');
+        $this->form_validation->set_rules('tahun-masuk', 'Tahun Masuk', 'required|trim|exact_length[4]');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
