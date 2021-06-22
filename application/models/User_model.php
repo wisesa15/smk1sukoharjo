@@ -112,6 +112,30 @@ class User_model extends CI_Model
         $this->db->insert('user', $data);
     }
 
+    public function importUser($role, $nomorid)
+    {
+        if ($role == 2) {
+            $user = $nomorid;
+        } else if ($role == 3) {
+            $user = $nomorid;
+        }
+        $data = [
+            'username' => $user,
+            'image' => 'default.jpg',
+            'password' => password_hash($user, PASSWORD_DEFAULT),
+            'role_id' => $role,
+            'date_created' => time()
+        ];
+        if ($role == 2) {
+            $guru = $this->db->get_where('guru', ['nip' => $user])->row_array();
+            $data['id_guru'] = $guru['id'];
+        } else if ($role == 3) {
+            $siswa = $this->db->get_where('siswa', ['nis' => $user])->row_array();
+            $data['id_siswa'] = $siswa['id'];
+        }
+        $this->db->insert('user', $data);
+    }
+
     public function delete($role, $id)
     {
         /* delete() menghapus akun berdasarkan idsiswa atau idguru */

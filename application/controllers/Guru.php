@@ -25,6 +25,94 @@ class Guru extends CI_Controller
         $this->load->view('templates/footer');
     }
 
+    public function import()
+    {
+        $data['title'] = 'Import CSV Guru';
+        $data['user'] = $this->user->getUser($this->session->userdata('id'));
+        $memCsv = array();
+
+        $this->form_validation->set_rules('file', 'CSV file', 'callback_file_check');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('guru/import', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $insertCount = $rowCount = $notAddCount = 0;
+
+            // If file uploaded
+            if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+                // Load CSV reader library
+                $this->load->library('CSVReader');
+
+                // Parse data from CSV file
+                $csvData = $this->csvreader->parse_csv($_FILES['file']['tmp_name']);
+
+                // Insert/update CSV data into database
+                if (!empty($csvData)) {
+                    foreach ($csvData as $row) {
+                        $rowCount++;
+
+                        // Prepare data for DB insertion
+                        $memCsv = array(
+                            'nip' => $row['NIP'],
+                            'nama' => $row['Nama'],
+                        );
+
+                        // Check whether email already exists in the database
+                        $con = array(
+                            'where' => array(
+                                'nip' => $row['NIP']
+                            ),
+                            'returnType' => 'count'
+                        );
+                        $prevCount = $this->guru->getRows($con);
+
+                        if ($prevCount == 0) {
+                            // Insert member data
+                            $insert = $this->guru->importGuru($memCsv);
+                            $this->user->importUser(2, $row['NIP']);
+
+                            if ($insert) {
+                                $insertCount++;
+                            }
+                        }
+                    }
+
+                    // Status message with imported data count
+                    $notAddCount = ($rowCount - $insertCount);
+                    $successMsg = '<div class="alert alert-success" role="alert">Berhasil menambah guru. Jumlah baris (' . $rowCount . ') | Baris yang berhasil ditambah (' . $insertCount . ') | Baris yang gagal ditambah (' . $notAddCount . ')</div>';
+                    $this->session->set_flashdata('message', $successMsg);
+                }
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Gagal mengunggah file, tolong coba lagi</div>');
+            }
+            // $this->siswa->tambahSiswa();
+            // $this->user->tambahUser(3);
+            // $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Anda telah berhasil mengubah data ' . $data['siswa']['nama'] . '.</div>');
+            redirect('guru');
+        }
+    }
+
+    public function file_check($str)
+    {
+        $allowed_mime_types = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+        if (isset($_FILES['file']['name']) && $_FILES['file']['name'] != "") {
+            $mime = get_mime_by_extension($_FILES['file']['name']);
+            $fileAr = explode('.', $_FILES['file']['name']);
+            $ext = end($fileAr);
+            if (($ext == 'csv') && in_array($mime, $allowed_mime_types)) {
+                return true;
+            } else {
+                $this->form_validation->set_message('file_check', 'Please select only CSV file to upload.');
+                return false;
+            }
+        } else {
+            $this->form_validation->set_message('file_check', 'Please select a CSV file to upload.');
+            return false;
+        }
+    }
+
     public function detail($id)
     {
         /* menampilkan halaman detail guru berdasarkan id yang dipilih untuk admin */
