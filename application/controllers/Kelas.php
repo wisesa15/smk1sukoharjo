@@ -200,6 +200,7 @@ class Kelas extends CI_Controller
         /*$data['detailPertemuan'] = $this->kelas->getDetailPertemuan($id_pertemuan);
         $data['detailKelas'] = $this->kelas->getDetail($data['kelasP']['id_kelas']);*/
         $data['kelasP'] = $this->kelas->getKelasP($id_pertemuan);
+
         $data['detailKelas'] = $this->kelas->getDetail($data['kelasP']['id']);
         if ($data['user']['role_id'] == 2) {
             $data['guru'] = $this->guru->getGuru($data['user']['id_guru']);
@@ -235,7 +236,7 @@ class Kelas extends CI_Controller
         $this->form_validation->set_rules('keterangan', 'Keterangan', 'required');
 
         $config['upload_path']          = './assets/file/';
-        $config['allowed_types']        = 'pdf|ppt|docx';
+        $config['allowed_types']        = 'pdf|ppt|docx|pptx';
         $config['max_size']             = 10000;
 
 

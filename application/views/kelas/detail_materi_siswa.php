@@ -4,15 +4,20 @@
             <div class="ecommerce-widget">
                 <div class="container-fluid">
                     <div class="card ">
-                        <h1 class="card-header text-center"><?= $file['nama']; ?><?php if ($user['role_id'] == 3 and $check != null) : ?>
-                            <span class="badge badge-success">Sudah Mengumpulkan</span>
-                        <?php elseif ($user['role_id'] == 3 and $check == null and  $file['tenggalwaktu'] < time()) : ?>
-                            <span class="badge badge-danger">Telat Mengumpulkan</span>
-                        <?php elseif ($user['role_id'] == 3 and $check == null and  $file['tenggalwaktu'] >= time()) : ?>
-                            <span class="badge badge-warning">Belum Mengumpulkan</span>
-                        <?php endif; ?>
+                        <h1 class="card-header text-center"><?= $file['nama']; ?>
+                            <?php if ($file['jenis'] == 2) : ?>
+                                <?php if ($user['role_id'] == 3 and $check != null) : ?>
+                                    <span class="badge badge-success">Sudah Mengumpulkan</span>
+                                <?php elseif ($user['role_id'] == 3 and $check == null and  $file['tenggalwaktu'] < time()) : ?>
+                                    <span class="badge badge-danger">Telat Mengumpulkan</span>
+                                <?php elseif ($user['role_id'] == 3 and $check == null and  $file['tenggalwaktu'] >= time()) : ?>
+                                    <span class="badge badge-warning">Belum Mengumpulkan</span>
+                                <?php endif; ?>
+                            <?php endif; ?>
                         </h1>
-                        <span style="background-color:#F3B600; text-align:center; color:black; ">Tenggat Waktu : <?= date('d/m/Y H:i', $file['tenggalwaktu']); ?></span>
+                        <?php if ($file['jenis'] == 2) : ?>
+                            <span style="background-color:#F3B600; text-align:center; color:black; ">Tenggat Waktu : <?= date('d/m/Y H:i', $file['tenggalwaktu']); ?></span>
+                        <?php endif; ?>
                         <hr class="mt-0 mb-3">
                         <div class="card-body"><?= $file['keterangan'] ?></div>
                     </div>

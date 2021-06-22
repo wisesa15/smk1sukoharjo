@@ -79,7 +79,7 @@ class Kelas_model extends CI_Model
     }
     public function getKelasP($id_aktivitas)
     {
-        $result = $this->db->get_where('aktivitas_kelas', ['id_kelas' => $id_aktivitas])->row_array();
+        $result = $this->db->get_where('aktivitas_kelas', ['id' => $id_aktivitas])->row_array();
         return $result;
     }
     public function getDetailPertemuan($id_pertemuan)
