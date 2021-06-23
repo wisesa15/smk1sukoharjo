@@ -72,7 +72,6 @@ class Guru extends CI_Controller
                             // Insert member data
                             $insert = $this->guru->importGuru($memCsv);
                             $this->user->importUser(2, $row['NIP']);
-
                             if ($insert) {
                                 $insertCount++;
                             }

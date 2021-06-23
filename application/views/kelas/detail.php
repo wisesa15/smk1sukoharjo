@@ -40,7 +40,7 @@
                                                                 <?= $nama_materi['nama']; ?>
                                                             </h3>
                                                             <a href="<?= base_url('kelas/editMateri/') . $nama_materi['id']; ?>" class="badge badge-success">Edit</a>
-                                                            <a href="<?= base_url('kelas/delekelas/editMateriteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">hapus</a>
+                                                            <a href="<?= base_url('kelas/deleteMateri/') . $nama_materi['id']; ?>" class="badge badge-danger">hapus</a>
                                                     </li>
                                                 <?php else : ?>
                                                     <li class="list-group-item ">
